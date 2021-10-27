@@ -3,13 +3,8 @@
 #include "stack.h"
 
 void CreateStack(Stack *s){
-    Stack Stackbaru;
-    IDX_TOP(Stackbaru) = IDX_UNDEF;
-    int i; 
-    for (i = 0; i<CAPACITY; i++){
-        Stackbaru.buffer[i] = 0;
-    }
-    *s = Stackbaru;
+    IDX_TOP(*s) = IDX_UNDEF;
+    MAKSIMUM(*s) = 3;
 }
 /* I.S. sembarang; */
 /* F.S. Membuat sebuah stack S kosong dengan kondisi sbb: */
@@ -29,7 +24,9 @@ boolean isFull(Stack s){
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
 void push(Stack *s, ElType val){
     (IDX_TOP(*s))++;
-    TOP(*s) = val;
+    if(val == 1) {
+        PRICE(*s) = 1000;
+    }
     
 }
 /* Menambahkan val sebagai elemen Stack s */
