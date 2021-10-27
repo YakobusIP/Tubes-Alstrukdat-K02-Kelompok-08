@@ -10,10 +10,17 @@
 #define IDX_UNDEF -1
 #define CAPACITY 100
 
+typedef struct {
+    char name[20];
+    int price;
+    int effect;
+    char reward[20];
+} items;
+
 typedef int ElType;
 typedef struct {
   int CapacityNow;
-  ElType buffer[CAPACITY]; /* tabel penyimpan elemen */
+  items buffer[CAPACITY]; /* tabel penyimpan elemen */
   int idxTop;              /* alamat TOP: elemen puncak */
 } Stack;
 
@@ -22,6 +29,10 @@ typedef struct {
 #define IDX_TOP(s) (s).idxTop
 #define     TOP(s) (s).buffer[(s).idxTop]
 #define MAKSIMUM(s) (s).CapacityNow
+#define NAME(s) (s).buffer[(s.idxTop)].name
+#define PRICE(s) (s).buffer[(s.idxTop)].price
+#define EFFECT(s) (s).buffer[(s.idxTop)].effect
+#define REWARD(s) (s).buffer[(s.idxTop)].reward
 
 /* *** Konstruktor/Kreator *** */
 void CreateStack(Stack *s);
