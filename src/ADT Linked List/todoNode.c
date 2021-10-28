@@ -9,7 +9,6 @@ Address newNode(toDoList val) {
     if (p!=NULL) {
         INFO(p) = val;
         NEXT(p) = NULL;
-        PREV(p) = NULL;
     }
     return p;
 }

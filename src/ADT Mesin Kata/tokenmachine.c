@@ -56,7 +56,7 @@ void readCommand() {
 }
 
 // READ CONFIG FILE BELUM SELESAI, HARUS DISESUAIN SAMA MODUL LAIN
-void readConfigFile(Queue *q) {
+void readConfigFile(PrioQueue *q) {
 /* Membaca file config secara penuh */
     /* KAMUS */
     toDoList val;
@@ -72,7 +72,7 @@ void readConfigFile(Queue *q) {
     // READ DAFTAR PESANAN DAN INPUT KE TO DO LIST
     p = readNumberfromChar();
     //printf("%d,", p);
-    CreateQueue(q);
+    CreatePrioQueue(q);
     for (i=0;i<p;i++) {
         ignoreNext();
         ignoreBlank();
@@ -108,6 +108,6 @@ void readConfigFile(Queue *q) {
         val.timeLimit = intimeLimit;
 
         // INPUT VAL YANG SUDAH DIBENTUK KE DALAM QUEUE
-        enqueue(q, val);
+        enqueueToDo(q, val, 10);
     }
 }

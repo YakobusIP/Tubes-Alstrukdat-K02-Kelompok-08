@@ -4,7 +4,7 @@
 
 int main() {
     /* KAMUS */
-    Queue q;
+    PrioQueue q;
     /* ALGORITMA */
     // READ INPUT FROM CONFIG FILE
     //readConfigFile(&q);

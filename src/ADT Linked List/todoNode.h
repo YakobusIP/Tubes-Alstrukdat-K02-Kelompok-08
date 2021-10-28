@@ -17,14 +17,12 @@ typedef struct {
 typedef struct node* Address;
 typedef struct node {
     toDoList info;
-    Address next_node;
-    Address prev_node;
+    Address next;
 } Node;
 
 /* SELEKTOR UNIVERSAL */
 #define INFO(p) (p)->info
-#define NEXT(p) (p)->next_node
-#define PREV(p) (p)->prev_node
+#define NEXT(p) (p)->next
 
 Address newNode(toDoList val);
 

@@ -34,7 +34,7 @@ int readNumberfromChar();
 void readCommand();
 /* Membaca command dari input user */
 
-void readConfigFile(Queue *q);
+void readConfigFile(PrioQueue *q);
 /* Membaca file config secara penuh */
 
 #endif

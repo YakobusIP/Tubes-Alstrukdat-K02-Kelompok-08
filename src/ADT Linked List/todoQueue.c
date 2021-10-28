@@ -3,8 +3,8 @@
 #include "todoQueue.h"
 
 /**** KREATOR ****/
-void CreateQueue(Queue *q) {
-/* Membuat sebuah Queue kosong */
+void CreatePrioQueue(PrioQueue *q) {
+/* Membuat sebuah PrioQueue kosong */
 /* NEXTHEAD bernilai NULL */
 /* NEXTTAIL bernilai NULL */    
     /* ALGORITMA */
@@ -12,15 +12,15 @@ void CreateQueue(Queue *q) {
     TAIL(*q) = NULL;
 }
 
-/**** TEST QUEUE KOSONG ****/
-boolean isEmpty(Queue q) {
-/* Mengirim true jika queue kosong */
+/**** TEST PrioQueue KOSONG ****/
+boolean isEmpty(PrioQueue q) {
+/* Mengirim true jika PrioQueue kosong */
     /* ALGORITMA */
     return ((HEAD(q) == NULL) && (TAIL(q) == NULL));
 }
 
-int length(Queue q) {
-/* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika q kosong. */ 
+int length(PrioQueue q) {
+/* Mengirimkan banyaknya elemen PrioQueue. Mengirimkan 0 jika q kosong. */ 
     /* KAMUS */
     Address p;
     int len;
@@ -35,7 +35,49 @@ int length(Queue q) {
 }
 
 /* *** Primitif Add/Delete *** */
-void enqueue(Queue *q, toDoList val) {
+// 
+// UNSURE, CHECK BEFORE PUSH
+//
+void enqueueToDo(PrioQueue *q, toDoList val, int time) {
+/* Proses: Menambahkan val pada q */
+/* I.S. q mungkin kosong, tabel penampung elemen q TIDAK penuh */
+/* F.S. Membentuk node baru diisi dengan val, lalu diinsert sesuai dengan nilai reqIn,
+        mengecek apakah nilai reqIn pada val lebih kecil daripada time sekarang */ 
+    /* KAMUS */
+    Address o, p;
+    toDoList temp;
+    /* ALGORITMA */
+    o = HEAD(*q);
+    p = newNode(val);
+    if (INFO(p).reqIn <= time) {
+        if (isEmpty(*q)) {
+            HEAD(*q) = p;
+            TAIL(*q) = p;
+        } else {
+            // Jika reqIn head awal lebih besar daripada reqIn baru, maka insert node di awal PrioQueue
+            if (INFO(o).reqIn > val.reqIn) {
+                NEXT(p) = HEAD(*q);
+                HEAD(*q) = p;
+            } else {
+                // Mencari posisi penyisipan elemen ke dalam PrioQueue
+                while ((NEXT(o) != NULL) && (INFO(NEXT(o)).reqIn <= val.reqIn)) {
+                    o = NEXT(o);
+                }
+
+                // Penyisipan elemen (insertAt)
+                NEXT(p) = NEXT(o);
+                NEXT(o) = p;
+                TAIL(*q) = NEXT(p);
+            }
+        }  
+    }
+        
+}
+
+// 
+// UNSURE, CHECK BEFORE PUSH
+//
+void enqueueFull(PrioQueue *q, toDoList val) {
 /* Proses: Menambahkan val pada q dengan aturan FIFO */
 /* I.S. q mungkin kosong, tabel penampung elemen q TIDAK penuh */
 /* F.S. Membentuk node baru diisi dengan val, lalu diinsert sesuai dengan nilai reqIn  */ 
@@ -49,33 +91,28 @@ void enqueue(Queue *q, toDoList val) {
         HEAD(*q) = p;
         TAIL(*q) = p;
     } else {
-        // Jika reqIn head awal lebih besar daripada reqIn baru, maka insert node di awal queue
+        // Jika reqIn head awal lebih besar daripada reqIn baru, maka insert node di awal PrioQueue
         if (INFO(o).reqIn > val.reqIn) {
             NEXT(p) = HEAD(*q);
-            PREV(HEAD(*q)) = p;
             HEAD(*q) = p;
         } else {
-            // Mencari posisi penyisipan elemen ke dalam queue
+            // Mencari posisi penyisipan elemen ke dalam PrioQueue
             while ((NEXT(o) != NULL) && (INFO(NEXT(o)).reqIn <= val.reqIn)) {
                 o = NEXT(o);
             }
 
             // Penyisipan elemen (insertAt)
             NEXT(p) = NEXT(o);
-            PREV(p) = o;
             NEXT(o) = p;
-            PREV(NEXT(o)) = p;
             TAIL(*q) = NEXT(p);
         }
     }
-    // MASIH ERROR KALAU NILAI REQIN SAMA, DIA INPUTNYA KEBALIK 
-        
 }
 
-void dequeue(Queue *q, toDoList *val) {
+void dequeue(PrioQueue *q, toDoList *val) {
 /* Proses: Menghapus val pada q dengan aturan FIFO */
 /* I.S. q tidak mungkin kosong */
-/* F.S. val = nilai elemen HEAD queue, HEAD mundur; 
+/* F.S. val = nilai elemen HEAD PrioQueue, HEAD mundur; 
         q mungkin kosong */    
     /* KAMUS */
     Address p;
@@ -86,13 +123,12 @@ void dequeue(Queue *q, toDoList *val) {
         HEAD(*q) = NULL;
     } else {
         HEAD(*q) = NEXT(p);
-        PREV(HEAD(*q)) = NULL;
     }
 }
 
 
-/**** Display Queue ****/
-void displayQueue(Queue q) {
+/**** Display PrioQueue ****/
+void displayQueue(PrioQueue q) {
 /* I.S. q boleh kosong */
 /* F.S. Output q sesuai dengan contoh */
     /* KAMUS */
@@ -100,7 +136,38 @@ void displayQueue(Queue q) {
     toDoList val;
     /* ALGORITMA */
     i = 1;
-    printf("Pesanan pada To Do List:");
+    printf("Pesanan pada To Do List:\n");
+    while (length(q) > 0) {
+        printf("%d. ", i);
+        i++;
+        dequeue(&q, &val);
+        printf("%d,", val.reqIn);
+        printf("%c,", val.pickUp);
+        printf("%c,", val.dropOff);
+
+        if (val.type == 'N') {
+            printf("Normal Item");
+        } else if (val.type == 'H') {
+            printf("Heavy Item");
+        } else if (val.type == 'V') {
+            printf("VIP Item");
+        } else {
+            printf("Perishable Item, sisa waktu %d", val.timeLimit);
+        }
+        printf("\n");
+    }
+}
+
+/**** Display To Do List ****/
+void displayToDo(PrioQueue q) {
+/* I.S. q boleh kosong */
+/* F.S. Output to do list sesuai dengan time yang dimasukkan */
+    /* KAMUS */
+    int i;
+    toDoList val;
+    /* ALGORITMA */
+    i = 1;
+    printf("Pesanan pada To Do List:\n");
     while (length(q) > 0) {
         printf("%d. ", i);
         i++;
@@ -119,38 +186,5 @@ void displayQueue(Queue q) {
             printf("(Perishable Item, sisa waktu %d)", val.timeLimit);
         }
         printf("\n");
-    }
-}
-
-/**** Display To Do List ****/
-void displayToDo(Queue q, int time) {
-/* I.S. q boleh kosong */
-/* F.S. Output to do list sesuai dengan time yang dimasukkan */
-    /* KAMUS */
-    int i;
-    Address p;
-    toDoList val;
-    /* ALGORITMA */
-    i = 1;
-    p = HEAD(q);
-    while ((p != NULL) && (INFO(p).reqIn <= time)) {
-        printf("%d. ", i);
-        i++;
-        val = INFO(p);
-        printf("%c ", val.pickUp);
-        printf("-> ");
-        printf("%c ", val.dropOff);
-
-        if (val.type == 'N') {
-            printf("(Normal Item)");
-        } else if (val.type == 'H') {
-            printf("(Heavy Item)");
-        } else if (val.type == 'V') {
-            printf("(VIP Item)");
-        } else {
-            printf("(Perishable Item, sisa waktu %d)", val.timeLimit);
-        }
-        printf("\n");
-        p = NEXT(p);
     }
 }

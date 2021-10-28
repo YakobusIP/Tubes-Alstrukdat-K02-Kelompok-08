@@ -6,7 +6,7 @@
 
 int main() {
     /* KAMUS */
-    Queue tdList;
+    PrioQueue tdList;
     toDoList val, val2;
     int i,p;
     int reqIn, timeLimit;
@@ -32,6 +32,6 @@ int main() {
         enqueue(&tdList, val);
     }
 
-    displayToDo(tdList, 5);
+    displayToDo(tdList);
     return 0;
 }
