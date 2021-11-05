@@ -37,4 +37,10 @@ void readCommand();
 void readConfigFile(PrioQueue *q);
 /* Membaca file config secara penuh */
 
+void saveToFile(PrioQueue *q);
+/* Save state game ke dalam sebuah file */
+
+void loadFromFile(PrioQueue *q);
+/* Load state game dari sebuah file */
+
 #endif
