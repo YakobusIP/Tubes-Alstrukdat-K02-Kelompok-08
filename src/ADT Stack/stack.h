@@ -13,7 +13,8 @@
 struct items {
     char name[20];
     int price;
-    int effect; 
+    int effect;
+    char type; // Untuk mengidentifikasi item
     char reward[20];
 };
 typedef int ElType;
@@ -30,6 +31,7 @@ typedef struct {
 #define TOP(s) (s).buffer[(IDX_TOP(s))]
 #define NAME(s) (s).buffer[(IDX_TOP(s))].name
 #define PRICE(s) (s).buffer[(IDX_TOP(s))].price
+#define TYPE(s) (s).buffer[(IDX_TOP(s))].type
 #define EFFECT(s) (s).buffer[(IDX_TOP(s))].effect
 #define REWARD(s) (s).buffer[(IDX_TOP(s))].reward
 
@@ -41,13 +43,13 @@ void CreateStack(Stack *s);
 /* Proses : Melakukan alokasi, membuat sebuah s kosong */
 
 /* ************ Prototype ************ */
-boolean isEmpty(Stack s);
+boolean isEmptyStack(Stack s);
 /* Mengirim true jika s kosong: lihat definisi di atas */
-boolean isFull(Stack s);
+boolean isFullStack(Stack s);
 /* Mengirim true jika tabel penampung nilai s stack penuh */
 
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
-void push(Stack *s, ElType val);
+void push(Stack *s, int val); // Time berguna untuk perishable items, jika bukan, isi dengan 0
 /* Menambahkan val sebagai elemen Stack s */
 /* I.S. s mungkin kosong, tabel penampung elemen stack TIDAK penuh */
 /* F.S. val menjadi TOP yang baru,IDX_TOP bertambah 1 */

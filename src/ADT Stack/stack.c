@@ -13,11 +13,11 @@ void CreateStack(Stack *s){
 /* Proses : Melakukan alokasi, membuat sebuah s kosong */
 
 /* ************ Prototype ************ */
-boolean isEmpty(Stack s){
+boolean isEmptyStack(Stack s){
     return IDX_TOP(s) == IDX_UNDEF;
 }
 /* Mengirim true jika s kosong: lihat definisi di atas */
-boolean isFull(Stack s){
+boolean isFullStack(Stack s){
     return IDX_TOP(s) == MAKSIMUM(s)-1;
 }
 /* Mengirim true jika tabel penampung nilai s stack penuh */
@@ -29,21 +29,25 @@ void push(Stack *s, int val){
         strcpy(NAME(*s), "Normal Item");
         PRICE(*s) = 200;
         EFFECT(*s) = IDX_UNDEF;
+        TYPE(*s) = "N";
         strcpy(REWARD(*s), "");
     }else if(val == 2){
         strcpy(NAME(*s), "Heavy Item");
         PRICE(*s) = 400;
         EFFECT(*s) = 1;
+        TYPE(*s) = "H";
         strcpy(REWARD(*s), "Speed Boost");
     }else if(val == 3){
         strcpy(NAME(*s), "Perishable Item");
         PRICE(*s) = 400;
         EFFECT(*s) = 2;
+        TYPE(*s) = "P";
         strcpy(REWARD(*s), "Increase Capacity");
     }else if(val == 4){
         strcpy(NAME(*s), "VIP Item");
         PRICE(*s) = 600;
         EFFECT(*s) = 3;
+        TYPE(*s) = "V";
         strcpy(REWARD(*s), "Return To Sender");
     }
     
