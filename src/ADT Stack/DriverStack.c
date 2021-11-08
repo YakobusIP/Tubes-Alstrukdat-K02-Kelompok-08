@@ -6,7 +6,8 @@
 
 int main(){
     Stack S;
-    int in, out;
+    int in;
+    struct items out;
     CreateStack(&S);
     in = 1;
     push(&S, in);
@@ -21,9 +22,7 @@ int main(){
     push(&S, in);
     printf("%d %s\n", PRICE(S), NAME(S));
     pop(&S, &out);
-    printf("%d\n", out);
-    pop(&S, &out);
-    // x = peek(&S);
-    printf("%d\n", out);
+    printf("%d\n", out.price);
+    
     return 0;
 }

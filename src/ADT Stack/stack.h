@@ -13,10 +13,9 @@
 struct items {
     char name[20];
     int price;
-    int effect;
+    int effect; 
     char reward[20];
 };
-
 typedef int ElType;
 typedef struct {
   int CapacityNow;
@@ -28,6 +27,7 @@ typedef struct {
 /* Jika s adalah Stack, maka akses elemen : */
 #define IDX_TOP(s) (s).idxTop
 #define MAKSIMUM(s) (s).CapacityNow
+#define TOP(s) (s).buffer[(IDX_TOP(s))]
 #define NAME(s) (s).buffer[(IDX_TOP(s))].name
 #define PRICE(s) (s).buffer[(IDX_TOP(s))].price
 #define EFFECT(s) (s).buffer[(IDX_TOP(s))].effect
@@ -53,7 +53,7 @@ void push(Stack *s, ElType val);
 /* F.S. val menjadi TOP yang baru,IDX_TOP bertambah 1 */
 
 /* ************ Menghapus sebuah elemen Stack ************ */
-void pop(Stack *s, ElType *val);
+void pop(Stack *s, struct items *val);
 /* Menghapus val dari Stack s */
 /* I.S. s tidak mungkin kosong */
 /* F.S. val adalah nilai elemen TOP yang lama, IDX_TOP berkurang 1 */
