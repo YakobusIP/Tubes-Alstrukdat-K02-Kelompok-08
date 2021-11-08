@@ -53,18 +53,8 @@ void push(Stack *s, int val){
 /* F.S. val menjadi TOP yang baru,IDX_TOP bertambah 1 */
 
 /* ************ Menghapus sebuah elemen Stack ************ */
-void pop(Stack *s, int *val){
-    if(!strcmp(NAME(*s),"Normal Item")){
-        *val = 1;
-    }else if(!strcmp(NAME(*s),"Heavy Item")){
-        *val = 2;
-    }else if(!strcmp(NAME(*s),"Perishable Item")){
-        *val = 3;
-    }else if(!strcmp(NAME(*s),"VIP Item")){
-        *val = 4;
-    }else{
-        *val = IDX_UNDEF;
-    }
+void pop(Stack *s, struct items *val){
+    *val = TOP(*s);
     (IDX_TOP(*s))--;
 }
 /* Menghapus val dari Stack s */
