@@ -4,7 +4,7 @@
 #define MAP_H
 
 #include "adjMatriks.h"
-#include "../ADTPoint/point.h"
+#include "../ADT Point/point.h"
 #include "../pcolor/pcolor.h"
 
 

@@ -3,9 +3,9 @@
 
 #include <stdlib.h>
 #include "../boolean.h"
-#include "../ADTPoint/point.h"
-#include "../ADTMatriks/map.h"
-#include "../ADTMatriks/adjMatriks.h"
+#include "../ADT Point/point.h"
+#include "../ADT Matriks/map.h"
+#include "../ADT Matriks/adjMatriks.h"
 
 
 typedef struct {
