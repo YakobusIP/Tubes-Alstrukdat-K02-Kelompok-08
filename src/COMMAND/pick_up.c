@@ -11,7 +11,7 @@ notes : identifikasi lokasi perlu penyesuaian lagi mau gimana,
 
 void pick_up(PrioQueue *q, Stack *s, char pickupLocation, UangWaktu *u) {
     // displayToDo(*q);
-    if (isEmpty(*q)) {
+    if (isQueueEmpty(*q)) {
         printf("Pesanan tidak ditemukan!\n");
     }
 

@@ -13,7 +13,7 @@ void CreatePrioQueue(PrioQueue *q) {
 }
 
 /**** TEST PrioQueue KOSONG ****/
-boolean isEmpty(PrioQueue q) {
+boolean isQueueEmpty(PrioQueue q) {
 /* Mengirim true jika PrioQueue kosong */
     /* ALGORITMA */
     return ((HEAD(q) == NULL) && (TAIL(q) == NULL));
@@ -35,9 +35,7 @@ int length(PrioQueue q) {
 }
 
 /* *** Primitif Add/Delete *** */
-// 
-// UNSURE, CHECK BEFORE PUSH
-//
+// PUSH ELEMEN KE DALAM QUEUE SESUAI DENGAN WAKTU REQ-IN NYA
 void enqueueToDo(PrioQueue *q, toDoList val, int time) {
 /* Proses: Menambahkan val pada q */
 /* I.S. q mungkin kosong, tabel penampung elemen q TIDAK penuh */
@@ -48,9 +46,9 @@ void enqueueToDo(PrioQueue *q, toDoList val, int time) {
     toDoList temp;
     /* ALGORITMA */
     o = HEAD(*q);
-    p = newNode(val);
+    p = newToDoNode(val);
     if (INFO(p).reqIn <= time) {
-        if (isEmpty(*q)) {
+        if (isQueueEmpty(*q)) {
             HEAD(*q) = p;
             TAIL(*q) = p;
         } else {
@@ -74,9 +72,7 @@ void enqueueToDo(PrioQueue *q, toDoList val, int time) {
         
 }
 
-// 
-// UNSURE, CHECK BEFORE PUSH
-//
+// PUSH SEMUA ELEMEN TANPA MELIHAT NILAI REQ-IN
 void enqueueFull(PrioQueue *q, toDoList val) {
 /* Proses: Menambahkan val pada q dengan aturan FIFO */
 /* I.S. q mungkin kosong, tabel penampung elemen q TIDAK penuh */
@@ -86,8 +82,8 @@ void enqueueFull(PrioQueue *q, toDoList val) {
     toDoList temp;
     /* ALGORITMA */
     o = HEAD(*q);
-    p = newNode(val);
-    if (isEmpty(*q)) {
+    p = newToDoNode(val);
+    if (isQueueEmpty(*q)) {
         HEAD(*q) = p;
         TAIL(*q) = p;
     } else {

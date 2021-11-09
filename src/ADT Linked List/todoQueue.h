@@ -22,7 +22,7 @@ void CreatePrioQueue(PrioQueue *q);
 /* NEXTTAIL bernilai NULL */
 
 /**** TEST PrioQueue KOSONG ****/
-boolean isEmpty(PrioQueue q);
+boolean isQueueEmpty(PrioQueue q);
 /* Mengirim true jika PrioQueue kosong */
 
 int length(PrioQueue q);
