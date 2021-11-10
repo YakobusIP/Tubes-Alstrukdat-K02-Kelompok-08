@@ -30,12 +30,16 @@ void CreateAvailableGadget(AvailableGadget *AG) {
 
 
 void displayGadget(struct Gadget G, int i) {
+    printf("%d. %s\n", i, NAME(G));
+}
+
+void displayGadgetWithPrice(struct Gadget G, int i) {
     printf("%d. %s (%d Yen)\n", i, NAME(G), PRICE(G));
 }
 
 void displayAvailableGadget(AvailableGadget AG) {
     int i;
     for (i=0; i<CAPACITY; i++) {
-        displayGadget((AG).Buffer[i], i+1);
+        displayGadgetWithPrice((AG).Buffer[i], i+1);
     }
 }

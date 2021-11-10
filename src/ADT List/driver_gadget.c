@@ -15,5 +15,5 @@ int main() {
     addGadget(&IG, ELMT(AG, 3));    // menambahkan senter pembesar ke inventory
     displayInventory(IG);
     deleteGadget(&IG, ELMT(AG, 2));
-    displayInventory(IG);
+    displayInventoryWithPrice(IG);
 }
