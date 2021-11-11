@@ -2,172 +2,194 @@
 #include <stdlib.h>
 #include "todoQueue.h"
 
-/**** KREATOR ****/
-void CreatePrioQueue(PrioQueue *q) {
-/* Membuat sebuah PrioQueue kosong */
-/* NEXTHEAD bernilai NULL */
-/* NEXTTAIL bernilai NULL */    
+/* PROTOTYPE */
+/****************** PEMBUATAN LIST KOSONG ******************/
+void CreateToDoList(List *l) {
+/* I.S. sembarang */
+/* F.S. Terbentuk list kosong */
     /* ALGORITMA */
-    HEAD(*q) = NULL;
-    TAIL(*q) = NULL;
+    FIRST(*l) = NULL;
+}
+/****************** TEST LIST KOSONG ******************/
+boolean isListEmpty(List l) {
+/* Mengirim true jika list kosong */
+    /* ALGORITMA */
+    return (FIRST(l) == NULL);
 }
 
-/**** TEST PrioQueue KOSONG ****/
-boolean isQueueEmpty(PrioQueue q) {
-/* Mengirim true jika PrioQueue kosong */
-    /* ALGORITMA */
-    return ((HEAD(q) == NULL) && (TAIL(q) == NULL));
-}
-
-int length(PrioQueue q) {
-/* Mengirimkan banyaknya elemen PrioQueue. Mengirimkan 0 jika q kosong. */ 
+/****************** GETTER SETTER ******************/
+toDoList getElmt(List l, int idx) {
+/* I.S. l terdefinisi, idx indeks yang valid dalam l, yaitu 0..length(l) */
+/* F.S. Mengembalikan nilai elemen l pada indeks idx */
     /* KAMUS */
     Address p;
-    int len;
+    int i;
     /* ALGORITMA */
-    p = HEAD(q);
-    len = 0;
-    while (p != NULL) {
-        len++;
+    p = FIRST(l);
+    i = 0;
+    while (i < idx) {
+        i++;
         p = NEXT(p);
     }
-    return len;
+    return (INFO(p));
 }
 
-/* *** Primitif Add/Delete *** */
-// PUSH ELEMEN KE DALAM QUEUE SESUAI DENGAN WAKTU REQ-IN NYA
-void enqueueToDo(PrioQueue *q, toDoList val, int time) {
-/* Proses: Menambahkan val pada q */
-/* I.S. q mungkin kosong, tabel penampung elemen q TIDAK penuh */
-/* F.S. Membentuk node baru diisi dengan val, lalu diinsert sesuai dengan nilai reqIn,
-        mengecek apakah nilai reqIn pada val lebih kecil daripada time sekarang */ 
+
+void setElmt(List *l, int idx, toDoList val) {
+/* I.S. l terdefinisi, idx indeks yang valid dalam l, yaitu 0..length(l) */
+/* F.S. Mengubah elemen l pada indeks ke-idx menjadi val */
     /* KAMUS */
-    Address o, p;
-    toDoList temp;
+    Address p;
+    int i;
     /* ALGORITMA */
-    o = HEAD(*q);
-    p = newToDoNode(val);
-    if (INFO(p).reqIn <= time) {
-        if (isQueueEmpty(*q)) {
-            HEAD(*q) = p;
-            TAIL(*q) = p;
-        } else {
-            // Jika reqIn head awal lebih besar daripada reqIn baru, maka insert node di awal PrioQueue
-            if (INFO(o).reqIn > val.reqIn) {
-                NEXT(p) = HEAD(*q);
-                HEAD(*q) = p;
-            } else {
-                // Mencari posisi penyisipan elemen ke dalam PrioQueue
-                while ((NEXT(o) != NULL) && (INFO(NEXT(o)).reqIn <= val.reqIn)) {
-                    o = NEXT(o);
-                }
-
-                // Penyisipan elemen (insertAt)
-                NEXT(p) = NEXT(o);
-                NEXT(o) = p;
-                TAIL(*q) = NEXT(p);
-            }
-        }  
+    p = FIRST(*l);
+    i = 0;
+    while (i < idx) {
+        i++;
+        p = NEXT(p);
     }
-        
+    INFO(p) = val;
 }
 
-// PUSH SEMUA ELEMEN TANPA MELIHAT NILAI REQ-IN
-void enqueueFull(PrioQueue *q, toDoList val) {
-/* Proses: Menambahkan val pada q dengan aturan FIFO */
-/* I.S. q mungkin kosong, tabel penampung elemen q TIDAK penuh */
-/* F.S. Membentuk node baru diisi dengan val, lalu diinsert sesuai dengan nilai reqIn  */ 
-    /* KAMUS */
-    Address o, p;
-    toDoList temp;
-    /* ALGORITMA */
-    o = HEAD(*q);
-    p = newToDoNode(val);
-    if (isQueueEmpty(*q)) {
-        HEAD(*q) = p;
-        TAIL(*q) = p;
-    } else {
-        // Jika reqIn head awal lebih besar daripada reqIn baru, maka insert node di awal PrioQueue
-        if (INFO(o).reqIn > val.reqIn) {
-            NEXT(p) = HEAD(*q);
-            HEAD(*q) = p;
-        } else {
-            // Mencari posisi penyisipan elemen ke dalam PrioQueue
-            while ((NEXT(o) != NULL) && (INFO(NEXT(o)).reqIn <= val.reqIn)) {
-                o = NEXT(o);
-            }
-
-            // Penyisipan elemen (insertAt)
-            NEXT(p) = NEXT(o);
-            NEXT(o) = p;
-            TAIL(*q) = NEXT(p);
-        }
-    }
-}
-
-void dequeue(PrioQueue *q, toDoList *val) {
-/* Proses: Menghapus val pada q dengan aturan FIFO */
-/* I.S. q tidak mungkin kosong */
-/* F.S. val = nilai elemen HEAD PrioQueue, HEAD mundur; 
-        q mungkin kosong */    
+/****************** PRIMITIF BERDASARKAN NILAI ******************/
+/*** PENAMBAHAN ELEMEN ***/
+void insertFirst(List *l, toDoList val) {
+/* I.S. l mungkin kosong */
+/* F.S. Melakukan alokasi sebuah elemen dan */
+/* menambahkan elemen pertama dengan nilai val jika alokasi berhasil. */
+/* Jika alokasi gagal: I.S.= F.S. */
     /* KAMUS */
     Address p;
     /* ALGORITMA */
-    p = HEAD(*q);
-    *val = INFO(p);
-    if (NEXT(p) == NULL) {
-        HEAD(*q) = NULL;
+    p = newNode(val);
+    if (p != NULL) {
+        NEXT(p) = FIRST(*l);
+        FIRST(*l) = p;
+    }
+}
+
+void insertLast(List *l, toDoList val) {
+/* I.S. l mungkin kosong */
+/* F.S. Melakukan alokasi sebuah elemen dan */
+/* menambahkan elemen list di akhir: elemen terakhir yang baru */
+/* bernilai val jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */   
+    /* KAMUS */
+    Address p, prev;
+    /* ALGORITMA */
+    if (isEmpty(*l)) {
+        insertFirst(l, val);
     } else {
-        HEAD(*q) = NEXT(p);
+        p = newNode(val);
+        if (p != NULL) {
+            prev = FIRST(*l);
+            while (NEXT(prev) != NULL) {
+                prev = NEXT(prev);
+            }
+            NEXT(prev) = p;
+        } 
     }
 }
 
-
-/**** Display PrioQueue ****/
-void displayQueue(PrioQueue q) {
-/* I.S. q boleh kosong */
-/* F.S. Output q sesuai dengan contoh */
+void insertAt(List *l, toDoList val, int idx) {
+/* I.S. l tidak mungkin kosong, idx indeks yang valid dalam l, yaitu 0..length(l) */
+/* F.S. Melakukan alokasi sebuah elemen dan */
+/* menyisipkan elemen dalam list pada indeks ke-idx (bukan menimpa elemen di i) */
+/* yang bernilai val jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */    
     /* KAMUS */
+    Address p, prev;
     int i;
-    toDoList val;
     /* ALGORITMA */
-    i = 1;
-    printf("Pesanan pada To Do List:\n");
-    while (length(q) > 0) {
-        printf("%d. ", i);
-        i++;
-        dequeue(&q, &val);
-        printf("%d,", val.reqIn);
-        printf("%c,", val.pickUp);
-        printf("%c,", val.dropOff);
-
-        if (val.type == 'N') {
-            printf("Normal Item");
-        } else if (val.type == 'H') {
-            printf("Heavy Item");
-        } else if (val.type == 'V') {
-            printf("VIP Item");
-        } else {
-            printf("Perishable Item, sisa waktu %d", val.timeLimit);
+    if (idx == 0) {
+        insertFirst(l, val);
+    } else {
+        p = newNode(val);
+        if (p != NULL) {
+            prev = FIRST(*l);
+            i = 0;
+            while (i < (idx-1)) {
+                i++;
+                prev = NEXT(prev);
+            }
+            NEXT(p) = NEXT(prev);
+            NEXT(prev) = p;
         }
-        printf("\n");
     }
 }
 
-/**** Display To Do List ****/
-void displayToDo(PrioQueue q) {
-/* I.S. q boleh kosong */
-/* F.S. Output to do list sesuai dengan time yang dimasukkan */
+/*** PENGHAPUSAN ELEMEN ***/
+void deleteFirst(List *l, toDoList *val) {
+/* I.S. List l tidak kosong  */
+/* F.S. Elemen pertama list dihapus: nilai info disimpan pada x */
+/*      dan alamat elemen pertama di-dealokasi */
+    /* KAMUS */
+    Address p;
+    /* ALGORITMA */
+    p = FIRST(*l);
+    *val = INFO(p);
+    FIRST(*l) = NEXT(p);
+}
+
+void deleteLast(List *l, toDoList *val) {
+/* I.S. list tidak kosong */
+/* F.S. Elemen terakhir list dihapus: nilai info disimpan pada x */
+/*      dan alamat elemen terakhir di-dealokasi */
+    /* KAMUS */
+    Address p, prev;
+    /* ALGORITMA */
+    p = FIRST(*l);
+    prev = NULL;
+    while (NEXT(p) != NULL) {
+        prev = p;
+        p = NEXT(p);
+    }
+    if (prev == NULL) {
+        FIRST(*l) = NULL;
+    } else {
+        NEXT(prev) = NULL;
+    }
+    *val = INFO(p);
+}
+
+void deleteAt(List *l, int idx, toDoList *val) {
+/* I.S. list tidak kosong, idx indeks yang valid dalam l, yaitu 0..length(l) */
+/* F.S. val diset dengan elemen l pada indeks ke-idx. */
+/*      Elemen l pada indeks ke-idx dihapus dari l */
+    /* KAMUS */
+    Address p, prev;
+    int i;
+    /* ALGORITMA */
+    if (idx == 0) {
+        deleteFirst(l, val);
+    } else {
+        i = 0;
+        prev = FIRST(*l);
+        while (i < (idx-1)) {
+            i++;
+            prev = NEXT(prev);
+        }
+        p = NEXT(prev);
+        *val = INFO(p);
+        NEXT(prev) = NEXT(p);
+    }
+}
+
+/****************** PROSES SEMUA ELEMEN LIST ******************/
+void displayToDo(List l) {
+/* I.S. List mungkin kosong */
+/* F.S. Jika list tidak kosong, iai list dicetak ke kanan: [e1,e2,...,en] */
+/* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
+/* Jika list kosong : menulis [] */
+/* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */   
     /* KAMUS */
     int i;
     toDoList val;
     /* ALGORITMA */
     i = 1;
     printf("Pesanan pada To Do List:\n");
-    while (length(q) > 0) {
+    while (length(l) > 0) {
         printf("%d. ", i);
         i++;
-        dequeue(&q, &val);
+        deleteFirst(&l, &val);
         printf("%c ", val.pickUp);
         printf("-> ");
         printf("%c ", val.dropOff);
