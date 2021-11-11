@@ -16,12 +16,9 @@ void CreateMap(map *M, int nRow, int nCol)
     }
 }
 
-void ReadMap(map * M, Coordinate *C)
+void ReadMap(map *M, Coordinate *C)
 {
-    if(IsCoordEff(*C, nRow(*M), nCol(*M)))
-    {
         CoordPointer(*M, row(*C), col(*C)) = C;
-    }
 }
 
 void DisplayMap(map M, adjMatrix A, Coordinate Mobita)
@@ -46,10 +43,11 @@ void DisplayMap(map M, adjMatrix A, Coordinate Mobita)
                     {
                         print_yellow(x);
                     }
-                    //1 diganti dengan kondisional dibawah
-                    //check coordinate = mobita
+                    
+                    
                     //Check coordinate = pickup
                     //Check coordinate = drop off
+
                     else if(checkAdjacency(A, nama(Mobita), x))
                     {
                         print_green(x);
