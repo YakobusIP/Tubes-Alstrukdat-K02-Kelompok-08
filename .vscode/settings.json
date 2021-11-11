@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "uangwaktu.h": "c",
+        "todoqueue.h": "c",
+        "string.h": "c",
+        "inprogresslist.h": "c"
+    }
+}

@@ -1,24 +1,24 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include "todoQueue.h"
+#include "inprogressList.h"
 
 /* PROTOTYPE */
 /****************** PEMBUATAN LIST KOSONG ******************/
-void CreateToDoList(to_do_List *l) {
+void CreateList(List *l) {
 /* I.S. sembarang */
 /* F.S. Terbentuk list kosong */
     /* ALGORITMA */
     FIRST(*l) = NULL;
 }
+
 /****************** TEST LIST KOSONG ******************/
-boolean isListEmpty(to_do_List l) {
+boolean isEmpty(List l) {
 /* Mengirim true jika list kosong */
     /* ALGORITMA */
     return (FIRST(l) == NULL);
 }
 
 /****************** GETTER SETTER ******************/
-toDoList getElmt(to_do_List l, int idx) {
+inProgressList getElmt(List l, int idx) {
 /* I.S. l terdefinisi, idx indeks yang valid dalam l, yaitu 0..length(l) */
 /* F.S. Mengembalikan nilai elemen l pada indeks idx */
     /* KAMUS */
@@ -34,8 +34,7 @@ toDoList getElmt(to_do_List l, int idx) {
     return (INFO(p));
 }
 
-
-void setElmt(to_do_List *l, int idx, toDoList val) {
+void setElmt(List *l, int idx, inProgressList val) {
 /* I.S. l terdefinisi, idx indeks yang valid dalam l, yaitu 0..length(l) */
 /* F.S. Mengubah elemen l pada indeks ke-idx menjadi val */
     /* KAMUS */
@@ -53,7 +52,7 @@ void setElmt(to_do_List *l, int idx, toDoList val) {
 
 /****************** PRIMITIF BERDASARKAN NILAI ******************/
 /*** PENAMBAHAN ELEMEN ***/
-void insertFirst(to_do_List *l, toDoList val) {
+void insertFirst(List *l, inProgressList val) {
 /* I.S. l mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen pertama dengan nilai val jika alokasi berhasil. */
@@ -61,14 +60,14 @@ void insertFirst(to_do_List *l, toDoList val) {
     /* KAMUS */
     Address p;
     /* ALGORITMA */
-    p = newNode(val);
+    p = newInProgressNode(val);
     if (p != NULL) {
         NEXT(p) = FIRST(*l);
         FIRST(*l) = p;
     }
 }
 
-void insertLast(to_do_List *l, toDoList val) {
+void insertLast(List *l, inProgressList val) {
 /* I.S. l mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen list di akhir: elemen terakhir yang baru */
@@ -79,7 +78,7 @@ void insertLast(to_do_List *l, toDoList val) {
     if (isEmpty(*l)) {
         insertFirst(l, val);
     } else {
-        p = newNode(val);
+        p = newInProgressNode(val);
         if (p != NULL) {
             prev = FIRST(*l);
             while (NEXT(prev) != NULL) {
@@ -90,7 +89,7 @@ void insertLast(to_do_List *l, toDoList val) {
     }
 }
 
-void insertAt(to_do_List *l, toDoList val, int idx) {
+void insertAt(List *l, inProgressList val, int idx) {
 /* I.S. l tidak mungkin kosong, idx indeks yang valid dalam l, yaitu 0..length(l) */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menyisipkan elemen dalam list pada indeks ke-idx (bukan menimpa elemen di i) */
@@ -102,7 +101,7 @@ void insertAt(to_do_List *l, toDoList val, int idx) {
     if (idx == 0) {
         insertFirst(l, val);
     } else {
-        p = newNode(val);
+        p = newInProgressNode(val);
         if (p != NULL) {
             prev = FIRST(*l);
             i = 0;
@@ -117,7 +116,7 @@ void insertAt(to_do_List *l, toDoList val, int idx) {
 }
 
 /*** PENGHAPUSAN ELEMEN ***/
-void deleteFirst(to_do_List *l, toDoList *val) {
+void deleteFirst(List *l, inProgressList *val) {
 /* I.S. List l tidak kosong  */
 /* F.S. Elemen pertama list dihapus: nilai info disimpan pada x */
 /*      dan alamat elemen pertama di-dealokasi */
@@ -129,7 +128,7 @@ void deleteFirst(to_do_List *l, toDoList *val) {
     FIRST(*l) = NEXT(p);
 }
 
-void deleteLast(to_do_List *l, toDoList *val) {
+void deleteLast(List *l, inProgressList *val) {
 /* I.S. list tidak kosong */
 /* F.S. Elemen terakhir list dihapus: nilai info disimpan pada x */
 /*      dan alamat elemen terakhir di-dealokasi */
@@ -150,7 +149,7 @@ void deleteLast(to_do_List *l, toDoList *val) {
     *val = INFO(p);
 }
 
-void deleteAt(to_do_List *l, int idx, toDoList *val) {
+void deleteAt(List *l, int idx, inProgressList *val) {
 /* I.S. list tidak kosong, idx indeks yang valid dalam l, yaitu 0..length(l) */
 /* F.S. val diset dengan elemen l pada indeks ke-idx. */
 /*      Elemen l pada indeks ke-idx dihapus dari l */
@@ -174,35 +173,37 @@ void deleteAt(to_do_List *l, int idx, toDoList *val) {
 }
 
 /****************** PROSES SEMUA ELEMEN LIST ******************/
-void displayToDo(to_do_List l) {
+void displayInProgress(List l) {
 /* I.S. List mungkin kosong */
 /* F.S. Jika list tidak kosong, iai list dicetak ke kanan: [e1,e2,...,en] */
 /* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
 /* Jika list kosong : menulis [] */
-/* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */   
+/* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */    
     /* KAMUS */
+    Address p;
     int i;
-    toDoList val;
+    char typeCheck;
     /* ALGORITMA */
     i = 1;
-    printf("Pesanan pada To Do List:\n");
-    while (length(l) > 0) {
+    printf("Pesanan yang sedang diantarkan:\n");
+    p = FIRST(l);
+    while (p != NULL) {
         printf("%d. ", i);
         i++;
-        deleteFirst(&l, &val);
-        printf("%c ", val.pickUp);
-        printf("-> ");
-        printf("%c ", val.dropOff);
+        typeCheck = INFO(p).type;
 
-        if (val.type == 'N') {
-            printf("(Normal Item)");
-        } else if (val.type == 'H') {
-            printf("(Heavy Item)");
-        } else if (val.type == 'V') {
-            printf("(VIP Item)");
-        } else {
-            printf("(Perishable Item, sisa waktu %d)", val.timeLimit);
+        if (typeCheck == 'N') {
+            printf("Normal Item");
+        } else if (typeCheck == 'H') {
+            printf("Heavy Item");
+        } else if (typeCheck == 'P') {
+            printf("Perishable Item");
+        } else if (typeCheck == 'V') {
+            printf("VIP Item");
         }
+
+        printf("(Tujuan: %c)", INFO(p).dropOff);
         printf("\n");
+        p = NEXT(p);
     }
 }

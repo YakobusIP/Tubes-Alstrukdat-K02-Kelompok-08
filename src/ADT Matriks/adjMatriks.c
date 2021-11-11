@@ -2,37 +2,39 @@
 #include "adjMatriks.h"
 
 
-void createAdjMatrix(adjMatrix *A)
+void createAdjMatrix(adjMatrix *A, int length)
 {
     int i, j;
-    for(i = 0; i < 18; i++)
+    adjLength(*A) = length;
+    for(i = 0; i < length; i++)
     {
-        for(j = 0; j < 18; j++)
+        for(j = 0; j < length; j++)
         {
             adjacent(*A, i, j) = 0;
         }
     }
 }
 
-void ReadAdjMatrix(adjMatrix *A)
+void ReadAdjMatrix(adjMatrix *A, int row, int col, int adj)
 {
     int i, j;
-    for(i = 0; i < 18; i++)
+    for(i = 0; i < adjLength(*A); i++)
     {
-        for(j = 0; j < 18; j++)
+        for(j = 0; j < adjLength(*A); j++)
         {
-            if (j % 2 == 0) adjacent(*A, i, j) = 1;
-            else if (j % 3 == 0) adjacent(*A, i, j) = 1;
-            //Adjacent(A) dari mesin karakter
+            if(i == row && j == col)
+            {
+                adjacent(*A, i, j) = adj;
+            }
         }
     }
 }
 
 void DisplayAdjMatrix(adjMatrix A)
 {
-    for(int i = 0; i < 18; i++)
+    for(int i = 0; i < adjLength(A); i++)
     {
-        for(int j = 0; j < 18; j++)
+        for(int j = 0; j < adjLength(A); j++)
         {
             printf("%d ", adjacent(A, i, j));
         }

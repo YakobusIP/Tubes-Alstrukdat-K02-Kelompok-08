@@ -24,6 +24,6 @@ typedef struct node {
 #define INFO(p) (p)->info
 #define NEXT(p) (p)->next
 
-Address newNode(toDoList val);
+Address newToDoNode(toDoList val);
 
 #endif

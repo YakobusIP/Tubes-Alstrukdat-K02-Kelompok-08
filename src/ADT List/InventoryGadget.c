@@ -1,3 +1,6 @@
+/* Mobita dapat memiliki 2 gadget yang sama sekaligus
+selama masih ada slot di inventory */
+
 #include <stdio.h>
 #include "InventoryGadget.h"
 
@@ -6,11 +9,11 @@ void CreateInventoryGadget(InventoryGadget *IG) {
 }
 
 boolean isFull(InventoryGadget IG) {
-    return NEFF(IG) = CAPACITY;
+    return NEFF(IG) == CAPACITY;
 }
 
 boolean isEmpty(InventoryGadget IG) {
-    return NEFF(IG) = 0;
+    return NEFF(IG) == 0;
 }
 
 int indexOf(InventoryGadget IG, struct Gadget G) {
@@ -47,6 +50,16 @@ void displayInventory (InventoryGadget IG) {
     int i;
     for (i=0; i<=getLastIdx(IG); i++) {
         displayGadget(ELMT(IG, i), i+1);
+    }
+    for (i=getLastIdx(IG)+1; i<CAPACITY; i++) {
+        printf("%d. -\n", i+1);
+    }
+}
+
+void displayInventoryWithPrice (InventoryGadget IG) {
+    int i;
+    for (i=0; i<=getLastIdx(IG); i++) {
+        displayGadgetWithPrice(ELMT(IG, i), i+1);
     }
     for (i=getLastIdx(IG)+1; i<CAPACITY; i++) {
         printf("%d. -\n", i+1);
