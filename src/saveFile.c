@@ -12,7 +12,6 @@ Token currentToken;
 int main(){
     /* KAMUS */
     toDoList val;
-    PrioQueue q;
     int i, len;
     /* ALGORITMA */
     printf("Masukkan nama save file dalam permainan : ");

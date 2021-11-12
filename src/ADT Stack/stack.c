@@ -23,31 +23,31 @@ boolean isFullStack(Stack s){
 /* Mengirim true jika tabel penampung nilai s stack penuh */
 
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
-void push(Stack *s, int val){
+void pushStack(Stack *s, int val){
     (IDX_TOP(*s))++;
     if(val == 1){
         strcpy(NAME(*s), "Normal Item");
         PRICE(*s) = 200;
         EFFECT(*s) = IDX_UNDEF;
-        TYPE(*s) = "N";
+        strcpy(TYPE(*s), "N");
         strcpy(REWARD(*s), "");
     }else if(val == 2){
         strcpy(NAME(*s), "Heavy Item");
         PRICE(*s) = 400;
         EFFECT(*s) = 1;
-        TYPE(*s) = "H";
+        strcpy(TYPE(*s), "H");
         strcpy(REWARD(*s), "Speed Boost");
     }else if(val == 3){
         strcpy(NAME(*s), "Perishable Item");
         PRICE(*s) = 400;
         EFFECT(*s) = 2;
-        TYPE(*s) = "P";
+        strcpy(TYPE(*s), "P");
         strcpy(REWARD(*s), "Increase Capacity");
     }else if(val == 4){
         strcpy(NAME(*s), "VIP Item");
         PRICE(*s) = 600;
         EFFECT(*s) = 3;
-        TYPE(*s) = "V";
+        strcpy(TYPE(*s), "V");
         strcpy(REWARD(*s), "Return To Sender");
     }
     
@@ -57,7 +57,7 @@ void push(Stack *s, int val){
 /* F.S. val menjadi TOP yang baru,IDX_TOP bertambah 1 */
 
 /* ************ Menghapus sebuah elemen Stack ************ */
-void pop(Stack *s, struct items *val){
+void popStack(Stack *s, struct items *val){
     *val = TOP(*s);
     (IDX_TOP(*s))--;
 }

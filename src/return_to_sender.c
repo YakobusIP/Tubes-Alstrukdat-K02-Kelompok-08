@@ -8,14 +8,11 @@
 // Stuck
 int main() {
     boolean isReturnToSenderValid;
-    PrioQueue q;
     Stack s;
     struct items val;
-    CreatePrioQueue(&q);
     CreateStack(&s);
     if(isReturnToSenderValid) {
         pop(&s, &val);
-        enqueueToDo;
     }
     return 0;
 }

@@ -10,18 +10,18 @@ int main(){
     struct items out;
     CreateStack(&S);
     in = 1;
-    push(&S, in);
+    pushStack(&S, in);
     printf("%d %s\n", PRICE(S), NAME(S));
     in = 2;
-    push(&S, in);
+    pushStack(&S, in);
     printf("%d %s\n", PRICE(S), NAME(S));
     in = 3;
-    push(&S, in);
+    pushStack(&S, in);
     printf("%d %s\n", PRICE(S), NAME(S));
     in = 4;
-    push(&S, in);
+    pushStack(&S, in);
     printf("%d %s\n", PRICE(S), NAME(S));
-    pop(&S, &out);
+    popStack(&S, &out);
     printf("%d\n", out.price);
     
     return 0;

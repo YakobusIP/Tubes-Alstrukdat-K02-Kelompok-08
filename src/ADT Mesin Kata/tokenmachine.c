@@ -202,4 +202,4 @@ void loadFromFile(PrioQueue *q) {
         // INPUT VAL YANG SUDAH DIBENTUK KE DALAM QUEUE
         enqueueToDo(q, val, 10);
     }
-}
+} 

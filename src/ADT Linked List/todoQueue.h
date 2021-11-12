@@ -1,7 +1,7 @@
 #ifndef TODOQUEUE_H
 #define TODOQUEUE_H
 
-#include "boolean.h"
+#include "../boolean.h"
 #include "todoNode.h"
 
 #define IDX_UNDEF (-1)
