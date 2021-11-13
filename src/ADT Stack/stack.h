@@ -14,7 +14,7 @@ struct items {
     char name[20];
     int price;
     int effect;
-    char type; // Untuk mengidentifikasi item
+    char type[20]; // Untuk mengidentifikasi item
     char reward[20];
 };
 typedef int ElType;
@@ -28,12 +28,12 @@ typedef struct {
 /* Jika s adalah Stack, maka akses elemen : */
 #define IDX_TOP(s) (s).idxTop
 #define MAKSIMUM(s) (s).CapacityNow
-#define TOP(s) (s).buffer[(IDX_TOP(s))]
-#define NAME(s) (s).buffer[(IDX_TOP(s))].name
-#define PRICE(s) (s).buffer[(IDX_TOP(s))].price
-#define TYPE(s) (s).buffer[(IDX_TOP(s))].type
-#define EFFECT(s) (s).buffer[(IDX_TOP(s))].effect
-#define REWARD(s) (s).buffer[(IDX_TOP(s))].reward
+#define TOP(s) (s).buffer[(s).idxTop]
+#define NAMA(s) (s).buffer[(s).idxTop].name
+#define HARGA(s) (s).buffer[(s).idxTop].price
+#define TYPE(s) (s).buffer[(s).idxTop].type
+#define EFFECT(s) (s).buffer[(s).idxTop].effect
+#define REWARD(s) (s).buffer[(s).idxTop].reward
 
 /* *** Konstruktor/Kreator *** */
 void CreateStack(Stack *s);

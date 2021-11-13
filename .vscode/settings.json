@@ -3,6 +3,7 @@
         "uangwaktu.h": "c",
         "todoqueue.h": "c",
         "string.h": "c",
-        "inprogresslist.h": "c"
+        "inprogresslist.h": "c",
+        "charmachine.h": "c"
     }
 }
