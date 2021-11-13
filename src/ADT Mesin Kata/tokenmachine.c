@@ -204,7 +204,7 @@ void readConfigFile(PrioQueue *q, map *M, adjMatrix *A) {
         val.timeLimit = intimeLimit;
 
         // INPUT VAL YANG SUDAH DIBENTUK KE DALAM QUEUE
-        enqueueToDo(q, val, 10);
+        enqueueRL(q, val);
     }
 }
 

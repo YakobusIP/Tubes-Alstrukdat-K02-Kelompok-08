@@ -42,7 +42,7 @@ int length(PrioQueue q) {
 }
 
 /* *** Primitif Add/Delete *** */
-void enqueue(PrioQueue *q, requestList val, int time) {
+void enqueueRL(PrioQueue *q, requestList val) {
 /* Proses: Menambahkan val pada q dengan aturan FIFO */
 /* I.S. q mungkin kosong, tabel penampung elemen q TIDAK penuh */
 /* F.S. val menjadi TAIL yang baru, IDX_TAIL "mundur".
@@ -51,37 +51,35 @@ void enqueue(PrioQueue *q, requestList val, int time) {
     /* KAMUS */
     int i,j;
     /* ALGORITMA */
-    if (HEAD(*q).reqIn <= time) {
-        if (isQueueEmpty(*q)) {
-            IDX_HEAD(*q) = 0;
-            IDX_TAIL(*q) = 0;
-            TAIL(*q) = val;
-        } else {
-            // Jika reqIn head awal lebih besar daripada reqIn baru, maka insert val di awal PrioQueue
-            if (HEAD(*q).reqIn > val.reqIn) {
-                // Jika index head awal sudah 0, lakukan penggeseran 1 elemen ke kanan
-                if (IDX_HEAD(*q) == 0) {
-                    for(i=IDX_HEAD(*q);i<IDX_TAIL(*q);i++) {
-                        (*q).buffer[i+1] = (*q).buffer[i];
-                    }
-                    IDX_TAIL(*q)++;
+    if (isQueueEmpty(*q)) {
+        IDX_HEAD(*q) = 0;
+        IDX_TAIL(*q) = 0;
+        TAIL(*q) = val;
+    } else {
+        // Jika reqIn head awal lebih besar daripada reqIn baru, maka insert val di awal PrioQueue
+        if (HEAD(*q).reqIn > val.reqIn) {
+            // Jika index head awal sudah 0, lakukan penggeseran 1 elemen ke kanan
+            if (IDX_HEAD(*q) == 0) {
+                for(i=IDX_HEAD(*q);i<IDX_TAIL(*q);i++) {
+                    (*q).buffer[i+1] = (*q).buffer[i];
                 }
-                // Tambah elemen ke depan queue
-                HEAD(*q) = val;
-            } else {
-                i = IDX_HEAD(*q);
-                while ((i <= IDX_TAIL(*q)) && ((*q).buffer[i].reqIn <= val.reqIn)) {
-                    i++;
-                }
-                // Penggeseran elemen ke kanan
-                if (i != IDX_TAIL(*q)+1) {
-                    for(j=IDX_TAIL(*q)+1;j>i;j--) {
-                        (*q).buffer[j] = (*q).buffer[j-1];
-                    }
-                }
-                (*q).buffer[i] = val;
                 IDX_TAIL(*q)++;
             }
+            // Tambah elemen ke depan queue
+            HEAD(*q) = val;
+        } else {
+            i = IDX_HEAD(*q);
+            while ((i <= IDX_TAIL(*q)) && ((*q).buffer[i].reqIn <= val.reqIn)) {
+                i++;
+            }
+            // Penggeseran elemen ke kanan
+            if (i != IDX_TAIL(*q)+1) {
+                for(j=IDX_TAIL(*q)+1;j>i;j--) {
+                    (*q).buffer[j] = (*q).buffer[j-1];
+                }
+            }
+            (*q).buffer[i] = val;
+            IDX_TAIL(*q)++;
         }
     }
         
