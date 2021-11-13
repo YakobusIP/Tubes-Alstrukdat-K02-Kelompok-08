@@ -58,7 +58,7 @@ void readCommand() {
 }
 
 // READ CONFIG FILE BELUM SELESAI, HARUS DISESUAIN SAMA MODUL LAIN
-void readConfigFile(PrioQueue *q) {
+void readConfigFile(PrioQueue *q, map *M, adjMatrix *A) {
 /* Membaca file config secara penuh */
     /* KAMUS */
     toDoList val;
@@ -70,7 +70,57 @@ void readConfigFile(PrioQueue *q) {
     start(configFileName);
     ignoreBlank();
     ignoreNext();
+   
+    //READ MAP SIZE
+    int mapRow, mapCol, hqRow, hqCol, coordLength, coordRow, coordCol, adj;
+    char coordName;
+    ignoreBlank();
+    mapRow = readNumberfromChar();
+    ignoreBlank();
+    mapCol = readNumberfromChar();
+    ignoreNext();
+    CreateMap(M, mapRow, mapCol);
 
+    //KOORDINAT HQ
+    ignoreBlank();
+    hqRow = readNumberfromChar();
+    ignoreBlank();
+    hqCol = readNumberfromChar();
+    ignoreNext();
+    Coordinate *C = CreateCoord('8', hqRow, hqCol);
+    ReadMap(M, C);
+
+
+   
+    //CEK KOORDINAT
+    ignoreBlank();
+    coordLength = readNumberfromChar();
+    for(int j = 0; j < coordLength; j++)
+    {
+        ignoreNext();
+        ignoreBlank();
+        coordName = currentChar;
+        adv();
+        coordRow = readNumberfromChar();
+        coordCol = readNumberfromChar();
+        Coordinate *C = CreateCoord(coordName, coordRow, coordCol);
+        ReadMap(M, C);
+    }
+
+    //READ ADJ MATRIX
+    createAdjMatrix(A, coordLength + 1);
+
+    for(int j = 0; j < coordLength + 1; j++)
+    {
+        ignoreNext();
+        ignoreBlank();
+        for(int k = 0; k < coordLength + 1; k++)
+        {
+            ignoreBlank();
+            adj = readNumberfromChar();
+            ReadAdjMatrix(A, j, k, adj);
+        }
+    }
     // READ DAFTAR PESANAN DAN INPUT KE TO DO LIST
     p = readNumberfromChar();
     //printf("%d,", p);
