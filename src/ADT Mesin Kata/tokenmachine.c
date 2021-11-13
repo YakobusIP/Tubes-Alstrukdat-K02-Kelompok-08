@@ -57,11 +57,19 @@ void readCommand() {
     currentToken.length = i;
 }
 
+boolean isStringEqual(Token input, char* compare) {
+/* Membandingkan apakah kedua string yang dimasukkan sama */
+    /* KAMUS */
+
+    /* ALGORITMA */
+
+}
+
 // READ CONFIG FILE BELUM SELESAI, HARUS DISESUAIN SAMA MODUL LAIN
 void readConfigFile(PrioQueue *q, map *M, adjMatrix *A) {
 /* Membaca file config secara penuh */
     /* KAMUS */
-    toDoList val;
+    requestList val;
     int i, p;
     int inreqIn, intimeLimit;
     char inpickUp, indropOff, intype;
@@ -167,7 +175,7 @@ void readConfigFile(PrioQueue *q, map *M, adjMatrix *A) {
 void saveToFile(PrioQueue *q) {
 /* Save state game ke dalam sebuah file */   
     /* KAMUS */
-    toDoList val;
+    requestList val;
     int i, len;
     /* ALGORITMA */
     saveFile = fopen(saveFileName,"w");
@@ -201,7 +209,7 @@ void saveToFile(PrioQueue *q) {
 void loadFromFile(PrioQueue *q) {
 /* Load state game dari sebuah file */
     /* KAMUS */
-    toDoList val;
+    requestList val;
     int i, p;
     int inreqIn, intimeLimit;
     char inpickUp, indropOff, intype;

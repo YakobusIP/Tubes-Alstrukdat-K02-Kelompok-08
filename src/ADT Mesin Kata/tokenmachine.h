@@ -6,7 +6,7 @@
 
 #include "../boolean.h"
 #include "charmachine.h"
-#include "../ADT Linked List/todoQueue.h"
+#include "../ADT Queue/requestList.h"
 #include "../ADT Matriks/adjMatriks.h"
 #include "../ADT Matriks/map.h"
 #include "../ADT Point/point.h"
@@ -37,6 +37,9 @@ int readNumberfromChar();
 
 void readCommand();
 /* Membaca command dari input user */
+
+boolean isStringEqual(Token input, char* compare);
+/* Membandingkan apakah kedua string yang dimasukkan sama */
 
 void readConfigFile(PrioQueue *q, map *M, adjMatrix *A);
 /* Membaca file config secara penuh */
