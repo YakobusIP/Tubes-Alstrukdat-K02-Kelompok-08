@@ -57,11 +57,23 @@ void readCommand() {
     currentToken.length = i;
 }
 
+/* Cara penggunaan: isStringEqual(currentToken, "Command yang ingin dipakai"), contoh isStringEqual(currentToken, "BUY"), kalau dia true berarti bisa masuk ke dalam if-nya */
 boolean isStringEqual(Token input, char* compare) {
 /* Membandingkan apakah kedua string yang dimasukkan sama */
     /* KAMUS */
-
+    int i;
+    boolean flag;
     /* ALGORITMA */
+    i = 0;
+    flag = true;
+    while ((i < input.length) && (flag)) {
+        if (input.contents[i] != compare[i]) {
+            flag = false;
+        } else {
+            i++;
+        }
+    }
+    return flag;
 
 }
 
