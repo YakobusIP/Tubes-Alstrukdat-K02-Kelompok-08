@@ -1,8 +1,8 @@
 /* COMMAND IN_PROGRESS */
 
 #include <stdio.h>
-#include "../ADT Linked List/inprogressList.h"
+#include "in_progress.h"
 
-void in_progress(List *l) {
-    displayInProgress(*l);
+void in_progress(in_progress_list *ipl) {
+    displayInProgress(*ipl);
 }

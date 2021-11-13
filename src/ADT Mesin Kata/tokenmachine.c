@@ -33,11 +33,12 @@ int readNumberfromChar() {
     num = 0;
     ignoreBlank();
     ignoreNext();
-    adv();
+    // adv();
     while ((currentChar != BLANK) && (currentChar != NEXTLINE)) {
         num = num*10 + (currentChar - '0');
         adv();
     }
+
     return num;
 }
 
@@ -55,6 +56,7 @@ void readCommand() {
         advUserInput();
         i++;
     }
+    ignoreBlank();
     
     currentToken.length = i;
 }
@@ -206,7 +208,7 @@ void readConfigFile(PrioQueue *q, map *M, adjMatrix *A) {
         val.timeLimit = intimeLimit;
 
         // INPUT VAL YANG SUDAH DIBENTUK KE DALAM QUEUE
-        enqueueToDo(q, val, 10);
+        enqueueRL(q, val);
     }
 }
 
@@ -296,6 +298,6 @@ void loadFromFile(PrioQueue *q) {
         val.timeLimit = intimeLimit;
 
         // INPUT VAL YANG SUDAH DIBENTUK KE DALAM QUEUE
-        enqueueToDo(q, val, 10);
+        enqueueRL(q, val);
     }
 } 

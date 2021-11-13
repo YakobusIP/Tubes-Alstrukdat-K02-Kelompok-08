@@ -15,7 +15,7 @@ typedef struct node* Address;
 typedef struct node {
     inProgressList info;
     Address next;
-} Node;
+} ipNode;
 
 /* SELEKTOR UNIVERSAL */
 #define INFO(p) (p)->info

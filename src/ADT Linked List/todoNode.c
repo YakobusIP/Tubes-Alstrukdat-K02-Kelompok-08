@@ -5,7 +5,7 @@
 #include <stdlib.h>
 
 Address newToDoNode(toDoList val) {
-    Address p = (Address) malloc(sizeof(Node));
+    Address p = (Address) malloc(sizeof(tdNode));
     if (p!=NULL) {
         INFO(p) = val;
         NEXT(p) = NULL;

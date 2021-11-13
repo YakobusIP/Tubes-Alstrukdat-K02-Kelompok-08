@@ -1,5 +1,5 @@
-#ifndef TODOQUEUE_H
-#define TODOQUEUE_H
+#ifndef TODOLIST_H
+#define TODOLIST_H
 
 #include "../boolean.h"
 #include "todoNode.h"

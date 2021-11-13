@@ -5,7 +5,7 @@
 #include "inprogressNode.h"
 
 Address newInProgressNode(inProgressList val) {
-    Address p = (Address) malloc(sizeof(Node));
+    Address p = (Address) malloc(sizeof(ipNode));
     if (p!=NULL) {
         INFO(p) = val;
         NEXT(p) = NULL;

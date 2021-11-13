@@ -18,7 +18,7 @@ typedef struct node* Address;
 typedef struct node {
     toDoList info;
     Address next;
-} Node;
+} tdNode;
 
 /* SELEKTOR UNIVERSAL */
 #define INFO(p) (p)->info

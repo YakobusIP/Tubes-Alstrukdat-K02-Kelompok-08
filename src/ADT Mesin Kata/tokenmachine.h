@@ -14,7 +14,7 @@
 
 #define CAPACITYTOKENMACHINE 100
 #define BLANK ' '
-#define NEXTLINE '.'
+#define NEXTLINE '\n'
 
 typedef struct {
    char contents[CAPACITYTOKENMACHINE]; /* container penyimpan kata, indeks yang dipakai [0..CAPACITY-1] */

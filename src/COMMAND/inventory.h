@@ -25,6 +25,4 @@
 
 void inventory(inProgressList l, Stack s, map m,  UangWaktu c);
 
-
-
 #endif
