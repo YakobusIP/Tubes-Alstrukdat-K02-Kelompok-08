@@ -77,6 +77,30 @@ boolean isStringEqual(Token input, char* compare) {
 
 }
 
+/* Cara penggunaan: sama seperti strcpy biasa 
+        char string[] = "Testing123";
+        char variable[50];
+        copyString(variable, string));
+*/
+char* copyString(char* variable, const char* string) {
+/* Implementasi fungsi strcpy di cstring.h */
+    /* KAMUS */
+    char* pointer;
+    /* ALGORITMA */
+    pointer = variable;
+
+    // Ketika string belum sampai akhir (di C, akhir string memiliki '\0')
+    while (*string != '\0') {
+        *variable = *string;
+        variable++;
+        string++;
+    }
+
+    // Tambah bagian '\0' ke akhir string variabel
+    *variable = '\0';
+    return pointer;
+}
+
 // READ CONFIG FILE BELUM SELESAI, HARUS DISESUAIN SAMA MODUL LAIN
 void readConfigFile(PrioQueue *q, map *M, adjMatrix *A) {
 /* Membaca file config secara penuh */

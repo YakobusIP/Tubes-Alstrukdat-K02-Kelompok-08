@@ -41,6 +41,9 @@ void readCommand();
 boolean isStringEqual(Token input, char* compare);
 /* Membandingkan apakah kedua string yang dimasukkan sama */
 
+char* copyString(char* variable, const char* string);
+/* Implementasi fungsi strcpy di cstring.h */
+
 void readConfigFile(PrioQueue *q, map *M, adjMatrix *A);
 /* Membaca file config secara penuh */
 
