@@ -7,6 +7,10 @@
 #include "../boolean.h"
 #include "charmachine.h"
 #include "../ADT Linked List/todoQueue.h"
+#include "../ADT Matriks/adjMatriks.h"
+#include "../ADT Matriks/map.h"
+#include "../ADT Point/point.h"
+
 
 #define CAPACITY 100
 #define BLANK ' '
@@ -34,7 +38,7 @@ int readNumberfromChar();
 void readCommand();
 /* Membaca command dari input user */
 
-void readConfigFile(PrioQueue *q);
+void readConfigFile(PrioQueue *q, map *M, adjMatrix *A);
 /* Membaca file config secara penuh */
 
 void saveToFile(PrioQueue *q);
