@@ -6,14 +6,18 @@
 
 #include "../boolean.h"
 #include "charmachine.h"
-#include "../ADT Linked List/todoQueue.h"
+#include "../ADT Queue/requestList.h"
+#include "../ADT Matriks/adjMatriks.h"
+#include "../ADT Matriks/map.h"
+#include "../ADT Point/point.h"
 
-#define CAPACITY 100
+
+#define CAPACITYTOKENMACHINE 100
 #define BLANK ' '
-#define NEXTLINE '\n'
+#define NEXTLINE '.'
 
 typedef struct {
-   char contents[CAPACITY]; /* container penyimpan kata, indeks yang dipakai [0..CAPACITY-1] */
+   char contents[CAPACITYTOKENMACHINE]; /* container penyimpan kata, indeks yang dipakai [0..CAPACITY-1] */
    int length;
 } Token;
 
@@ -34,7 +38,13 @@ int readNumberfromChar();
 void readCommand();
 /* Membaca command dari input user */
 
-void readConfigFile(PrioQueue *q);
+boolean isStringEqual(Token input, char* compare);
+/* Membandingkan apakah kedua string yang dimasukkan sama */
+
+char* copyString(char* variable, const char* string);
+/* Implementasi fungsi strcpy di cstring.h */
+
+void readConfigFile(PrioQueue *q, map *M, adjMatrix *A);
 /* Membaca file config secara penuh */
 
 void saveToFile(PrioQueue *q);

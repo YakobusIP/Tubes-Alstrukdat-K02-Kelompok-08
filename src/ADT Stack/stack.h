@@ -8,7 +8,7 @@
 #include "../boolean.h"
 
 #define IDX_UNDEF -1
-#define CAPACITY 100
+#define CAPACITYSTACK 100
 
 struct items {
     char name[20];
@@ -20,7 +20,7 @@ struct items {
 typedef int ElType;
 typedef struct {
   int CapacityNow;
-  struct items buffer[CAPACITY]; /* tabel penyimpan elemen */
+  struct items buffer[CAPACITYSTACK]; /* tabel penyimpan elemen */
   int idxTop;              /* alamat TOP: elemen puncak */
 } Stack;
 

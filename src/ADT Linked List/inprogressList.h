@@ -1,7 +1,7 @@
 #ifndef INPROGRESSLIST_H
 #define INPROGRESSLIST_H
 
-#include "boolean.h"
+#include "../boolean.h"
 #include "inprogressNode.h"
 
 typedef Address List;

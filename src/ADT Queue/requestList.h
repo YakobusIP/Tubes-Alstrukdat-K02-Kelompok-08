@@ -7,7 +7,7 @@
 #include "../boolean.h"
 
 #define IDX_UNDEF -1
-#define CAPACITY 30 // Maksimum kapasitas daftar pesanan adalah 30
+#define CAPACITYREQUESTLIST 30 // Maksimum kapasitas daftar pesanan adalah 30
 
 /* Definisi elemen dan address */
 typedef struct {
@@ -19,7 +19,7 @@ typedef struct {
 } requestList;
 
 typedef struct {
-	requestList buffer[CAPACITY]; 
+	requestList buffer[CAPACITYREQUESTLIST]; 
 	int idxHead;
 	int idxTail;
 } PrioQueue;

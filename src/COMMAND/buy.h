@@ -2,11 +2,11 @@
 #define BUY_H
 
 #include "../ADT Lain/UangWaktu.h"
-/* #include "../src/ADT Linked List/inprogressList.h"
-#include "../src/ADT Linked List/inprogressNode.h"
-#include "../src/ADT Linked List/todoNode.h"
-#include "../src/ADT List/adjList.h"
-#include "../src/ADT Linked List/todoQueue.h" */
+/* #include "../ADT Linked List/inprogressList.h"
+#include "../ADT Linked List/inprogressNode.h"
+#include "../ADT Linked List/todoNode.h"
+#include "../ADT List/adjList.h"
+#include "../ADT Linked List/todoQueue.h"  */
 #include "../ADT List/Gadget.h"
 #include "../ADT List/InventoryGadget.h"
 #include "../ADT Matriks/adjMatriks.h"
@@ -19,11 +19,11 @@
 #include "../pcolor/pcolor.h"
 
 #include "../ADT Lain/UangWaktu.c"
-/* #include "../src/ADT Linked List/inprogressList.h"
-#include "../src/ADT Linked List/inprogressNode.h"
-#include "../src/ADT Linked List/todoNode.h"
-#include "../src/ADT List/adjList.h"
-#include "../src/ADT Linked List/todoQueue.h" */
+/* #include "../ADT Linked List/inprogressList.h"
+#include "../ADT Linked List/inprogressNode.h"
+#include "../ADT Linked List/todoNode.h"
+#include "../ADT List/adjList.h"
+#include "../ADT Linked List/todoQueue.h"  */
 #include "../ADT List/Gadget.c"
 #include "../ADT List/InventoryGadget.c"
 #include "../ADT Matriks/adjMatriks.c"
@@ -35,6 +35,6 @@
 #include "../ADT Queue/requestList.c"
 #include "../pcolor/pcolor.c"
 
-void buy(UangWaktu c, AvailableGadget AG, InventoryGadget IG, struct Gadget G);
+void buy(UangWaktu *c, AvailableGadget AG, InventoryGadget *IG, struct Gadget G);
 
 #endif

@@ -6,7 +6,7 @@
 
 #include "../boolean.h"
 
-#define CAPACITY 5
+#define CAPACITYGADGET 5
 
 typedef struct Gadget{
     int ID;             // ID Gadget untuk mempermudah akses elemen
@@ -16,7 +16,7 @@ typedef struct Gadget{
 };
 
 typedef struct {
-    struct Gadget Buffer[CAPACITY]; /* tabel penyimpan gadget yang tersedia pada sistem */
+    struct Gadget Buffer[CAPACITYGADGET]; /* tabel penyimpan gadget yang tersedia pada sistem */
 } AvailableGadget;
 
 /* *** Selektor *** */
