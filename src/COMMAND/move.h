@@ -5,6 +5,7 @@
 #include "../ADT Matriks/map.h"
 #include "../ADT Matriks/adjMatriks.h"
 #include "../ADT List/adjList.h"
+#include "../ADT Lain/UangWaktu.h"
 
-void move(Coordinate *src, map m, adjMatrix A, int *waktu);
+void move(Coordinate *src, map m, adjMatrix A, UangWaktu *u);
 #endif
