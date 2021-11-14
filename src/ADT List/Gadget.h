@@ -5,6 +5,7 @@
 #define GADGET_H
 
 #include "../boolean.h"
+#include "../ADT Mesin Kata/tokenmachine.h"
 
 #define CAPACITYGADGET 5
 

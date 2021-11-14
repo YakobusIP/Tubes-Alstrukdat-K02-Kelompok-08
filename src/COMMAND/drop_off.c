@@ -1,54 +1,44 @@
-/* COMMAND UNTUK DROP OFF,
-notes : identifikasi lokasi perlu penyesuaian lagi mau gimana,
-reward belum aktif */
+/* COMMAND UNTUK DROP OFF */
 
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "../ADT Linked List/todoQueue.h"
-#include "../ADT Stack/stack.h"
-#include "../ADT Lain/UangWaktu.h"
+#include "drop_off.h"
 
-void drop_off(PrioQueue *q, Stack *s, char currentLocation, UangWaktu *u) {
-    toDoList dropoff_item;
-    char type_item;
-    ElType val;
-
-    // akses items dengan identifikasi effect agar lebih mudah dibanding mengcompare nama
-    if (EFFECT(*s) == IDX_UNDEF) {type_item = 'N';}
-    else if (EFFECT(*s) == 1) {type_item = 'H';}
-    else if (EFFECT(*s) == 2) {type_item = 'P';}
-    else if (EFFECT(*s) == 3) {type_item = 'V';}
-
-    Address p = HEAD(*q);
-    boolean found = false;
-    do {
-        if (INFO(p).type = type_item) {
-            dropoff_item = INFO(p);
-            found = true;
-        }
-        else {
-            p = NEXT(p);
-        }
-    } while (p != NULL && !found);
-
-    /* Cek dulu apakah lokasi dropoff item tumpukan teratas sesuai dengan lokasi sekarang */
-    if (dropoff_item.dropOff != currentLocation) {
-        printf("Tidak ada pesanan yang perlu diantarkan ke lokasi ini\n");
+void drop_off(in_progress_list *pl, Stack *s, char currentLocation, UangWaktu *u) {
+    if (isEmptyStack(*s)) {
+        printf("Tidak ada pesanan yang perlu diantarkan\n");
     }
     else {
-        pop(s, &val);
-        if (val == 1) {
-            ChangeUang(u, 200);
-        } else if (val == 2) {
-            ChangeUang(u, 400);
-        } else if (val == 3) {
-            ChangeUang(u, 400);
-        } else if (val == 4) {
-            ChangeUang(u, 600);
-        }
-        printf("Pesanan %c berhasil diantarkan\n", dropoff_item.type);
-        printf("Uang yang didapatkan: %d yen");
-    }
+        inProgressList dropoff_item;
+        struct items delStackItem;
+        inProgressList delProgressItem;
+        dropoff_item.type = TOP(*s).type;
 
+        // mencari data drop off item dari progress list
+        Address p = FIRST(*pl);
+        int idx = 0;
+        boolean found = false;
+        do {
+            if (INFO(p).type == dropoff_item.type) {
+                dropoff_item.dropOff = INFO(p).dropOff;
+                found = true;
+            }
+            else {
+                p = NEXT(p);
+                idx++;
+            }
+        } while (p != NULL && !found);
+
+        /* Cek dulu apakah lokasi dropoff item tumpukan teratas sesuai dengan lokasi sekarang */
+        if (dropoff_item.dropOff != currentLocation) {
+            printf("Tidak ada pesanan yang perlu diantarkan ke lokasi ini\n");
+        }
+        else {
+            int addUang = HARGA(*s);
+            popStack(s, &delStackItem);
+            deleteAt(pl, idx, &delProgressItem);
+            ChangeUang(u, addUang);
+            printf("Pesanan %c berhasil diantarkan\n", dropoff_item.type);
+            printf("Uang yang didapatkan: %d yen\n", addUang);
+        }
+    }
 }
