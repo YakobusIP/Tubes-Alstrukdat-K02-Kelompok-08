@@ -5,6 +5,10 @@
 #include "../ADT Linked List/todoList.h"
 #include "../ADT Lain/UangWaktu.h"
 
-void to_do(PrioQueue *q, to_do_List *tdl, UangWaktu *u);
+// Fungsi untuk memindahkan isi dari daftar pesanan ke dalam to do list sesuai waktu sekarang
+void fromRLtoTDL(PrioQueue *q, to_do_List *tdl, UangWaktu *u);
+
+// Fungsi untuk display to do list ketika diminta
+void to_do(to_do_List tdl);
 
 #endif TODO_H

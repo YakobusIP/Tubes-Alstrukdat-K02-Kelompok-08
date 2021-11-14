@@ -101,7 +101,8 @@ int main(){
         } else if (isStringEqual(currentToken,"MAP")) {
 
         } else if (isStringEqual(currentToken,"TO_DO")) {
-           // to_do(&pq, &TDL, &u);
+            //fromRLtoTDL(&pq, &TDL, &u);
+            // to_do(&pq, &TDL, &u);
         } else if (isStringEqual(currentToken,"IN_PROGRESS")) {
            // in_progress(&IPL);
         } else if(isStringEqual(currentToken,"BUY")) {

@@ -69,14 +69,20 @@ boolean isStringEqual(Token input, char* compare) {
     boolean flag;
     /* ALGORITMA */
     i = 0;
-    flag = true;
-    while ((i < input.length) && (flag)) {
-        if (input.contents[i] != compare[i]) {
-            flag = false;
-        } else {
-            i++;
+    
+    if (input.length != (sizeof(compare)/sizeof(compare[0]))) {
+        flag = false;
+    } else {
+        flag = true;
+        while ((i < input.length) && (flag)) {
+            if (input.contents[i] != compare[i]) {
+                flag = false;
+            } else {
+                i++;
+            }
         }
     }
+    
     return flag;
 
 }

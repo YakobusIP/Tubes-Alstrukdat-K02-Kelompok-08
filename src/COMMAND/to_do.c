@@ -3,7 +3,8 @@
 #include <stdio.h>
 #include "to_do.h"
 
-void to_do(PrioQueue *q, to_do_List *tdl, UangWaktu *u) {
+// Fungsi untuk memindahkan isi dari daftar pesanan ke dalam to do list sesuai waktu sekarang
+void fromRLtoTDL(PrioQueue *q, to_do_List *tdl, UangWaktu *u) {
     /* KAMUS */
     int i;
     requestList val_in;
@@ -30,6 +31,9 @@ void to_do(PrioQueue *q, to_do_List *tdl, UangWaktu *u) {
             insertLast(*tdl, val_out);
         }
     }
-    
+}
+
+// Fungsi untuk display to do list ketika diminta
+void to_do(to_do_List tdl) {
     displayToDo(tdl);
 }
