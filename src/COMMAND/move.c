@@ -2,7 +2,7 @@
 #include "move.h"
 
 
-void move(Coordinate *src, map m, adjMatrix A, int *waktu)
+void move(Coordinate *src, map m, adjMatrix A, UangWaktu *u)
 {
     char c;
     adjList l;
@@ -26,6 +26,6 @@ void move(Coordinate *src, map m, adjMatrix A, int *waktu)
     printf("Mobita sekarang berada di titik ");
     DisplayCoord(*src);
     printf("!\n");
-    *waktu += 1;
+    ChangeWaktu(u, 1); //Tambah waktu sebanyak 1 satuan waktu
 }
 
