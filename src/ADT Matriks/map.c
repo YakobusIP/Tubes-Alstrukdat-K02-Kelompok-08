@@ -21,10 +21,17 @@ void ReadMap(map *M, Coordinate *C)
         CoordPointer(*M, row(*C), col(*C)) = C;
 }
 
-void DisplayMap(map M, adjMatrix A, Coordinate Mobita)
+void DisplayMap(map M, adjMatrix A, Coordinate Mobita, in_progress_list ipl, to_do_List tdl)
 {
-    char x;
+    char x, dropoff, pickup;
     int nRow = nRow(M), nCol = nCol(M);
+    Address drop, pick;
+    drop = FIRST(ipl);
+    pick = FIRST(tdl);
+    if(drop != NULL) dropoff = INFO(drop).dropOff;
+    else dropoff = NONE;
+    if(pick != NULL) pickup = INFO(pick).pickUp;
+    else pickup = NONE;
 
     for(int i = 0; i < nRow + 2; i++)
     {
@@ -44,9 +51,14 @@ void DisplayMap(map M, adjMatrix A, Coordinate Mobita)
                         print_yellow(x);
                     }
                     
-                    
-                    //Check coordinate = pickup
-                    //Check coordinate = drop off
+                    else if (x == pickup)
+                    {
+                        print_red(x);
+                    }
+                    else if (x == dropoff)
+                    {
+                        print_blue(x);
+                    }
 
                     else if(checkAdjacency(A, nama(Mobita), x))
                     {
