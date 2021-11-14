@@ -26,29 +26,29 @@ boolean isFullStack(Stack s){
 void pushStack(Stack *s, int val){
     (IDX_TOP(*s))++;
     if(val == 1){
-        strcpy(NAMA(*s), "Normal Item");
+        copyString(NAMA(*s), "Normal Item");
         HARGA(*s) = 200;
         EFFECT(*s) = IDX_UNDEF;
-        strcpy(TYPE(*s), "N");
-        strcpy(REWARD(*s), "");
+        copyString(TYPE(*s), "N");
+        copyString(REWARD(*s), "");
     }else if(val == 2){
-        strcpy(NAMA(*s), "Heavy Item");
+        copyString(NAMA(*s), "Heavy Item");
         HARGA(*s) = 400;
         EFFECT(*s) = 1;
-        strcpy(TYPE(*s), "H");
-        strcpy(REWARD(*s), "Speed Boost");
+        copyString(TYPE(*s), "H");
+        copyString(REWARD(*s), "Speed Boost");
     }else if(val == 3){
-        strcpy(NAMA(*s), "Perishable Item");
+        copyString(NAMA(*s), "Perishable Item");
         HARGA(*s) = 400;
         EFFECT(*s) = 2;
-        strcpy(TYPE(*s), "P");
-        strcpy(REWARD(*s), "Increase Capacity");
+        copyString(TYPE(*s), "P");
+        copyString(REWARD(*s), "Increase Capacity");
     }else if(val == 4){
-        strcpy(NAMA(*s), "VIP Item");
+        copyString(NAMA(*s), "VIP Item");
         HARGA(*s) = 600;
         EFFECT(*s) = 3;
-        strcpy(TYPE(*s), "V");
-        strcpy(REWARD(*s), "Return To Sender");
+        copyString(TYPE(*s), "V");
+        copyString(REWARD(*s), "Return To Sender");
     }
     
 }

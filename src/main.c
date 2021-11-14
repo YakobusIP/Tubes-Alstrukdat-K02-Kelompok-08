@@ -5,9 +5,9 @@
 #include "boolean.h"
 
 #include "ADT Lain/UangWaktu.h"
-/* #include "ADT Linked List/inprogressList.h"
+#include "ADT Linked List/inprogressList.h"
 #include "ADT Linked List/inprogressNode.h"
-#include "ADT Linked List/todoNode.h" */
+#include "ADT Linked List/todoNode.h" 
 #include "ADT List/adjList.h"
 #include "ADT List/Gadget.h"
 #include "ADT List/InventoryGadget.h"
@@ -21,9 +21,9 @@
 #include "pcolor/pcolor.h"
 
 #include "ADT Lain/UangWaktu.c"
-/* #include "ADT Linked List/inprogressList.c"
+#include "ADT Linked List/inprogressList.c"
 #include "ADT Linked List/inprogressNode.c"
-#include "ADT Linked List/todoNode.c" */
+#include "ADT Linked List/todoNode.c"
 #include "ADT List/adjList.c" 
 #include "ADT List/Gadget.c"
 #include "ADT List/InventoryGadget.c"
@@ -43,8 +43,8 @@
 // #include "../src/COMMAND/in_progress.h"
 #include "../src/COMMAND/buy.h"
 #include "../src/COMMAND/buy.c"
-/* #include "../src/COMMAND/return_to_sender.h"
-#include "../src/COMMAND/return_to_sender.c" */
+#include "../src/COMMAND/return_to_sender.h"
+#include "../src/COMMAND/return_to_sender.c" 
 
 void print_mainmenu(){
     //Prosedur Tulis Main Menu//
@@ -68,8 +68,8 @@ int main(){
     AvailableGadget AG; // ADT yang menampilkan gadget yang tersedia
     InventoryGadget IG; // ADT untuk menampilkan gadget yang telah dimiliki
     struct Gadget G; // Struct untuk menampilkan info gadget
-    // to_do_List TDL; // ADT untuk menampilkan to_do_list yang harus dikerjakan
-    // inProgressList IPL; // ADT untuk menampilkan daftar pekerjaan yang sedang dikerjakan
+    to_do_List TDL; // ADT untuk menampilkan to_do_list yang harus dikerjakan
+    inProgressList IPL; // ADT untuk menampilkan daftar pekerjaan yang sedang dikerjakan
     Stack s; // ADT untuk tas
     map m; // ADT untuk menyimpan map
     Coordinate C; // ADT untuk menyimpan koordinat
@@ -77,9 +77,12 @@ int main(){
     PrioQueue pq;
     adjMatrix AM;
     struct items val;
+    boolean isReturn; // Digunakan untuk mengetahui apakah ada ability is return to sender
+    // Jika telah menerima item VIP, ubah isReturn ke True
     boolean newGame; // Boolean untuk menampilkan apakah game sukses dimulai atau tidak, jika sukses, akan menjadi true
     /* Algoritma */
     newGame = true;
+    isReturn = false;
     CreateUangWaktu(&u);
     CreateAvailableGadget(&AG);
     CreateInventoryGadget(&IG);
@@ -113,9 +116,14 @@ int main(){
         } else if (isStringEqual(currentToken,"HELP")) {
 
         } else if (isStringEqual(currentToken,"SAVE_GAME")) {
-
+            save(m, AM, TDL);
         } else if (isStringEqual(currentToken,"RETURN")) {
-            // return_to_sender(&s, &IPL,&TDL);
+            if(EFFECT(s) == 3) {
+                printf("Maaf, return to sender tidak bisa digunakan untuk VIP Item\n");
+            } else {
+                return_to_sender(&s, &IPL,&TDL, u);
+                isReturn = false;
+            }
         } else if (isStringEqual(currentToken,"EXIT")){
             newGame = false;
             printf("Sampai jumpa di permainan berikutnya\n");
