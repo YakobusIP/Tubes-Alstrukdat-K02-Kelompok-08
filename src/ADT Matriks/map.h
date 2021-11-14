@@ -6,10 +6,14 @@
 #include "adjMatriks.h"
 #include "../ADT Point/point.h"
 #include "../pcolor/pcolor.h"
+#include "../ADT Linked List/inprogressList.h"
+#include "../ADT Linked List/todoList.h"
 
 
 #define ROW_MAX 20
 #define COL_MAX 30
+#define NONE '1'
+
 
 typedef struct {
     Coordinate *coordinate[ROW_MAX+2][COL_MAX+2];
@@ -36,7 +40,7 @@ void CreateMap(map *M, int nRow, int nCol);
 void ReadMap(map * M, Coordinate *C);
 /*I.S. Map terdefinisi, Koordinat terdefinisi*/
 /*F.S. Koordinat ditambahkan pada map*/
-void DisplayMap(map M, adjMatrix A, Coordinate Mobita);
+void DisplayMap(map M, adjMatrix A, Coordinate Mobita, in_progress_list ipl, to_do_List tdl);
 /*I.S. Map terdefinisi*/
 /*Menampilkan peta*/
 
