@@ -6,7 +6,7 @@
 // addMoveTime = waktu tambahan saat move jika membawa heavy item, dapat menumpuk
 
 boolean foundVIP(to_do_List l) {
-    Address p = FIRST(l);
+    tdAddress p = FIRST(l);
     boolean foundVip = false;
     do {
         if (INFO(p).type ==  'V') {
@@ -22,14 +22,14 @@ boolean foundVIP(to_do_List l) {
 
 void foundPickupInLoc(to_do_List *tdl, char currentLocation, boolean *found, int *val, toDoList *pickup_item) {
     /* Mengecek apakah ada pesanan yang harus di pick-up di currentLocation */
-    Address p = FIRST(*tdl);
+    tdAddress p = FIRST(*tdl);
     do {
         if (INFO(p).pickUp ==  currentLocation) {
             *pickup_item = INFO(p);
-            if ((*pickup_item).type = 'N') {val = 1;}
-            else if ((*pickup_item).type = 'H') {val = 2;}
-            else if ((*pickup_item).type = 'P') {val = 3;}
-            else if ((*pickup_item).type = 'V') {val = 4;}
+            if ((*pickup_item).type = 'N') {*val = 1;}
+            else if ((*pickup_item).type = 'H') {*val = 2;}
+            else if ((*pickup_item).type = 'P') {*val = 3;}
+            else if ((*pickup_item).type = 'V') {*val = 4;}
             *found = true;
         }
         else {
@@ -39,7 +39,7 @@ void foundPickupInLoc(to_do_List *tdl, char currentLocation, boolean *found, int
 }
 
 void pick_up(to_do_List *tdl, Stack *s, in_progress_list *pl, char currentLocation, int *addMoveTime) {
-    if (isListEmpty(*tdl)) {
+    if (isTDListEmpty(*tdl)) {
         printf("Pesanan tidak ditemukan!\n");
     }
 
@@ -64,7 +64,7 @@ void pick_up(to_do_List *tdl, Stack *s, in_progress_list *pl, char currentLocati
                 // progress_item.startTime
                 progress_item.timeLimit = pickup_item.timeLimit;
                 progress_item.type = pickup_item.type;
-                insertLast(pl, progress_item);
+                insertLastIP(pl, progress_item);
 
                 if (pickup_item.type == 'H') {*addMoveTime++;}
                 /* Efek Perishable Item dihandle MOVE karna bergantung waktu pengantaran */

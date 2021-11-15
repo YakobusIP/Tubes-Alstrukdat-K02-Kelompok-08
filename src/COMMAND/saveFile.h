@@ -1,7 +1,7 @@
 #ifndef SAVE_H
 #define SAVE_H
 
-#include "boolean.h"
+#include "../boolean.h"
 #include "../ADT Lain/UangWaktu.h"
 #include "../ADT Linked List/todoNode.h" 
 #include "../ADT List/adjList.h"

@@ -1,25 +1,29 @@
 #include <stdio.h>
 #include "loadFile.h"
 
-void readConfigFile(PrioQueue *q, map *M, adjMatrix *A) {
+void load(PrioQueue *q, map *M, adjMatrix *A) {
 /* Membaca file config secara penuh */
     /* KAMUS */
     requestList val;
-    static FILE *saveFile;
+    static FILE *loadFile;
     int i, p;
+    int mark;
     int inreqIn, intimeLimit;
     char inpickUp, indropOff, intype;
     /* ALGORITMA */
     // START READ CONFIG FILE
-    printf("Masukkan nama save file dalam permainan : ");
+    printf("Masukkan nama load file dalam permainan : ");
     readCommand();
-    saveFile = fopen(currentToken.contents,"a");
-
-    start(configFileName);
+    loadFile = fopen(currentToken.contents,"w");
+    
+    start(loadFile);
     ignoreBlank();
     ignoreNext();
    
-    //READ MAP SIZE
+
+    do
+    {
+        //READ MAP SIZE
     int mapRow, mapCol, hqRow, hqCol, coordLength, coordRow, coordCol, adj;
     char coordName;
     ignoreBlank();
@@ -109,38 +113,11 @@ void readConfigFile(PrioQueue *q, map *M, adjMatrix *A) {
 
         // INPUT VAL YANG SUDAH DIBENTUK KE DALAM QUEUE
         enqueueRL(q, val);
-    }
+        }
+        ignoreNext();
+        mark = readNumberfromChar();
+    } while (mark == 9999);
+    
 }
 
-void saveToFile(PrioQueue *q) {
-/* Save state game ke dalam sebuah file */   
-    /* KAMUS */
-    requestList val;
-    int i, len;
-    /* ALGORITMA */
-    saveFile = fopen(saveFileName,"w");
-
-    // Print banyaknya pesanan
-    fprintf(saveFile, "%d\n", length(*q));
-
-    // Print everything inside Daftar Pesanan or To Do List
-    len = length(*q);
-    for (i=0;i<len;i++) {
-        dequeue(q, &val);
-        fprintf(saveFile, "%d ", val.reqIn);
-        fprintf(saveFile, "%c ", val.pickUp);
-        fprintf(saveFile, "%c ", val.dropOff);
-        fprintf(saveFile, "%c", val.type);
-
-        if (val.type == 'P') {
-            fprintf(saveFile, " %d\n", val.timeLimit);
-        } else {
-            fprintf(saveFile, "\n");
-        }
-        if (i==len) {
-            fprintf(saveFile, "");
-        }
-    }
-
-    fclose(saveFile);
-}
+/*  */

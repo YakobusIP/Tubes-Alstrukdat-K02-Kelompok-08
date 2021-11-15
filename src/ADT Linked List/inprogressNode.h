@@ -11,16 +11,16 @@ typedef struct {
     int startTime;
 } inProgressList;
 
-typedef struct node* Address;
-typedef struct node {
+typedef struct ipnode* ipAddress;
+typedef struct ipnode {
     inProgressList info;
-    Address next;
+    ipAddress next;
 } ipNode;
 
 /* SELEKTOR UNIVERSAL */
 #define INFO(p) (p)->info
 #define NEXT(p) (p)->next
 
-Address newInProgressNode(inProgressList val);
+ipAddress newInProgressNode(inProgressList val);
 
 #endif

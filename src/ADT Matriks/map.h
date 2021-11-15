@@ -43,7 +43,7 @@ void ReadMap(map * M, Coordinate *C);
 void DisplayMap(map M, adjMatrix A, Coordinate Mobita, in_progress_list ipl, to_do_List tdl);
 /*I.S. Map terdefinisi*/
 /*Menampilkan peta*/
-
+void ListCoordinate(map M);
 /*LAINNYA*/
 Coordinate* CoordByName(map m, char nama);
 /*I.S. Map terdefinisi, nama terdefinisi*/

@@ -16,4 +16,4 @@ void foundPickupInLoc(to_do_List *l, char currentLocation, boolean *found, int *
 void pick_up(to_do_List *tdl, Stack *s, in_progress_list *pl, char currentLocation, int *addMoveTime);
 /* Melakukan pickup item di lokasi sekarang jika ada pesanan */
 
-#endif PICK_UP_H
+#endif

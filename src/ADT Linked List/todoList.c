@@ -10,7 +10,7 @@ void CreateToDoList(to_do_List *l) {
     FIRST(*l) = NULL;
 }
 /****************** TEST LIST KOSONG ******************/
-boolean isListEmpty(to_do_List l) {
+boolean isTDListEmpty(to_do_List l) {
 /* Mengirim true jika list kosong */
     /* ALGORITMA */
     return (FIRST(l) == NULL);
@@ -21,7 +21,7 @@ toDoList getElmtTD(to_do_List l, int idx) {
 /* I.S. l terdefinisi, idx indeks yang valid dalam l, yaitu 0..length(l) */
 /* F.S. Mengembalikan nilai elemen l pada indeks idx */
     /* KAMUS */
-    Address p;
+    tdAddress p;
     int i;
     /* ALGORITMA */
     p = FIRST(l);
@@ -38,7 +38,7 @@ void setElmtTD(to_do_List *l, int idx, toDoList val) {
 /* I.S. l terdefinisi, idx indeks yang valid dalam l, yaitu 0..length(l) */
 /* F.S. Mengubah elemen l pada indeks ke-idx menjadi val */
     /* KAMUS */
-    Address p;
+    tdAddress p;
     int i;
     /* ALGORITMA */
     p = FIRST(*l);
@@ -58,9 +58,9 @@ void insertFirstTD(to_do_List *l, toDoList val) {
 /* menambahkan elemen pertama dengan nilai val jika alokasi berhasil. */
 /* Jika alokasi gagal: I.S.= F.S. */
     /* KAMUS */
-    Address p;
+    tdAddress p;
     /* ALGORITMA */
-    p = newNode(val);
+    p = newToDoNode(val);
     if (p != NULL) {
         NEXT(p) = FIRST(*l);
         FIRST(*l) = p;
@@ -73,12 +73,12 @@ void insertLastTD(to_do_List *l, toDoList val) {
 /* menambahkan elemen list di akhir: elemen terakhir yang baru */
 /* bernilai val jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */   
     /* KAMUS */
-    Address p, prev;
+    tdAddress p, prev;
     /* ALGORITMA */
-    if (isEmpty(*l)) {
-        insertFirst(l, val);
+    if (isTDListEmpty(*l)) {
+        insertFirstTD(l, val);
     } else {
-        p = newNode(val);
+        p = newToDoNode(val);
         if (p != NULL) {
             prev = FIRST(*l);
             while (NEXT(prev) != NULL) {
@@ -95,13 +95,13 @@ void insertAtTD(to_do_List *l, toDoList val, int idx) {
 /* menyisipkan elemen dalam list pada indeks ke-idx (bukan menimpa elemen di i) */
 /* yang bernilai val jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */    
     /* KAMUS */
-    Address p, prev;
+    tdAddress p, prev;
     int i;
     /* ALGORITMA */
     if (idx == 0) {
-        insertFirst(l, val);
+        insertFirstTD(l, val);
     } else {
-        p = newNode(val);
+        p = newToDoNode(val);
         if (p != NULL) {
             prev = FIRST(*l);
             i = 0;
@@ -121,7 +121,7 @@ void deleteFirstTD(to_do_List *l, toDoList *val) {
 /* F.S. Elemen pertama list dihapus: nilai info disimpan pada x */
 /*      dan alamat elemen pertama di-dealokasi */
     /* KAMUS */
-    Address p;
+    tdAddress p;
     /* ALGORITMA */
     p = FIRST(*l);
     *val = INFO(p);
@@ -133,7 +133,7 @@ void deleteLastTD(to_do_List *l, toDoList *val) {
 /* F.S. Elemen terakhir list dihapus: nilai info disimpan pada x */
 /*      dan alamat elemen terakhir di-dealokasi */
     /* KAMUS */
-    Address p, prev;
+    tdAddress p, prev;
     /* ALGORITMA */
     p = FIRST(*l);
     prev = NULL;
@@ -154,11 +154,11 @@ void deleteAtTD(to_do_List *l, int idx, toDoList *val) {
 /* F.S. val diset dengan elemen l pada indeks ke-idx. */
 /*      Elemen l pada indeks ke-idx dihapus dari l */
     /* KAMUS */
-    Address p, prev;
+    tdAddress p, prev;
     int i;
     /* ALGORITMA */
     if (idx == 0) {
-        deleteFirst(l, val);
+        deleteFirstTD(l, val);
     } else {
         i = 0;
         prev = FIRST(*l);
@@ -185,10 +185,10 @@ void displayToDo(to_do_List l) {
     /* ALGORITMA */
     i = 1;
     printf("Pesanan pada To Do List:\n");
-    while (length(l) > 0) {
+    while (!isTDListEmpty(l)) {
         printf("%d. ", i);
         i++;
-        deleteFirst(&l, &val);
+        deleteFirstTD(&l, &val);
         printf("%c ", val.pickUp);
         printf("-> ");
         printf("%c ", val.dropOff);

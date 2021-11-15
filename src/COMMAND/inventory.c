@@ -1,7 +1,7 @@
 #include "inventory.h"
 #include <stdio.h>
 
-void movePintuKemanaSaja(Coordinate *src, map m, adjMatrix A, InventoryGadget *IG, struct Gadget G) {
+void movePintuKemanaSaja(Coordinate *src, map m, adjMatrix A, InventoryGadget *IG, Gadget G) {
     char c;
     adjList l;
     CreateAdjList(&l);
@@ -33,7 +33,7 @@ void movePintuKemanaSaja(Coordinate *src, map m, adjMatrix A, InventoryGadget *I
 }
 
 int lengthIPL(in_progress_list ipl) {
-    Address p;
+    ipAddress p;
     p = FIRST(ipl);
     int i = 0;
     while (p != NULL) {
@@ -53,7 +53,7 @@ void inventory(InventoryGadget *IG, in_progress_list *ipl, Stack *s, UangWaktu *
     } else if(x < 0 || x > 5) {
         printf("Nomor yang anda masukkan tidak tepat!\n");
     } else {
-        struct Gadget G;
+        Gadget G;
         G = ELMT(*IG, x);
         if (ELMT(*IG, x).ID == ID(G)) {
             // Kondisi ketika Gadget tersebut ada
@@ -64,7 +64,7 @@ void inventory(InventoryGadget *IG, in_progress_list *ipl, Stack *s, UangWaktu *
                     int i = lengthIPL(*ipl) - 1;
                     boolean flag = false;
                     while (i>=0 && !flag) {
-                        if (getElmtIP(*ipl,i).type == "P") {
+                        if (getElmtIP(*ipl,i).type == 'P') {
                             inProgressList newIPL = getElmtIP(*ipl,i);
                             newIPL.startTime = WAKTU(*c);
                             setElmtIP(ipl, i, newIPL);
@@ -111,7 +111,7 @@ void inventory(InventoryGadget *IG, in_progress_list *ipl, Stack *s, UangWaktu *
             } else if (ID(G) == 5) {
                 // menghilangkan efek heavy item
                 if (TOP(*s).type == 'H') {
-                    TOP(*s).type == 'N';
+                    TOP(*s).type = 'N';
                     deleteGadget(IG, G);
                     printf("Senter pengecil berhasil digunakan!\n");
                 }

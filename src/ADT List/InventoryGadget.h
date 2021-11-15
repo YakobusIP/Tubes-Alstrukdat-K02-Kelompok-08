@@ -12,7 +12,7 @@ dengan representasi array static rapat kiri*/
 #define CAPACITY 5
 
 typedef struct{
-    struct Gadget Buffer[CAPACITY];
+    Gadget Buffer[CAPACITY];
     int NEFF;
 } InventoryGadget;
 
@@ -26,9 +26,7 @@ void CreateInventoryGadget(InventoryGadget *IG);
 /* I.S. sembarang; */
 /* F.S. InventoryGadget teralokasi dengan NEFF = 0 */
 
-int getLastIdx(InventoryGadget IG) {
-    return NEFF(IG)-1;
-}
+int getLastIdx(InventoryGadget IG);
 
 boolean isFull(InventoryGadget IG);
 /* mereturn True jika Inventory penuh, NEFF=CAPACITY */
@@ -36,24 +34,26 @@ boolean isFull(InventoryGadget IG);
 boolean isEmpty(InventoryGadget IG);
 /* mereturn True jika Inventory kosong, NEFF=0 */
 
-int indexOf(InventoryGadget IG, struct Gadget G);
+int indexOf(InventoryGadget IG, Gadget G);
 /* Mereturn index dimana G dipertemukan pertama kali pada inventory ,
 jika tidak ada return -1 */
 
-boolean isInInventory (InventoryGadget IG, struct Gadget G);
+boolean isInInventory (InventoryGadget IG, Gadget G);
 /* Mereturn True jika Gadget G tersedia dalam inventory */
 
 /* *** Operasi Pada Inventory*** */
-void addGadget(InventoryGadget *IG, struct Gadget G);
+void addGadget(InventoryGadget *IG, Gadget G);
 /* I.S. Inventory tidak penuh */
 /* F.S. Gadget G ditambahkan ke Inventory */
 
-void deleteGadget(InventoryGadget *IG, struct Gadget G);
+void deleteGadget(InventoryGadget *IG, Gadget G);
 /* I.S. Inventory tidak kosong, G valid ada pada inventory */
 /* F.S. Gadget G dihapus dari Inventory */
 
 void displayInventory (InventoryGadget IG);
 /* Menampilkan daftar Gadget pada inventory */
+
+void displayInventoryWithPrice (InventoryGadget IG);
 
 
 #endif

@@ -1,6 +1,7 @@
 #include "Gadget.h"
+#include <stdio.h>
 
-void CreateGadget(struct Gadget *G, int ID) {
+void CreateGadget(Gadget *G, int ID) {
     ID(*G) = ID;
     if (ID == 1) {
         // copyString(variable, string)
@@ -29,11 +30,11 @@ void CreateAvailableGadget(AvailableGadget *AG) {
 }
 
 
-void displayGadget(struct Gadget G, int i) {
+void displayGadget(Gadget G, int i) {
     printf("%d. %s\n", i, NAME(G));
 }
 
-void displayGadgetWithPrice(struct Gadget G, int i) {
+void displayGadgetWithPrice(Gadget G, int i) {
     printf("%d. %s (%d Yen)\n", i, NAME(G), PRICE(G));
 }
 

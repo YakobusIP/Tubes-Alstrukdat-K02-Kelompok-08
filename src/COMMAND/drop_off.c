@@ -14,7 +14,7 @@ void drop_off(in_progress_list *pl, Stack *s, char currentLocation, UangWaktu *u
         dropoff_item.type = TOP(*s).type;
 
         // mencari data drop off item dari progress list
-        Address p = FIRST(*pl);
+        ipAddress p = FIRST(*pl);
         int idx = 0;
         boolean found = false;
         do {
@@ -35,7 +35,7 @@ void drop_off(in_progress_list *pl, Stack *s, char currentLocation, UangWaktu *u
         else {
             int addUang = HARGA(*s);
             popStack(s, &delStackItem);
-            deleteAt(pl, idx, &delProgressItem);
+            deleteAtIP(pl, idx, &delProgressItem);
             ChangeUang(u, addUang);
             printf("Pesanan %c berhasil diantarkan\n", dropoff_item.type);
             printf("Uang yang didapatkan: %d yen\n", addUang);

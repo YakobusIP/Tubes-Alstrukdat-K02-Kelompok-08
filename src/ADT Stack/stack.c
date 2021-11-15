@@ -1,7 +1,6 @@
 #include "../boolean.h"
 #include <stdio.h>
 #include "stack.h"
-#include <string.h>
 
 void CreateStack(Stack *s){
     MAKSIMUM(*s) = 3;

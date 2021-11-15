@@ -25,7 +25,7 @@ boolean isQueueFull(PrioQueue q) {
 /* Mengirim true jika tabel penampung elemen q sudah penuh */
 /* yaitu jika index head bernilai 0 dan index tail bernilai CAPACITY-1 */
     /* ALGORITMA */
-    return ((IDX_HEAD(q) == 0) && (IDX_TAIL(q) == CAPACITY-1));
+    return ((IDX_HEAD(q) == 0) && (IDX_TAIL(q) == CAPACITYREQUESTLIST-1));
 }
 
 int length(PrioQueue q) {

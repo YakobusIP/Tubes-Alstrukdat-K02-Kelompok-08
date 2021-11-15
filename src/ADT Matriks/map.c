@@ -25,7 +25,8 @@ void DisplayMap(map M, adjMatrix A, Coordinate Mobita, in_progress_list ipl, to_
 {
     char x, dropoff, pickup;
     int nRow = nRow(M), nCol = nCol(M);
-    Address drop, pick;
+    tdAddress pick;
+    ipAddress drop;
     drop = FIRST(ipl);
     pick = FIRST(tdl);
     if(drop != NULL) dropoff = INFO(drop).dropOff;
@@ -75,6 +76,21 @@ void DisplayMap(map M, adjMatrix A, Coordinate Mobita, in_progress_list ipl, to_
             }
         }
         printf("\n");
+    }
+}
+
+void ListCoordinate(map M)
+{
+    for(int i = 1; i < nRow(M) + 1; i++)
+    {
+        for(int j = 1; j < nCol(M) + 1; j++)
+        {
+            if(CoordPointer(M, i, j) != NULL)
+            {
+                DisplayCoord(*CoordPointer(M, i, j));
+                printf("\n");
+            }
+        }
     }
 }
 

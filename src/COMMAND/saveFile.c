@@ -4,10 +4,11 @@
 void save(map m, adjMatrix adjM, to_do_List tdl){
     /* KAMUS */
     toDoList val;
-    Address p;
+    tdAddress p;
     Coordinate c;
     static FILE *saveFile;
     int i, len;
+    int count;
     /* ALGORITMA */
     printf("Masukkan nama save file dalam permainan : ");
     readCommand();
@@ -15,10 +16,34 @@ void save(map m, adjMatrix adjM, to_do_List tdl){
     /* for(int i = 0; i < 10; i++) {
         fprintf(saveFile, "%d\n", i);
     } */
-    fprintf(saveFile, ".\n");
+    fprintf(saveFile, "9999\n");
     fprintf(saveFile, "%d %d\n", nRow(m), nCol(m));
-    c = *CoordByName(m, "8");
+    c = *CoordByName(m, '8');
     fprintf(saveFile, "%d %d\n", row(c), col(c));
+    count = 0;
+    // Mencari tahu banyak koordinat
+    for(int i = 1; i < nRow(m) + 1; i++)
+    {
+        for(int j = 1; j < nCol(m) + 1; j++)
+        {
+            if(CoordPointer(m, i, j) != NULL)
+            {
+                count += 1;
+            }
+        }
+    }
+    fprintf(saveFile, "%d\n", count);
+    for(int i = 1; i < nRow(m) + 1; i++)
+    {
+        for(int j = 1; j < nCol(m) + 1; j++)
+        {
+            if(CoordPointer(m, i, j) != NULL)
+            {
+                fprintf(saveFile, "%c %d %d\n", nama(*CoordPointer(m, i, j)), row(*CoordPointer(m, i, j)), col(*CoordPointer(m, i, j)));
+            }
+        }
+    }
+
     for(int i = 0; i < adjLength(adjM); i++)
     {
         for(int j = 0; j < adjLength(adjM); j++)
@@ -27,7 +52,7 @@ void save(map m, adjMatrix adjM, to_do_List tdl){
         }
         fprintf(saveFile,"\n");
     }
-    p = tdl;
+    p = FIRST(tdl);
     while(p != NULL) {
         val = INFO(p);
         if(val.timeLimit > 0) {

@@ -5,4 +5,4 @@
 
 void in_progress(in_progress_list *ipl);
 
-#endif INPROGRESS_H
+#endif

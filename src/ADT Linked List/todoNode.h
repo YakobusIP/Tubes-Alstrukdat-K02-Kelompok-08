@@ -14,16 +14,16 @@ typedef struct {
     int timeLimit;
 } toDoList;
 
-typedef struct node* Address;
-typedef struct node {
+typedef struct tdnode* tdAddress;
+typedef struct tdnode {
     toDoList info;
-    Address next;
+    tdAddress next;
 } tdNode;
 
 /* SELEKTOR UNIVERSAL */
 #define INFO(p) (p)->info
 #define NEXT(p) (p)->next
 
-Address newToDoNode(toDoList val);
+tdAddress newToDoNode(toDoList val);
 
 #endif

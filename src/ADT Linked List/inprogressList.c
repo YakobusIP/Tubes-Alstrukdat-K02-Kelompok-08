@@ -3,7 +3,7 @@
 
 /* PROTOTYPE */
 /****************** PEMBUATAN LIST KOSONG ******************/
-void CreateList(in_progress_list *l) {
+void CreateInProgressList(in_progress_list *l) {
 /* I.S. sembarang */
 /* F.S. Terbentuk list kosong */
     /* ALGORITMA */
@@ -22,7 +22,7 @@ inProgressList getElmtIP(in_progress_list l, int idx) {
 /* I.S. l terdefinisi, idx indeks yang valid dalam l, yaitu 0..length(l) */
 /* F.S. Mengembalikan nilai elemen l pada indeks idx */
     /* KAMUS */
-    Address p;
+    ipAddress p;
     int i;
     /* ALGORITMA */
     p = FIRST(l);
@@ -38,7 +38,7 @@ void setElmtIP(in_progress_list *l, int idx, inProgressList val) {
 /* I.S. l terdefinisi, idx indeks yang valid dalam l, yaitu 0..length(l) */
 /* F.S. Mengubah elemen l pada indeks ke-idx menjadi val */
     /* KAMUS */
-    Address p;
+    ipAddress p;
     int i;
     /* ALGORITMA */
     p = FIRST(*l);
@@ -58,7 +58,7 @@ void insertFirstIP(in_progress_list *l, inProgressList val) {
 /* menambahkan elemen pertama dengan nilai val jika alokasi berhasil. */
 /* Jika alokasi gagal: I.S.= F.S. */
     /* KAMUS */
-    Address p;
+    ipAddress p;
     /* ALGORITMA */
     p = newInProgressNode(val);
     if (p != NULL) {
@@ -73,10 +73,10 @@ void insertLastIP(in_progress_list *l, inProgressList val) {
 /* menambahkan elemen list di akhir: elemen terakhir yang baru */
 /* bernilai val jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */   
     /* KAMUS */
-    Address p, prev;
+    ipAddress p, prev;
     /* ALGORITMA */
-    if (isEmpty(*l)) {
-        insertFirst(l, val);
+    if (isIPListEmpty(*l)) {
+        insertFirstIP(l, val);
     } else {
         p = newInProgressNode(val);
         if (p != NULL) {
@@ -95,11 +95,11 @@ void insertAtIP(in_progress_list *l, inProgressList val, int idx) {
 /* menyisipkan elemen dalam list pada indeks ke-idx (bukan menimpa elemen di i) */
 /* yang bernilai val jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */    
     /* KAMUS */
-    Address p, prev;
+    ipAddress p, prev;
     int i;
     /* ALGORITMA */
     if (idx == 0) {
-        insertFirst(l, val);
+        insertFirstIP(l, val);
     } else {
         p = newInProgressNode(val);
         if (p != NULL) {
@@ -121,7 +121,7 @@ void deleteFirstIP(in_progress_list *l, inProgressList *val) {
 /* F.S. Elemen pertama list dihapus: nilai info disimpan pada x */
 /*      dan alamat elemen pertama di-dealokasi */
     /* KAMUS */
-    Address p;
+    ipAddress p;
     /* ALGORITMA */
     p = FIRST(*l);
     *val = INFO(p);
@@ -133,7 +133,7 @@ void deleteLastIP(in_progress_list *l, inProgressList *val) {
 /* F.S. Elemen terakhir list dihapus: nilai info disimpan pada x */
 /*      dan alamat elemen terakhir di-dealokasi */
     /* KAMUS */
-    Address p, prev;
+    ipAddress p, prev;
     /* ALGORITMA */
     p = FIRST(*l);
     prev = NULL;
@@ -154,11 +154,11 @@ void deleteAtIP(in_progress_list *l, int idx, inProgressList *val) {
 /* F.S. val diset dengan elemen l pada indeks ke-idx. */
 /*      Elemen l pada indeks ke-idx dihapus dari l */
     /* KAMUS */
-    Address p, prev;
+    ipAddress p, prev;
     int i;
     /* ALGORITMA */
     if (idx == 0) {
-        deleteFirst(l, val);
+        deleteFirstIP(l, val);
     } else {
         i = 0;
         prev = FIRST(*l);
@@ -180,7 +180,7 @@ void displayInProgress(in_progress_list l) {
 /* Jika list kosong : menulis [] */
 /* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */    
     /* KAMUS */
-    Address p;
+    ipAddress p;
     int i;
     char typeCheck;
     /* ALGORITMA */
