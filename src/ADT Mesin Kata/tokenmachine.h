@@ -13,7 +13,7 @@
 
 
 #define CAPACITYTOKENMACHINE 100
-#define BLANK ' '
+#define BLANK '.'
 #define NEXTLINE '\n'
 
 typedef struct {

@@ -53,11 +53,11 @@ void readCommand() {
     i=0;
     while ((currentChar != BLANK) && (currentChar != NEXTLINE) && (i < CAPACITYTOKENMACHINE)) {
         currentToken.contents[i] = currentChar;
+        printf("%c\n", currentChar);
         advUserInput();
         i++;
     }
     ignoreBlank();
-    
     currentToken.length = i;
 }
 

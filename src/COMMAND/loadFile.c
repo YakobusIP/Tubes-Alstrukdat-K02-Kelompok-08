@@ -5,7 +5,7 @@ void load(PrioQueue *q, map *M, adjMatrix *A) {
 /* Membaca file config secara penuh */
     /* KAMUS */
     requestList val;
-    static FILE *loadFile;
+    static char *loadFile[200];
     int i, p;
     int mark;
     int inreqIn, intimeLimit;
@@ -14,7 +14,7 @@ void load(PrioQueue *q, map *M, adjMatrix *A) {
     // START READ CONFIG FILE
     printf("Masukkan nama load file dalam permainan : ");
     readCommand();
-    loadFile = fopen(currentToken.contents,"r");
+    *loadFile = fopen(currentToken.contents,"r");
     
     start(loadFile);
     ignoreBlank();

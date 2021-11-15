@@ -5,6 +5,7 @@
 #include "boolean.h"
 
 #include "ADT Lain/UangWaktu.h"
+#include "ADT Lain/Ability.h"
 #include "ADT Linked List/inprogressList.h"
 #include "ADT Linked List/inprogressNode.h"
 #include "ADT Linked List/todoList.h"
@@ -46,7 +47,7 @@
 #include "../src/COMMAND/buy.h"
 #include "../src/COMMAND/return_to_sender.h"
 #include "../src/COMMAND/loadFile.h"
-#include "../src/COMMAND/drop_off.h"
+// #include "../src/COMMAND/drop_off.h"
 #include "../src/COMMAND/help.h"
 // #include "../src/COMMAND/inventory.h"
 #include "../src/COMMAND/in_progress.h"
@@ -58,7 +59,7 @@
 #include "../src/COMMAND/buy.c"
 #include "../src/COMMAND/return_to_sender.c"
 #include "../src/COMMAND/loadFile.c"
-#include "../src/COMMAND/drop_off.c"
+// #include "../src/COMMAND/drop_off.c"
 #include "../src/COMMAND/help.c"
 // #include "../src/COMMAND/inventory.c"
 #include "../src/COMMAND/in_progress.c"
@@ -69,9 +70,6 @@
 
 
 
-struct Ability {
-    boolean type[3];    //type[i] mengikuti urutan spek
-};
 
 void print_mainmenu(){
     //Prosedur Tulis Main Menu//
@@ -106,9 +104,8 @@ int main(){
 
     char currentLocation;
     int addMoveTime = 0;      // waktu tambahan jika membawa heavy item, dapat menumpuk
-
     struct items val;
-    struct Ability ability; //struct ability
+    Ability ability; //struct ability
     boolean isReturn; // Digunakan untuk mengetahui apakah ada ability is return to sender
     // Jika telah menerima item VIP, ubah isReturn ke True
     boolean newGame; // Boolean untuk menampilkan apakah game sukses dimulai atau tidak, jika sukses, akan menjadi true
@@ -119,18 +116,19 @@ int main(){
     CreateAvailableGadget(&AG);
     CreateInventoryGadget(&IG);
     CreateToDoList(&TDL);
-    // createInProgressList(&IPL);
+    CreateInProgressList(&IPL);
     // load(&pq, &m,&AM);
     /* Start mesin kata untuk membaca config file dan input konfigurasi */
     // readConfigFile(&pq, &m, &AM);
     for(int i = 0; i < 3; i++){
         ability.type[i] = false; //awal game diinisiasi tanpa ability
     }
-    Mobita = *CoordByName(m, '8');
+    // Mobita = *CoordByName(m, '8');
     // Fungsi newGame
     while(newGame) {
         printf("ENTER COMMAND: ");
         readCommand();
+        printf("%s\n", currentToken);
         if(isStringEqual(currentToken,"MOVE")) {
             move(&Mobita, m, AM, &u);
         } else if (isStringEqual(currentToken,"PICK_UP")) {
@@ -138,7 +136,7 @@ int main(){
         } else if (isStringEqual(currentToken,"DROP_OFF")) {
             // drop_off(&IPL, &s, currentLocation, &u, &ability);
         } else if (isStringEqual(currentToken,"MAP")) {
-            // DisplayMap(m, AM, Mobita);
+            DisplayMap(m, AM, Mobita, IPL, TDL);
         } else if (isStringEqual(currentToken,"TO_DO")) {
             fromRLtoTDL(&pq, &TDL, &u);
             to_do(TDL);
