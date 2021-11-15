@@ -34,7 +34,7 @@ int readNumberfromChar() {
     ignoreBlank();
     ignoreNext();
     // adv();
-    while ((currentChar != BLANK) && (currentChar != NEXTLINE)) {
+    while ((currentChar != MARK) && (currentChar != BLANK) && (currentChar != NEXTLINE)) {
         num = num*10 + (currentChar - '0');
         adv();
     }
@@ -51,9 +51,26 @@ void readCommand() {
     ignoreBlank();
 
     i=0;
+    while ((currentChar != MARK) && (currentChar != BLANK) && (currentChar != NEXTLINE) && (i < CAPACITYTOKENMACHINE)) {
+        currentToken.contents[i] = currentChar;
+        advUserInput();
+        i++;
+    }
+    ignoreBlank();
+    currentToken.length = i;
+}
+
+void readCommandLoad() {
+/* Membaca command dari input user */
+    /* KAMUS */
+    int i;
+    /* ALGORITMA */
+    startUserInput();
+    ignoreBlank();
+
+    i=0;
     while ((currentChar != BLANK) && (currentChar != NEXTLINE) && (i < CAPACITYTOKENMACHINE)) {
         currentToken.contents[i] = currentChar;
-        printf("%c\n", currentChar);
         advUserInput();
         i++;
     }
@@ -62,15 +79,18 @@ void readCommand() {
 }
 
 /* Cara penggunaan: isStringEqual(currentToken, "Command yang ingin dipakai"), contoh isStringEqual(currentToken, "BUY"), kalau dia true berarti bisa masuk ke dalam if-nya */
-boolean isStringEqual(Token input, char* compare) {
+boolean isStringEqual(Token input, const char* compare) {
 /* Membandingkan apakah kedua string yang dimasukkan sama */
     /* KAMUS */
     int i;
     boolean flag;
     /* ALGORITMA */
     i = 0;
-    
-    if (input.length != (sizeof(compare)/sizeof(compare[0]))) {
+    int c = 0;
+    while (compare[c] != '\0') {
+        c++;
+    }
+    if (input.length != c/*  (sizeof(compare)/sizeof(compare[0])) */) {
         flag = false;
     } else {
         flag = true;

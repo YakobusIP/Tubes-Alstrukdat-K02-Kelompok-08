@@ -7,16 +7,13 @@ void load(PrioQueue *q, map *M, adjMatrix *A) {
     requestList val;
     static char *loadFile[200];
     int i, p;
-    int mark;
     int inreqIn, intimeLimit;
     char inpickUp, indropOff, intype;
     /* ALGORITMA */
     // START READ CONFIG FILE
     printf("Masukkan nama load file dalam permainan : ");
-    readCommand();
-    *loadFile = fopen(currentToken.contents,"r");
-    
-    start(loadFile);
+    readCommandLoad();
+    start(&currentToken.contents);
     ignoreBlank();
     ignoreNext();
 
@@ -40,7 +37,6 @@ void load(PrioQueue *q, map *M, adjMatrix *A) {
     ignoreNext();
     Coordinate *C = CreateCoord('8', hqRow, hqCol);
     ReadMap(M, C);
-
 
    
     //CEK KOORDINAT
@@ -109,14 +105,16 @@ void load(PrioQueue *q, map *M, adjMatrix *A) {
             intimeLimit = 0;
         }
         val.timeLimit = intimeLimit;
-
+        printf("%d %c %c %c %d\n", inreqIn, inpickUp, indropOff, intype, intimeLimit);
         // INPUT VAL YANG SUDAH DIBENTUK KE DALAM QUEUE
         enqueueRL(q, val);
         }
         ignoreNext();
-        mark = readNumberfromChar();
-    } while (mark == 9999);
-    
+        adv();
+        printf("test\n");
+    } while (!EOF);
+    adv();
+    printf("Sukses\n");
 }
 
 /*  */

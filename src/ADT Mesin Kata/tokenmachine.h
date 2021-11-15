@@ -13,7 +13,8 @@
 
 
 #define CAPACITYTOKENMACHINE 100
-#define BLANK '.'
+#define BLANK ' '
+#define MARK '.'
 #define NEXTLINE '\n'
 
 typedef struct {
@@ -38,7 +39,10 @@ int readNumberfromChar();
 void readCommand();
 /* Membaca command dari input user */
 
-boolean isStringEqual(Token input, char* compare);
+void readCommandLoad();
+/* Membaca command dari input user */
+
+boolean isStringEqual(Token input, const char* compare);
 /* Membandingkan apakah kedua string yang dimasukkan sama */
 
 char* copyString(char* variable, const char* string);

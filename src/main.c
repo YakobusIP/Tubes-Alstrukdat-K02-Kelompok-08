@@ -47,7 +47,7 @@
 #include "../src/COMMAND/buy.h"
 #include "../src/COMMAND/return_to_sender.h"
 #include "../src/COMMAND/loadFile.h"
-// #include "../src/COMMAND/drop_off.h"
+#include "../src/COMMAND/drop_off.h"
 #include "../src/COMMAND/help.h"
 // #include "../src/COMMAND/inventory.h"
 #include "../src/COMMAND/in_progress.h"
@@ -59,7 +59,7 @@
 #include "../src/COMMAND/buy.c"
 #include "../src/COMMAND/return_to_sender.c"
 #include "../src/COMMAND/loadFile.c"
-// #include "../src/COMMAND/drop_off.c"
+#include "../src/COMMAND/drop_off.c"
 #include "../src/COMMAND/help.c"
 // #include "../src/COMMAND/inventory.c"
 #include "../src/COMMAND/in_progress.c"
@@ -73,13 +73,21 @@
 
 void print_mainmenu(){
     //Prosedur Tulis Main Menu//
+    printf("/*************MENU*************/\n");
     printf("1. NEW GAME\n");
     printf("2. LOAD GAME\n");
     printf("3. EXIT");
+    printf("Masukkan Pilihan\n");
 }
+
+
 
 void newGame(){
     
+}
+
+void main_menu(){
+    readCommand();
 }
 
 void Exit(){
@@ -109,6 +117,10 @@ int main(){
     boolean isReturn; // Digunakan untuk mengetahui apakah ada ability is return to sender
     // Jika telah menerima item VIP, ubah isReturn ke True
     boolean newGame; // Boolean untuk menampilkan apakah game sukses dimulai atau tidak, jika sukses, akan menjadi true
+
+
+    load(&pq, &m, &AM);
+    printf("%d %d\n", nRow(m), nCol(m));
     /* Algoritma */
     newGame = true;
     isReturn = false;
@@ -120,15 +132,13 @@ int main(){
     // load(&pq, &m,&AM);
     /* Start mesin kata untuk membaca config file dan input konfigurasi */
     // readConfigFile(&pq, &m, &AM);
-    for(int i = 0; i < 3; i++){
-        ability.type[i] = false; //awal game diinisiasi tanpa ability
-    }
+    //CreateAbility(&ability);
     // Mobita = *CoordByName(m, '8');
+    printf("test\n");
     // Fungsi newGame
     while(newGame) {
         printf("ENTER COMMAND: ");
         readCommand();
-        printf("%s\n", currentToken);
         if(isStringEqual(currentToken,"MOVE")) {
             move(&Mobita, m, AM, &u);
         } else if (isStringEqual(currentToken,"PICK_UP")) {

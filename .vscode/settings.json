@@ -4,11 +4,6 @@
         "todoqueue.h": "c",
         "string.h": "c",
         "inprogresslist.h": "c",
-<<<<<<< HEAD
-        "charmachine.h": "c",
-        "stack.c": "cpp"
-=======
         "inventorygadget.h": "c"
->>>>>>> 87f06d333b8fb68fe841006becdbaa6420c1d7fd
     }
 }

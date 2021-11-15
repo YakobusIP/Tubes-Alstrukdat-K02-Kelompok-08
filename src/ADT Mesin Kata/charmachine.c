@@ -20,7 +20,8 @@ void start(const char* filename) {
 
 	 /* ALGORITMA */
     tape = fopen(filename,"r");
-	 adv();
+    printf("%s\n", filename);
+	adv();
 }
 
 void startUserInput() {
