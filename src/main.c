@@ -48,6 +48,11 @@
 #include "../src/COMMAND/return_to_sender.c" 
 #include "../src/COMMAND/loadFile.h"
 
+
+struct Ability {
+    boolean type[3];    //type[i] mengikuti urutan spek
+};
+
 void print_mainmenu(){
     //Prosedur Tulis Main Menu//
     printf("1. NEW GAME\n");
@@ -74,11 +79,12 @@ int main(){
     in_progress_list IPL; // ADT untuk menampilkan daftar pekerjaan yang sedang dikerjakan
     Stack s; // ADT untuk tas
     map m; // ADT untuk menyimpan map
-    Coordinate C; // ADT untuk menyimpan koordinat
+    Coordinate C, Mobita; // ADT untuk menyimpan koordinat
     requestList RL;
     PrioQueue pq;
     adjMatrix AM;
     struct items val;
+    struct Ability ability; //struct ability
     boolean isReturn; // Digunakan untuk mengetahui apakah ada ability is return to sender
     // Jika telah menerima item VIP, ubah isReturn ke True
     boolean newGame; // Boolean untuk menampilkan apakah game sukses dimulai atau tidak, jika sukses, akan menjadi true
@@ -93,18 +99,22 @@ int main(){
     // load(&pq, &m,&AM);
     /* Start mesin kata untuk membaca config file dan input konfigurasi */
     readConfigFile(&pq, &m, &AM);
+    for(int i = 0; i < 3; i++){
+        ability.type[i] = false; //awal game diinisiasi tanpa ability
+    }
+    Mobita = *CoordByName(m, '8');
     // Fungsi newGame
     while(newGame) {
         printf("ENTER COMMAND: ");
         readCommand();
         if(isStringEqual(currentToken,"MOVE")) {
-
+            move(&Mobita, m, AM, &u);
         } else if (isStringEqual(currentToken,"PICK_UP")) {
 
         } else if (isStringEqual(currentToken,"DROP_OFF")) {
 
         } else if (isStringEqual(currentToken,"MAP")) {
-
+            DisplayMap(m, AM, Mobita);
         } else if (isStringEqual(currentToken,"TO_DO")) {
             //fromRLtoTDL(&pq, &TDL, &u);
             //to_do(TDL);
