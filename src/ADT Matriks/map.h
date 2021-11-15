@@ -48,4 +48,5 @@ void ListCoordinate(map M);
 Coordinate* CoordByName(map m, char nama);
 /*I.S. Map terdefinisi, nama terdefinisi*/
 /*F.S. Dikembalikan koordinat dengan nama 'nama' dari peta yang sudah ada*/
+void move_loc(Coordinate *src, Coordinate dest, map* m);
 #endif
