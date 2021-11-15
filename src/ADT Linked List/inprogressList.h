@@ -14,9 +14,12 @@ void createInProgressList(in_progress_list *l);
 /* I.S. sembarang */
 /* F.S. Terbentuk list kosong */
 
-/****************** TEST LIST KOSONG ******************/
+/****************** TEST LIST KOSONG DAN PANJANG LIST ******************/
 boolean isIPListEmpty(in_progress_list l);
 /* Mengirim true jika list kosong */
+
+int lengthIPL(in_progress_list l);
+/* Mengirim panjang list, 0 jika kosong */
 
 /****************** GETTER SETTER ******************/
 inProgressList getElmtIP(in_progress_list l, int idx);

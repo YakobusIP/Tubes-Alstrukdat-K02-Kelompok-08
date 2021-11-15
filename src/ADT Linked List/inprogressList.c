@@ -10,11 +10,24 @@ void CreateInProgressList(in_progress_list *l) {
     FIRST(*l) = NULL;
 }
 
-/****************** TEST LIST KOSONG ******************/
+/****************** TEST LIST KOSONG DAN PANJANG LIST ******************/
 boolean isIPListEmpty(in_progress_list l) {
 /* Mengirim true jika list kosong */
     /* ALGORITMA */
     return (FIRST(l) == NULL);
+}
+
+int lengthIPL(in_progress_list l) {
+/* Mengirim panjang list, 0 jika kosong */
+    /* ALGORITMA */
+    ipAddress p;
+    p = FIRST(l);
+    int i = 0;
+    while (p != NULL) {
+        i++;
+        p = NEXT(p);
+    }
+    return i;
 }
 
 /****************** GETTER SETTER ******************/
