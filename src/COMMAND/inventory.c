@@ -1,5 +1,21 @@
-#include "inventory.h"
 #include <stdio.h>
+#include "inventory.h"
+// #include "../ADT Lain/UangWaktu.c"
+// #include "../ADT Linked List/inprogressList.c"
+// #include "../ADT Linked List/inprogressNode.c"
+// #include "../ADT Linked List/todoNode.c"
+// #include "../ADT List/adjList.c" 
+// #include "../ADT List/Gadget.c"
+// #include "../ADT List/InventoryGadget.c"
+// #include "../ADT Matriks/adjMatriks.c"
+// #include "../ADT Matriks/map.c"
+// #include "../ADT Mesin Kata/charmachine.c"
+// #include "../ADT Mesin Kata/tokenmachine.c"
+// #include "../ADT Point/point.c"
+// #include "../ADT Stack/stack.c"
+// #include "../ADT Queue/requestList.c"
+// #include "../pcolor/pcolor.c"
+// #include "../boolean.h"
 
 void movePintuKemanaSaja(Coordinate *src, map m, adjMatrix A, InventoryGadget *IG, Gadget G) {
     char c;
@@ -20,26 +36,16 @@ void movePintuKemanaSaja(Coordinate *src, map m, adjMatrix A, InventoryGadget *I
     printf("ENTER COMMAND: ");
     scanf("%d", &num);
     if (num == 0) {
-        printf("Pintu kemana saja tidak jadi digunakan\n");
+        printf("%s tidak jadi digunakan\n", NAME(G));
     } else if (num < 0 || num > lengthAdjList(l)) {
         printf("Input tidak valid!\n");
     } else {
         *src = *ElmtPointer(l, num-1);
         printf("Mobita sekarang berada di titik ");
         DisplayCoord(*src);
-        printf("!\nPintu kemana saja berhasil digunakan");
+        printf("!\n%s berhasil digunakan", NAME(G));
         deleteGadget(IG, G);
     }
-}
-
-int lengthIPL(in_progress_list ipl) {
-    ipAddress p;
-    p = FIRST(ipl);
-    int i = 0;
-    while (p != NULL) {
-        i++;
-    }
-    return i;
 }
 
 void inventory(InventoryGadget *IG, in_progress_list *ipl, Stack *s, UangWaktu *c, Coordinate *src, map m, adjMatrix A){
@@ -55,9 +61,9 @@ void inventory(InventoryGadget *IG, in_progress_list *ipl, Stack *s, UangWaktu *
     } else {
         Gadget G;
         G = ELMT(*IG, x);
-        if (ELMT(*IG, x).ID == ID(G)) {
-            // Kondisi ketika Gadget tersebut ada
+        if (ELMT(*IG, x).ID == ID(G)) { // Kondisi ketika Gadget tersebut ada
             if (ID(G) == 1) {
+                // kain pembungkus waktu
                 struct items perishItem;
                 if (TOP(*s).type == "P") {
                     // Mencari item tersebut pada progress list
@@ -75,48 +81,52 @@ void inventory(InventoryGadget *IG, in_progress_list *ipl, Stack *s, UangWaktu *
                     }
                     
                     if (flag) {
-                        printf("Kain pembungkus waktu berhasil digunakan\n");
+                        printf("%s berhasil digunakan\n", NAME(G));
                         deleteGadget(IG, G);
                     } else {
-                        printf("Kain pembungkus waktu tidak berhasil digunakan\n");
+                        printf("%s tidak berhasil digunakan\n", NAME(G));
                     }
                 }
                 else {
-                    printf("Kain pembungkus waktu tidak berhasil digunakan\n");
+                    printf("%s tidak berhasil digunakan karena item teratas bukan perisable item\n", NAME(G));
                 }
             }
             
             else if (ID(G) == 2) {
+                // senter pembesar
                 if(MAKSIMUM(*s) * 2 > CAPACITYSTACK){
-                    printf("Senter Pembesar tidak dapat digunakan karena melebihi kapasitas maksimum\n");
+                    printf("%s tidak dapat digunakan karena melebihi kapasitas maksimum\n", NAME(G));
                 }else{
                     MAKSIMUM(*s) *= 2;
-                    printf("Senter Pembesar berhasil digunakan\n");
+                    printf("%s berhasil digunakan\n", NAME(G));
                     deleteGadget(IG, G);
                 }
             }
             
             else if (ID(G) == 3) {
+                // pintu kemana saja
                 movePintuKemanaSaja(src, m, A, IG, G);
             }
             
             else if (ID(G) == 4) {
+                // mesin waktu
                 if(WAKTU(*c) < 50){
                     WAKTU(*c) = 0;
                 }else{
                     WAKTU(*c) = WAKTU(*c) - 50;
                 }
+                printf("%s berhasil digunakan\n", NAME(G));
                 deleteGadget(IG, G);
 
             } else if (ID(G) == 5) {
-                // menghilangkan efek heavy item
-                if (TOP(*s).type == 'H') {
-                    TOP(*s).type = 'N';
+                // senter pengecil, menghilangkan efek heavy item
+                if (TOP(*s).type == "H") {
+                    copyString(TOP(*s).type, "N");
+                    printf("%s berhasil digunakan\n", NAME(G));
                     deleteGadget(IG, G);
-                    printf("Senter pengecil berhasil digunakan!\n");
                 }
                 else {
-                    printf("Senter pengecil gagal digunakan karena item teratas bukan Heavy Item!\n");
+                    printf("%s gagal digunakan karena item teratas bukan Heavy Item!\n", NAME(G));
                 }
             }
         } else {
@@ -124,4 +134,8 @@ void inventory(InventoryGadget *IG, in_progress_list *ipl, Stack *s, UangWaktu *
             printf("Gadget yang dipilih tidak ada pada inventory!\n");
         }
     }
+}
+
+int main() {
+    printf("a");
 }
