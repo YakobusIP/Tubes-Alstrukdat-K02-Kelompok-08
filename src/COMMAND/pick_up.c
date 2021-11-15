@@ -1,7 +1,22 @@
-/* COMMAND UNTUK PICK UP */
-
 #include <stdio.h>
 #include "pick_up.h"
+// #include "../ADT Lain/UangWaktu.c"
+// #include "../ADT Linked List/inprogressList.c"
+// #include "../ADT Linked List/inprogressNode.c"
+// #include "../ADT Linked List/todoNode.c"
+// #include "../ADT Linked List/todoList.c"
+// #include "../ADT List/adjList.c" 
+// #include "../ADT List/Gadget.c"
+// #include "../ADT List/InventoryGadget.c"
+// #include "../ADT Matriks/adjMatriks.c"
+// #include "../ADT Matriks/map.c"
+// #include "../ADT Mesin Kata/charmachine.c"
+// #include "../ADT Mesin Kata/tokenmachine.c"
+// #include "../ADT Point/point.c"
+// #include "../ADT Stack/stack.c"
+// #include "../ADT Queue/requestList.c"
+// #include "../pcolor/pcolor.c"
+// #include "../boolean.h"
 
 // addMoveTime = waktu tambahan saat move jika membawa heavy item, dapat menumpuk
 
@@ -38,7 +53,7 @@ void foundPickupInLoc(to_do_List *tdl, char currentLocation, boolean *found, int
     } while (!(*found) && p!=NULL);
 }
 
-void pick_up(to_do_List *tdl, Stack *s, in_progress_list *pl, char currentLocation, int *addMoveTime) {
+void pick_up(to_do_List *tdl, Stack *s, in_progress_list *pl, char currentLocation, int *addMoveTime, UangWaktu *u) {
     if (isTDListEmpty(*tdl)) {
         printf("Pesanan tidak ditemukan!\n");
     }
@@ -61,17 +76,26 @@ void pick_up(to_do_List *tdl, Stack *s, in_progress_list *pl, char currentLocati
                 pushStack(s, val);                           // item dimasukkan ke dalam Tas
                 progress_item.dropOff = pickup_item.dropOff;
                 progress_item.pickUp = pickup_item.pickUp;
-                // progress_item.startTime
                 progress_item.timeLimit = pickup_item.timeLimit;
                 progress_item.type = pickup_item.type;
+                progress_item.startTime = WAKTU(*u);
                 insertLastIP(pl, progress_item);
 
                 if (pickup_item.type == 'H') {*addMoveTime++;}
                 /* Efek Perishable Item dihandle MOVE karna bergantung waktu pengantaran */
-
+                
+                char item_name[20];
+                if (pickup_item.type == 'N') {copyString(item_name, "Normal Item");}
+                if (pickup_item.type == 'H') {copyString(item_name, "Heavy Item");}
+                if (pickup_item.type == 'P') {copyString(item_name, "Perishable Item");}
+                if (pickup_item.type == 'V') {copyString(item_name, "VIP Item");}
                 printf("Tujuan Pesanan: %c\n", pickup_item.dropOff);
-                printf("Pesanan berupa %c berhasil diambil!\n", pickup_item.type);
+                printf("Pesanan berupa %s berhasil diambil!\n", item_name);
             }
         }
     }
 }
+
+// int main() {
+//     printf("a");
+// }
