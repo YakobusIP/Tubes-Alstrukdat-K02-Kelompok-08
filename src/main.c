@@ -83,6 +83,10 @@ int main(){
     requestList RL;
     PrioQueue pq;
     adjMatrix AM;
+
+    char currentLocation;
+    int addMoveTime = 0;      // waktu tambahan jika membawa heavy item, dapat menumpuk
+
     struct items val;
     struct Ability ability; //struct ability
     boolean isReturn; // Digunakan untuk mengetahui apakah ada ability is return to sender
@@ -110,9 +114,9 @@ int main(){
         if(isStringEqual(currentToken,"MOVE")) {
             move(&Mobita, m, AM, &u);
         } else if (isStringEqual(currentToken,"PICK_UP")) {
-
+            pick_up(&TDL, &s, &IPL, currentLocation, &addMoveTime, &u);
         } else if (isStringEqual(currentToken,"DROP_OFF")) {
-
+            // drop_off(&IPL, &s, currentLocation, &u, &ability);
         } else if (isStringEqual(currentToken,"MAP")) {
             DisplayMap(m, AM, Mobita);
         } else if (isStringEqual(currentToken,"TO_DO")) {
@@ -124,7 +128,7 @@ int main(){
             buy(&u, AG, &IG, G);
             adv();
         }  else if (isStringEqual(currentToken,"INVENTORY")) {
-            
+            inventory(&IG, &IPL, &s, &u, &C, m, AM);
         } else if (isStringEqual(currentToken,"HELP")) {
 
         } else if (isStringEqual(currentToken,"SAVE_GAME")) {
