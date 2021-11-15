@@ -4,7 +4,6 @@
 void CreateGadget(Gadget *G, int ID) {
     ID(*G) = ID;
     if (ID == 1) {
-        // copyString(variable, string)
         copyString(NAME(*G), "Kain Pembungkus Waktu");
         PRICE(*G) = 800;
     } else if (ID == 2) {

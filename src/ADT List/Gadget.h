@@ -11,7 +11,7 @@
 
 typedef struct {
     int ID;             // ID Gadget untuk mempermudah akses elemen
-    char Name[20];
+    char Name[25];
     int Price;
     // Akses Effect pada command menggunakan ID
 } Gadget;

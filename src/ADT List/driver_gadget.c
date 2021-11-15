@@ -1,6 +1,20 @@
 #include <stdio.h>
-#include "Gadget.c"
-#include "InventoryGadget.c"
+
+#include "../ADT Lain/UangWaktu.c"
+#include "../ADT Linked List/inprogressList.c"
+#include "../ADT Linked List/inprogressNode.c"
+#include "../ADT Linked List/todoNode.c"
+#include "../ADT List/adjList.c" 
+#include "../ADT List/Gadget.c"
+#include "../ADT List/InventoryGadget.c"
+#include "../ADT Matriks/adjMatriks.c"
+#include "../ADT Matriks/map.c"
+#include "../ADT Mesin Kata/charmachine.c"
+#include "../ADT Mesin Kata/tokenmachine.c"
+#include "../ADT Point/point.c"
+#include "../ADT Stack/stack.c"
+#include "../ADT Queue/requestList.c"
+#include "../pcolor/pcolor.c"
 
 int main() {
     AvailableGadget AG;
