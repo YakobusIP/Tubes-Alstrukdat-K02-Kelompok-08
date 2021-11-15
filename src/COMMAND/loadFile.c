@@ -14,12 +14,11 @@ void load(PrioQueue *q, map *M, adjMatrix *A) {
     // START READ CONFIG FILE
     printf("Masukkan nama load file dalam permainan : ");
     readCommand();
-    loadFile = fopen(currentToken.contents,"w");
+    loadFile = fopen(currentToken.contents,"r");
     
     start(loadFile);
     ignoreBlank();
     ignoreNext();
-   
 
     do
     {

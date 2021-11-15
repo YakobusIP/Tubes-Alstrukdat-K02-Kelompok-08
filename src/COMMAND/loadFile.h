@@ -1,7 +1,7 @@
 #ifndef LOAD_H
 #define LOAD_H
 
-#include "boolean.h"
+#include "../boolean.h"
 #include "../ADT Lain/UangWaktu.h"
 #include "../ADT Linked List/todoNode.h" 
 #include "../ADT List/adjList.h"
@@ -14,7 +14,6 @@
 #include "../ADT Point/point.h"
 #include "../ADT Stack/stack.h"
 #include "../ADT Queue/requestList.h"
-#include "../pcolor/pcolor.h"
 
 void load(PrioQueue *q, map *M, adjMatrix *A);
 
