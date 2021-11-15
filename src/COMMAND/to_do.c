@@ -28,7 +28,7 @@ void fromRLtoTDL(PrioQueue *q, to_do_List *tdl, UangWaktu *u) {
             val_out.type = type_in;
             val_out.timeLimit = timeLimit_in;
 
-            insertLast(*tdl, val_out);
+            insertLastTD(tdl, val_out);
         }
     }
 }

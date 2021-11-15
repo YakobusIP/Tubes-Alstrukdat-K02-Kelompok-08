@@ -4,7 +4,7 @@
 void save(map m, adjMatrix adjM, to_do_List tdl){
     /* KAMUS */
     toDoList val;
-    Address p;
+    tdAddress p;
     Coordinate c;
     static FILE *saveFile;
     int i, len;
@@ -17,7 +17,7 @@ void save(map m, adjMatrix adjM, to_do_List tdl){
     } */
     fprintf(saveFile, ".\n");
     fprintf(saveFile, "%d %d\n", nRow(m), nCol(m));
-    c = *CoordByName(m, "8");
+    c = *CoordByName(m, '8');
     fprintf(saveFile, "%d %d\n", row(c), col(c));
     for(int i = 0; i < adjLength(adjM); i++)
     {
@@ -27,7 +27,7 @@ void save(map m, adjMatrix adjM, to_do_List tdl){
         }
         fprintf(saveFile,"\n");
     }
-    p = tdl;
+    p = FIRST(tdl);
     while(p != NULL) {
         val = INFO(p);
         if(val.timeLimit > 0) {

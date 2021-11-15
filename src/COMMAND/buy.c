@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "buy.h"
 
-void buy(UangWaktu *c, AvailableGadget AG, InventoryGadget *IG, struct Gadget G) {
+void buy(UangWaktu *c, AvailableGadget AG, InventoryGadget *IG, Gadget G) {
     int ID;
     ID = 0;
     printf("Uang anda sekarang: %d Yen\n", UANG(*c));

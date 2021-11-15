@@ -4,9 +4,8 @@
 #include "../boolean.h"
 #include "inprogressNode.h"
 
-typedef Address in_progress_list;
+typedef ipAddress in_progress_list;
 
-#define IDX_UNDEF (-1)
 #define FIRST(l) (l)
 
 /* PROTOTYPE */

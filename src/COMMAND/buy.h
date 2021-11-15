@@ -17,6 +17,6 @@
 #include "../ADT Queue/requestList.h"
 #include "../pcolor/pcolor.h"
 
-void buy(UangWaktu *c, AvailableGadget AG, InventoryGadget *IG, struct Gadget G);
+void buy(UangWaktu *c, AvailableGadget AG, InventoryGadget *IG, Gadget G);
 
 #endif

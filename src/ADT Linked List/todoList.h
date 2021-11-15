@@ -4,9 +4,7 @@
 #include "../boolean.h"
 #include "todoNode.h"
 
-#define IDX_UNDEF (-1)
-
-typedef Address to_do_List;
+typedef tdAddress to_do_List;
 
 /* SELEKTOR */
 #define FIRST(l) (l)

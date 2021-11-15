@@ -20,6 +20,7 @@
 #include "ADT Queue/requestList.h"
 #include "pcolor/pcolor.h"
 
+/*
 #include "ADT Lain/UangWaktu.c"
 #include "ADT Linked List/inprogressList.c"
 #include "ADT Linked List/inprogressNode.c"
@@ -34,13 +35,13 @@
 #include "ADT Point/point.c"
 #include "ADT Stack/stack.c"
 #include "ADT Queue/requestList.c"
-#include "pcolor/pcolor.c" 
+#include "pcolor/pcolor.c" */
 
 /* Include command code */
 // P.S: Keliatannya kalo ini udah banyak yang implementasi kode buat command, yang include di atas ilangin aja
 // karena udah pasti di include sama header commandnya
-// #include "../src/COMMAND/to_do.h"
-// #include "../src/COMMAND/in_progress.h"
+//#include "../src/COMMAND/to_do.h"
+//#include "../src/COMMAND/in_progress.h"
 #include "../src/COMMAND/buy.h"
 #include "../src/COMMAND/buy.c"
 #include "../src/COMMAND/return_to_sender.h"
@@ -67,9 +68,9 @@ int main(){
     UangWaktu u; // ADT untuk membaca uang dan waktu
     AvailableGadget AG; // ADT yang menampilkan gadget yang tersedia
     InventoryGadget IG; // ADT untuk menampilkan gadget yang telah dimiliki
-    struct Gadget G; // Struct untuk menampilkan info gadget
+    Gadget G; // Struct untuk menampilkan info gadget
     to_do_List TDL; // ADT untuk menampilkan to_do_list yang harus dikerjakan
-    inProgressList IPL; // ADT untuk menampilkan daftar pekerjaan yang sedang dikerjakan
+    in_progress_list IPL; // ADT untuk menampilkan daftar pekerjaan yang sedang dikerjakan
     Stack s; // ADT untuk tas
     map m; // ADT untuk menyimpan map
     Coordinate C; // ADT untuk menyimpan koordinat
@@ -86,11 +87,11 @@ int main(){
     CreateUangWaktu(&u);
     CreateAvailableGadget(&AG);
     CreateInventoryGadget(&IG);
-    // CreateToDoList(&TDL);
-    // createInProgressList(&IPL);
+    CreateToDoList(&TDL);
+    createInProgressList(&IPL);
 
     /* Start mesin kata untuk membaca config file dan input konfigurasi */
-    // readConfigFile(&pq, &m, &AM);
+    readConfigFile(&pq, &m, &AM);
     // Fungsi newGame
     while(newGame) {
         printf("ENTER COMMAND: ");
@@ -105,7 +106,7 @@ int main(){
 
         } else if (isStringEqual(currentToken,"TO_DO")) {
             //fromRLtoTDL(&pq, &TDL, &u);
-            // to_do(&pq, &TDL, &u);
+            //to_do(TDL);
         } else if (isStringEqual(currentToken,"IN_PROGRESS")) {
            // in_progress(&IPL);
         } else if(isStringEqual(currentToken,"BUY")) {
@@ -116,12 +117,12 @@ int main(){
         } else if (isStringEqual(currentToken,"HELP")) {
 
         } else if (isStringEqual(currentToken,"SAVE_GAME")) {
-            save(m, AM, TDL);
+            //save(m, AM, TDL);
         } else if (isStringEqual(currentToken,"RETURN")) {
             if(EFFECT(s) == 3) {
                 printf("Maaf, return to sender tidak bisa digunakan untuk VIP Item\n");
             } else {
-                return_to_sender(&s, &IPL,&TDL, u);
+                return_to_sender(&s, &IPL, &TDL, u);
                 isReturn = false;
             }
         } else if (isStringEqual(currentToken,"EXIT")){

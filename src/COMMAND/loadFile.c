@@ -1,14 +1,10 @@
 #include <stdio.h>
-#include "ADT Mesin Kata/tokenmachine.h"
-#include "ADT Mesin Kata/tokenmachine.c"
-#include "ADT Mesin Kata/charmachine.h"
-#include "ADT Mesin Kata/charmachine.c"
-#include "ADT Linked List/todoQueue.h"
-#include "ADT Linked List/todoQueue.c"
-Token currentToken;
-int main() {
+#include "loadFile.h"
+
+// Ini gw ganti dari int main pake void load, soalnya kalo int main ga akan bisa di run dari main.c nya
+void load() {
     /* KAMUS */
-    toDoList val;
+    requestList val;
     PrioQueue q;
     int i, p;
     int inreqIn, intimeLimit;
@@ -58,7 +54,6 @@ int main() {
         val.timeLimit = intimeLimit;
 
         // INPUT VAL YANG SUDAH DIBENTUK KE DALAM QUEUE
-        enqueueToDo(&q, val, 10);
+        enqueueRL(&q, val);
     }
-    return 0;
 }

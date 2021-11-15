@@ -6,6 +6,7 @@
 #define STACK_H
 
 #include "../boolean.h"
+#include "../ADT Mesin Kata/tokenmachine.h"
 
 #define IDX_UNDEF -1
 #define CAPACITYSTACK 100
