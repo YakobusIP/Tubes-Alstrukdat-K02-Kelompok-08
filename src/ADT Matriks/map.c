@@ -127,3 +127,10 @@ Coordinate* CoordByName(map m, char nama)
     if (found) return CoordPointer(m, i, j);
     else return NULL;
 }
+
+void move_loc(Coordinate *src, Coordinate dest, map* m){
+    int i = row(dest);
+    int j = col(dest); 
+    *src = *CoordPointer(*m, i, j);
+}
+
