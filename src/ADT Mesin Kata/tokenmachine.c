@@ -25,6 +25,22 @@ void ignoreNext() {
     }
 }
 
+void ignoreBlankUserInput() {
+/* Mengabaikan BLANK dari input user di terminal */
+    /* ALGORITMA */
+    while (currentChar == BLANK) {
+        advUserInput();
+    }
+}
+
+void ignoreNextUserInput() {
+/* Mengabaikan satu atau beberapa NEXTLINE dari input user di terminal, NEXTLINE adalah \n */
+    /* ALGORITMA */
+    while (currentChar == NEXTLINE) {
+        advUserInput();
+    }
+}
+
 int readNumberfromChar() {
 /* Membaca digit angka dari bentuk char ke bentuk integer */
     /* KAMUS */
@@ -42,13 +58,31 @@ int readNumberfromChar() {
     return num;
 }
 
+int readNumberfromSTDIN() {
+/* Membaca digit angka dari bentuk char ke bentuk integer, data diambil dari input user di terminal */
+    /* KAMUS */
+    int num;
+    /* ALGORITMA */
+    startUserInput();
+    ignoreBlankUserInput();
+    ignoreNextUserInput();
+
+    num = 0;
+    while (!eot && (currentChar != NEXTLINE)) {
+        num = (num * 10) + (currentChar - '0');
+        advUserInput();
+    }
+
+    return num;
+}
+
 void readCommand() {
 /* Membaca command dari input user */
     /* KAMUS */
     int i;
     /* ALGORITMA */
     startUserInput();
-    ignoreBlank();
+    ignoreBlankUserInput();
 
     i=0;
     while ((currentChar != BLANK) && (currentChar != NEXTLINE) && (i < CAPACITYTOKENMACHINE)) {
@@ -56,34 +90,22 @@ void readCommand() {
         advUserInput();
         i++;
     }
-    ignoreBlank();
+    ignoreBlankUserInput();
     
     currentToken.length = i;
 }
 
 /* Cara penggunaan: isStringEqual(currentToken, "Command yang ingin dipakai"), contoh isStringEqual(currentToken, "BUY"), kalau dia true berarti bisa masuk ke dalam if-nya */
-boolean isStringEqual(Token input, char* compare) {
+int isStringEqual(const char* input, const char* compare) {
 /* Membandingkan apakah kedua string yang dimasukkan sama */
     /* KAMUS */
-    int i;
-    boolean flag;
+    
     /* ALGORITMA */
-    i = 0;
-    
-    if (input.length != (sizeof(compare)/sizeof(compare[0]))) {
-        flag = false;
-    } else {
-        flag = true;
-        while ((i < input.length) && (flag)) {
-            if (input.contents[i] != compare[i]) {
-                flag = false;
-            } else {
-                i++;
-            }
-        }
+    while (*input && (*input == *compare)) {
+        input++;
+        compare++;
     }
-    
-    return flag;
+    return *(const unsigned char*)input - *(const unsigned char*)compare;
 
 }
 

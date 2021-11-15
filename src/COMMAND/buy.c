@@ -8,8 +8,7 @@ void buy(UangWaktu *c, AvailableGadget AG, InventoryGadget *IG, Gadget G) {
     printf("Gadget yang tersedia: \n");
     displayAvailableGadget(AG);
     printf("Gadget mana yang ingin kamu beli? (ketik 0 jika ingin kembali)\n");
-    adv();
-    ID = readNumberfromChar();
+    ID = readNumberfromSTDIN();
     if(ID == 0) {
         printf("Anda tidak jadi membeli gadget\n");
     } else if (ID > 5 || ID < 0) {
