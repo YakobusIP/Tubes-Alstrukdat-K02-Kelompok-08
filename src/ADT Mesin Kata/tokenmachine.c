@@ -25,6 +25,22 @@ void ignoreNext() {
     }
 }
 
+void ignoreBlankUserInput() {
+/* Mengabaikan BLANK dari input user di terminal */
+    /* ALGORITMA */
+    while (currentChar == BLANK) {
+        advUserInput();
+    }
+}
+
+void ignoreNextUserInput() {
+/* Mengabaikan satu atau beberapa NEXTLINE dari input user di terminal, NEXTLINE adalah \n */
+    /* ALGORITMA */
+    while (currentChar == NEXTLINE) {
+        advUserInput();
+    }
+}
+
 int readNumberfromChar() {
 /* Membaca digit angka dari bentuk char ke bentuk integer */
     /* KAMUS */
@@ -34,9 +50,27 @@ int readNumberfromChar() {
     ignoreBlank();
     ignoreNext();
     // adv();
-    while ((currentChar != MARK) && (currentChar != BLANK) && (currentChar != NEXTLINE)) {
+    while ((currentChar != BLANK) && (currentChar != NEXTLINE)) {
         num = num*10 + (currentChar - '0');
         adv();
+    }
+
+    return num;
+}
+
+int readNumberfromSTDIN() {
+/* Membaca digit angka dari bentuk char ke bentuk integer, data diambil dari input user di terminal */
+    /* KAMUS */
+    int num;
+    /* ALGORITMA */
+    startUserInput();
+    ignoreBlankUserInput();
+    ignoreNextUserInput();
+
+    num = 0;
+    while (!eot && (currentChar != NEXTLINE)) {
+        num = (num * 10) + (currentChar - '0');
+        advUserInput();
     }
 
     return num;
@@ -48,10 +82,10 @@ void readCommand() {
     int i;
     /* ALGORITMA */
     startUserInput();
-    ignoreBlank();
+    ignoreBlankUserInput();
 
     i=0;
-    while ((currentChar != MARK) && (currentChar != BLANK) && (currentChar != NEXTLINE) && (i < CAPACITYTOKENMACHINE)) {
+    while ( (currentChar != BLANK) && (currentChar != NEXTLINE) && (i < CAPACITYTOKENMACHINE)) {
         currentToken.contents[i] = currentChar;
         advUserInput();
         i++;
@@ -74,36 +108,22 @@ void readCommandLoad() {
         advUserInput();
         i++;
     }
-    ignoreBlank();
+    ignoreBlankUserInput();
+    
     currentToken.length = i;
 }
 
 /* Cara penggunaan: isStringEqual(currentToken, "Command yang ingin dipakai"), contoh isStringEqual(currentToken, "BUY"), kalau dia true berarti bisa masuk ke dalam if-nya */
-boolean isStringEqual(Token input, const char* compare) {
+int isStringEqual(const char* input, const char* compare) {
 /* Membandingkan apakah kedua string yang dimasukkan sama */
     /* KAMUS */
-    int i;
-    boolean flag;
-    /* ALGORITMA */
-    i = 0;
-    int c = 0;
-    while (compare[c] != '\0') {
-        c++;
-    }
-    if (input.length != c/*  (sizeof(compare)/sizeof(compare[0])) */) {
-        flag = false;
-    } else {
-        flag = true;
-        while ((i < input.length) && (flag)) {
-            if (input.contents[i] != compare[i]) {
-                flag = false;
-            } else {
-                i++;
-            }
-        }
-    }
     
-    return flag;
+    /* ALGORITMA */
+    while (*input && (*input == *compare)) {
+        input++;
+        compare++;
+    }
+    return *(const unsigned char*)input - *(const unsigned char*)compare;
 
 }
 

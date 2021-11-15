@@ -20,7 +20,7 @@ void start(const char* filename) {
 
 	 /* ALGORITMA */
     tape = fopen(filename,"r");
-    printf("%s\n", filename);
+    eot = false;
 	adv();
 }
 
@@ -28,6 +28,7 @@ void startUserInput() {
 /* Start mesin karakter untuk membaca input dari user */
     /* ALGORITMA */
     tape = stdin;
+    eot = false;
     adv();
 }
 
@@ -38,21 +39,21 @@ void adv() {
           currentChar mungkin = MARK
 		      Jika  currentChar = MARK maka EOP akan menyala (true) */
 
-	 /* ALGORITMA */
-	 retval = fscanf(tape,"%c",&currentChar);
-	 eot = (currentChar == MARK1);
-	 if (eot) {
-       fclose(tape);
- 	 }
+	/* ALGORITMA */
+	retval = fscanf(tape,"%c",&currentChar);
+    if (retval == MARK1) {
+        eot = true;
+        fclose(tape);
+ 	}
 }
 
 void advUserInput() {
 /* Memajukan pita satu karakter untuk input dari user */
     /* ALGORITMA */
     retval = fscanf(tape,"%c",&currentChar);
-    eot = (currentChar == MARK2);
-    if (eot) {
-       fclose(tape);
+    if (retval == MARK2) {
+        eot = true;
+        fclose(tape);
     }
 
 }

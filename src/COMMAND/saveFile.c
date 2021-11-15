@@ -1,23 +1,25 @@
 #include <stdio.h>
 #include "./saveFile.h"
 
-void save(map m, adjMatrix adjM, to_do_List tdl){
+void save(map m, adjMatrix adjM, to_do_List tdl, UangWaktu u){
     /* KAMUS */
     toDoList val;
     tdAddress p;
     Coordinate c;
-    static FILE *saveFile;
+    FILE *saveFile;
     int i, len;
     int count;
     /* ALGORITMA */
     printf("Masukkan nama save file dalam permainan : ");
     readCommand();
     saveFile = fopen(currentToken.contents,"a");
-    /* for(int i = 0; i < 10; i++) {
-        fprintf(saveFile, "%d\n", i);
-    } */
-    fprintf(saveFile, "9999\n");
+    if(saveFile == NULL) {
+        printf("Failted to save\n");
+    }
+    fprintf(saveFile,"Test");
+    printf("%d %d\n", nRow(m), nCol(m));
     fprintf(saveFile, "%d %d\n", nRow(m), nCol(m));
+    fprintf(saveFile, "%d %d\n", UANG(u), WAKTU(u));
     c = *CoordByName(m, '8');
     fprintf(saveFile, "%d %d\n", row(c), col(c));
     count = 0;
@@ -52,16 +54,21 @@ void save(map m, adjMatrix adjM, to_do_List tdl){
         }
         fprintf(saveFile,"\n");
     }
-    p = FIRST(tdl);
+    p = tdl;
+    printf("test4\n");
+    displayToDo(tdl);
     while(p != NULL) {
-        val = INFO(p);
-        if(val.timeLimit > 0) {
-            fprintf(saveFile,"%d %c %c %c %d\n", val.reqIn, val.pickUp, val.dropOff, val.type, val.timeLimit);
+        
+        printf("%d\n", INFO(p).timeLimit);
+        if(INFO(p).timeLimit > 0) {
+            printf("test2\n");
+            fprintf(saveFile,"%d %c %c %c %d\n", INFO(p).reqIn, INFO(p).pickUp, INFO(p).dropOff, INFO(p).type, INFO(p).timeLimit);
         } else {
-            fprintf(saveFile, "%d %c %c %c\n", val.reqIn, val.pickUp, val.dropOff, val.type);
+            printf("test1\n");
+            fprintf(saveFile, "%d %c %c %c\n", INFO(p).reqIn, INFO(p).pickUp, INFO(p).dropOff, INFO(p).type);
         }
         p = NEXT(p);
-    }
+    } 
 /* 
     // Print banyaknya pesanan
     fprintf(saveFile, "%d\n", length(q));

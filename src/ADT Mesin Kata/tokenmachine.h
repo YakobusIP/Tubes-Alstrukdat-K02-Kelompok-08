@@ -14,7 +14,6 @@
 
 #define CAPACITYTOKENMACHINE 100
 #define BLANK ' '
-#define MARK '.'
 #define NEXTLINE '\n'
 
 typedef struct {
@@ -33,16 +32,22 @@ void ignoreBlank();
 void ignoreNext();
 /* Mengabaikan satu atau beberapa NEXTLINE, NEXTLINE adalah \n */
 
+void ignoreBlankUserInput();
+/* Mengabaikan BLANK dari input user di terminal */
+
+void ignoreNextUserInput();
+/* Mengabaikan satu atau beberapa NEXTLINE dari input user di terminal, NEXTLINE adalah \n */
+
 int readNumberfromChar();
 /* Membaca digit angka dari bentuk char ke bentuk integer */
+
+int readNumberfromSTDIN();
+/* Membaca digit angka dari bentuk char ke bentuk integer, data diambil dari input user di terminal */
 
 void readCommand();
 /* Membaca command dari input user */
 
-void readCommandLoad();
-/* Membaca command dari input user */
-
-boolean isStringEqual(Token input, const char* compare);
+int isStringEqual(const char* input, const char* compare);
 /* Membandingkan apakah kedua string yang dimasukkan sama */
 
 char* copyString(char* variable, const char* string);

@@ -15,6 +15,6 @@
 #include "../ADT Stack/stack.h"
 #include "../ADT Queue/requestList.h"
 
-void load(PrioQueue *q, map *M, adjMatrix *A);
+void load(PrioQueue *q, map *M, adjMatrix *A, boolean *failToLoad, UangWaktu *u);
 
 #endif

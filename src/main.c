@@ -111,6 +111,7 @@ int main(){
     adjMatrix AM;
 
     char currentLocation;
+    boolean failToLoad;
     int addMoveTime = 0;      // waktu tambahan jika membawa heavy item, dapat menumpuk
     struct items val;
     Ability ability; //struct ability
@@ -118,8 +119,9 @@ int main(){
     // Jika telah menerima item VIP, ubah isReturn ke True
     boolean newGame; // Boolean untuk menampilkan apakah game sukses dimulai atau tidak, jika sukses, akan menjadi true
 
-
-    load(&pq, &m, &AM);
+    failToLoad = false;
+    load(&pq, &m, &AM, &failToLoad, &u);
+    save(m, AM, TDL, u);
     printf("%d %d\n", nRow(m), nCol(m));
     /* Algoritma */
     newGame = true;
@@ -128,47 +130,47 @@ int main(){
     CreateAvailableGadget(&AG);
     CreateInventoryGadget(&IG);
     CreateToDoList(&TDL);
-    CreateInProgressList(&IPL);
+    // createInProgressList(&IPL);
     // load(&pq, &m,&AM);
     /* Start mesin kata untuk membaca config file dan input konfigurasi */
     // readConfigFile(&pq, &m, &AM);
-    //CreateAbility(&ability);
+    // CreateAbility(&ability);
     // Mobita = *CoordByName(m, '8');
-    printf("test\n");
     // Fungsi newGame
     while(newGame) {
         printf("ENTER COMMAND: ");
         readCommand();
-        if(isStringEqual(currentToken,"MOVE")) {
+        printf("%s\n", currentToken);
+        if(isStringEqual(currentToken.contents,"MOVE") == 0) {
             move(&Mobita, m, AM, &u);
-        } else if (isStringEqual(currentToken,"PICK_UP")) {
+        } else if (isStringEqual(currentToken.contents,"PICK_UP") == 0) {
             pick_up(&TDL, &s, &IPL, currentLocation, &addMoveTime, &u);
-        } else if (isStringEqual(currentToken,"DROP_OFF")) {
+        } else if (isStringEqual(currentToken.contents,"DROP_OFF") == 0) {
             // drop_off(&IPL, &s, currentLocation, &u, &ability);
-        } else if (isStringEqual(currentToken,"MAP")) {
+        } else if (isStringEqual(currentToken.contents,"MAP") == 0) {
             DisplayMap(m, AM, Mobita, IPL, TDL);
-        } else if (isStringEqual(currentToken,"TO_DO")) {
+        } else if (isStringEqual(currentToken.contents,"TO_DO")== 0) {
             fromRLtoTDL(&pq, &TDL, &u);
             to_do(TDL);
-        } else if (isStringEqual(currentToken,"IN_PROGRESS")) {
+        } else if (isStringEqual(currentToken.contents,"IN_PROGRESS")== 0) {
            in_progress(&IPL);
-        } else if(isStringEqual(currentToken,"BUY")) {
+        } else if(isStringEqual(currentToken.contents,"BUY")== 0) {
             buy(&u, AG, &IG, G);
             adv();
-        }  else if (isStringEqual(currentToken,"INVENTORY")) {
+        }  else if (isStringEqual(currentToken.contents,"INVENTORY")== 0) {
             // inventory(&IG, &IPL, &s, &u, &C, m, AM);
-        } else if (isStringEqual(currentToken,"HELP")) {
+        } else if (isStringEqual(currentToken.contents,"HELP")== 1) {
             Help();
-        } else if (isStringEqual(currentToken,"SAVE_GAME")) {
-            save(m, AM, TDL);
-        } else if (isStringEqual(currentToken,"RETURN")) {
+        } else if (isStringEqual(currentToken.contents,"SAVE_GAME")== 0) {
+            save(m, AM, TDL, u);
+        } else if (isStringEqual(currentToken.contents,"RETURN")== 0) {
             if(EFFECT(s) == 3) {
                 printf("Maaf, return to sender tidak bisa digunakan untuk VIP Item\n");
             } else {
                 return_to_sender(&s, &IPL, &TDL, u);
                 isReturn = false;
             }
-        } else if (isStringEqual(currentToken,"EXIT")){
+        } else if (isStringEqual(currentToken.contents,"EXIT") == 0){
             newGame = false;
             printf("Sampai jumpa di permainan berikutnya\n");
         } else {

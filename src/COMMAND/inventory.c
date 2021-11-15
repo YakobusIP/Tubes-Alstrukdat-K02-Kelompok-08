@@ -135,7 +135,3 @@ void inventory(InventoryGadget *IG, in_progress_list *ipl, Stack *s, UangWaktu *
         }
     }
 }
-
-int main() {
-    printf("a");
-}
