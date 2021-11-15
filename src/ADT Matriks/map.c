@@ -78,6 +78,21 @@ void DisplayMap(map M, adjMatrix A, Coordinate Mobita, in_progress_list ipl, to_
     }
 }
 
+void ListCoordinate(map M)
+{
+    for(int i = 1; i < nRow(M) + 1; i++)
+    {
+        for(int j = 1; j < nCol(M) + 1; j++)
+        {
+            if(CoordPointer(M, i, j) != NULL)
+            {
+                DisplayCoord(*CoordPointer(M, i, j));
+                printf("\n");
+            }
+        }
+    }
+}
+
 Coordinate* CoordByName(map m, char nama)
 {
     int i = 1, j = 1;
