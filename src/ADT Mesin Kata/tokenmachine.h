@@ -22,7 +22,6 @@ typedef struct {
 } Token;
 
 /* Word Engine State */
-extern Token currentToken;
 
 void ignoreBlank();
 /* Mengabaikan satu atau beberapa BLANK
@@ -44,10 +43,10 @@ int readNumberfromChar();
 int readNumberfromSTDIN();
 /* Membaca digit angka dari bentuk char ke bentuk integer, data diambil dari input user di terminal */
 
-void readCommand();
+void readCommand(Token *input);
 /* Membaca command dari input user */
 
-int isStringEqual(const char* input, const char* compare);
+boolean isStringEqual(Token input, const char* compare);
 /* Membandingkan apakah kedua string yang dimasukkan sama */
 
 char* copyString(char* variable, const char* string);
@@ -62,4 +61,5 @@ void saveToFile(PrioQueue *q);
 void loadFromFile(PrioQueue *q);
 /* Load state game dari sebuah file */
 
+void printWord(Token T);
 #endif

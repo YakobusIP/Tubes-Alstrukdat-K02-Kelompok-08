@@ -5,7 +5,6 @@ static char configFileName[] = "config.conf";
 static char saveFileName[] = "savefile.dat";
 
 static FILE *saveFile;
-Token currentToken;
 
 void ignoreBlank() {
 /* Mengabaikan satu atau beberapa BLANK
@@ -76,7 +75,7 @@ int readNumberfromSTDIN() {
     return num;
 }
 
-void readCommand() {
+void readCommand(Token *input) {
 /* Membaca command dari input user */
     /* KAMUS */
     int i;
@@ -84,29 +83,38 @@ void readCommand() {
     startUserInput();
     ignoreBlankUserInput();
 
-    i=0;
+    i = 0;
     while ((currentChar != BLANK) && (currentChar != NEXTLINE) && (i < CAPACITYTOKENMACHINE)) {
-        currentToken.contents[i] = currentChar;
+        (*input).contents[i] = currentChar;
         advUserInput();
         i++;
     }
     ignoreBlankUserInput();
     
-    currentToken.length = i;
+    (*input).length = i;
 }
 
 /* Cara penggunaan: isStringEqual(currentToken, "Command yang ingin dipakai"), contoh isStringEqual(currentToken, "BUY"), kalau dia true berarti bisa masuk ke dalam if-nya */
-int isStringEqual(const char* input, const char* compare) {
+boolean isStringEqual(Token input, const char* compare) {
 /* Membandingkan apakah kedua string yang dimasukkan sama */
     /* KAMUS */
-    
+    int i;
+    boolean flag;
     /* ALGORITMA */
-    while (*input && (*input == *compare)) {
-        input++;
-        compare++;
+    if (input.length != stringLength(compare)) {
+        flag = false;
+    } else {
+        i = 0;
+        flag = true;
+        while ((i < input.length) && (flag)) {
+            if (input.contents[i] != compare[i]) {
+                flag = false;
+            } else {
+                i++;
+            }
+        }
     }
-    return *(const unsigned char*)input - *(const unsigned char*)compare;
-
+    return flag;
 }
 
 /* Cara penggunaan: sama seperti strcpy biasa 
@@ -329,3 +337,11 @@ void loadFromFile(PrioQueue *q) {
         enqueueRL(q, val);
     }
 } 
+
+void printWord(Token T)
+{
+    for(int i=0;i<T.length;i++) {
+        printf("%c",T.contents[i]);
+    }
+    printf("\n");
+}
