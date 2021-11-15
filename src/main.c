@@ -23,6 +23,8 @@
 #include "ADT Lain/bfs.h"
 #include "pcolor/pcolor.h"
 
+
+// Jangan dihapus ya gais :D
 #include "ADT Lain/UangWaktu.c"
 #include "ADT Linked List/inprogressList.c"
 #include "ADT Linked List/inprogressNode.c"
@@ -37,7 +39,7 @@
 #include "ADT Mesin Kata/tokenmachine.c"
 #include "ADT Point/point.c"
 #include "ADT Stack/stack.c"
-#include "ADT Queue/requestList.c"
+#include "ADT Queue/requestList.c" 
 // #include "ADT Lain/bfs.c"
 #include "pcolor/pcolor.c" 
 
@@ -49,54 +51,30 @@
 #include "../src/COMMAND/loadFile.h"
 #include "../src/COMMAND/drop_off.h"
 #include "../src/COMMAND/help.h"
-// #include "../src/COMMAND/inventory.h"
+#include "../src/COMMAND/inventory.h"
 #include "../src/COMMAND/in_progress.h"
 #include "../src/COMMAND/move.h"
 #include "../src/COMMAND/pick_up.h"
 #include "../src/COMMAND/saveFile.h"
 #include "../src/COMMAND/to_do.h"
+#include "../src/COMMAND/start.h"
 
 #include "../src/COMMAND/buy.c"
 #include "../src/COMMAND/return_to_sender.c"
 #include "../src/COMMAND/loadFile.c"
 #include "../src/COMMAND/drop_off.c"
 #include "../src/COMMAND/help.c"
-// #include "../src/COMMAND/inventory.c"
+#include "../src/COMMAND/inventory.c"
 #include "../src/COMMAND/in_progress.c"
 #include "../src/COMMAND/move.c"
 #include "../src/COMMAND/pick_up.c"
 #include "../src/COMMAND/saveFile.c"
 #include "../src/COMMAND/to_do.c"
-
-
-
-
-void print_mainmenu(){
-    //Prosedur Tulis Main Menu//
-    printf("/*************MENU*************/\n");
-    printf("1. NEW GAME\n");
-    printf("2. LOAD GAME\n");
-    printf("3. EXIT");
-    printf("Masukkan Pilihan\n");
-}
-
-
-
-void newGame(){
-    
-}
-
-void main_menu(){
-    readCommand();
-}
-
-void Exit(){
-    printf("Thanks For Playing !");
-    exit(0);
-}
+#include "../src/COMMAND/start.c" 
 
 int main(){
     /* Kamus */    
+    Token currentCommand;
     UangWaktu u; // ADT untuk membaca uang dan waktu
     AvailableGadget AG; // ADT yang menampilkan gadget yang tersedia
     InventoryGadget IG; // ADT untuk menampilkan gadget yang telah dimiliki
@@ -120,63 +98,105 @@ int main(){
     boolean newGame; // Boolean untuk menampilkan apakah game sukses dimulai atau tidak, jika sukses, akan menjadi true
 
     failToLoad = false;
-    load(&pq, &m, &AM, &failToLoad, &u);
-    save(m, AM, TDL, u);
-    printf("%d %d\n", nRow(m), nCol(m));
-    /* Algoritma */
-    newGame = true;
+    newGame = false;
     isReturn = false;
+
+    /* Algoritma */
+
+    // Membuat konstruktor yang ada
     CreateUangWaktu(&u);
     CreateAvailableGadget(&AG);
     CreateInventoryGadget(&IG);
     CreateToDoList(&TDL);
-    // createInProgressList(&IPL);
-    // load(&pq, &m,&AM);
+    CreatePrioQueue(&pq);
+    CreateInProgressList(&IPL);
+
+    // Main Menu
+    mainMenu();
+    readCommand(&currentCommand);
+    if(isStringEqual(currentCommand,"NEW_GAME")){
+        start_game(&pq, &m, &AM);
+        fromRLtoTDL(&pq, &TDL, &u);
+        printf("Harap tunggu sebentar...\n");
+        delay(2);
+        printf("Permainan anda sedang disiapkan...\n");
+        delay(2);
+        printf("Ini dia!\n");
+        delay(1);
+        printf("Enjoy the Game!\n");
+        newGame = true;
+    }else if(isStringEqual(currentCommand, "LOAD_GAME") ){
+        load(&pq, &m, &AM, &failToLoad, &u);
+        if(failToLoad == false) {
+            fromRLtoTDL(&pq, &TDL, &u);
+            printf("Harap tunggu sebentar...\n");
+            delay(2);
+            printf("Permainan anda sedang diload...\n");
+            delay(2);
+            printf("Ini dia!\n");
+            delay(1);
+            printf("Game anda berhasil diload! Selamat bermain!\n");   
+            newGame = true;
+        } else {
+            newGame = false;
+        }
+    }else if(isStringEqual(currentCommand, "EXIT")){
+        newGame = false;
+        printf("Anda keluar dari game.\n");
+    }
+
     /* Start mesin kata untuk membaca config file dan input konfigurasi */
     // readConfigFile(&pq, &m, &AM);
     // CreateAbility(&ability);
     // Mobita = *CoordByName(m, '8');
-    // Fungsi newGame
+
+
+
+    // Masuk ke permainan utama
     while(newGame) {
         printf("ENTER COMMAND: ");
-        readCommand();
-        printf("%s\n", currentToken);
-        if(isStringEqual(currentToken.contents,"MOVE") == 0) {
+        readCommand(&currentCommand);
+        if(isStringEqual(currentCommand,"MOVE")) {
             move(&Mobita, m, AM, &u);
-        } else if (isStringEqual(currentToken.contents,"PICK_UP") == 0) {
+        } else if (isStringEqual(currentCommand,"PICK_UP")) {
             pick_up(&TDL, &s, &IPL, currentLocation, &addMoveTime, &u);
-        } else if (isStringEqual(currentToken.contents,"DROP_OFF") == 0) {
+        } else if (isStringEqual(currentCommand,"DROP_OFF")) {
             // drop_off(&IPL, &s, currentLocation, &u, &ability);
-        } else if (isStringEqual(currentToken.contents,"MAP") == 0) {
+        } else if (isStringEqual(currentCommand,"MAP")) {
             DisplayMap(m, AM, Mobita, IPL, TDL);
-        } else if (isStringEqual(currentToken.contents,"TO_DO")== 0) {
-            fromRLtoTDL(&pq, &TDL, &u);
+        } else if (isStringEqual(currentCommand,"TO_DO")) {
+            // fromRLtoTDL(&pq, &TDL, &u);
             to_do(TDL);
-        } else if (isStringEqual(currentToken.contents,"IN_PROGRESS")== 0) {
+        } else if (isStringEqual(currentCommand,"IN_PROGRESS")) {
            in_progress(&IPL);
-        } else if(isStringEqual(currentToken.contents,"BUY")== 0) {
+        } else if(isStringEqual(currentCommand,"BUY")) {
             buy(&u, AG, &IG, G);
-            adv();
-        }  else if (isStringEqual(currentToken.contents,"INVENTORY")== 0) {
-            // inventory(&IG, &IPL, &s, &u, &C, m, AM);
-        } else if (isStringEqual(currentToken.contents,"HELP")== 1) {
+        }  else if (isStringEqual(currentCommand,"INVENTORY")) {
+            inventory(&IG, &IPL, &s, &u, &C, m, AM);
+        } else if (isStringEqual(currentCommand,"HELP")) {
             Help();
-        } else if (isStringEqual(currentToken.contents,"SAVE_GAME")== 0) {
+        } else if (isStringEqual(currentCommand,"SAVE_GAME")) {
             save(m, AM, TDL, u);
-        } else if (isStringEqual(currentToken.contents,"RETURN")== 0) {
-            if(EFFECT(s) == 3) {
-                printf("Maaf, return to sender tidak bisa digunakan untuk VIP Item\n");
+            printf("Permainan anda sedang disimpan...\n");
+            delay(2);
+            printf("Permainan anda berhasil disimpan!\n");
+        } else if (isStringEqual(currentCommand,"RETURN")) {
+            if(isReturn) {
+                if(EFFECT(s) == 3) {
+                    printf("Maaf, return to sender tidak bisa digunakan untuk VIP Item\n");
+                } else {
+                    return_to_sender(&s, &IPL, &TDL, u);
+                    isReturn = false;
+                }
             } else {
-                return_to_sender(&s, &IPL, &TDL, u);
-                isReturn = false;
+                printf("Maaf, anda tidak memiliki return to sender\n");
             }
-        } else if (isStringEqual(currentToken.contents,"EXIT") == 0){
+        } else if (isStringEqual(currentCommand,"EXIT")){
             newGame = false;
             printf("Sampai jumpa di permainan berikutnya\n");
         } else {
             printf("COMMAND yang anda masukkan salah!\n");
         }
     } 
-        
     return 0;
 }

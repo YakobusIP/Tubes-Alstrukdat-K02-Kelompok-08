@@ -1,31 +1,28 @@
 #include <stdio.h>
+#include "start.h"
+#include <time.h>
 #include<sys/stat.h>
-#include "loadFile.h"
 
-void load(PrioQueue *q, map *M, adjMatrix *Al, boolean *failToLoad, UangWaktu *u) {
+void start_game(PrioQueue *q, map *M, adjMatrix *A) {
 /* Membaca file config secara penuh */
     /* KAMUS */
-    requestList val;
     Token currentCommand;
-    static char *loadFile[200];
+    requestList val;
     int i, p;
     int inreqIn, intimeLimit;
     char inpickUp, indropOff, intype;
     struct stat buffer;
     int exist;
-    int uang, waktu;
     /* ALGORITMA */
     // START READ CONFIG FILE
-    printf("Masukkan nama load file dalam permainan : ");
+    printf("Masukkan nama file konfigurasi: ");
     readCommand(&currentCommand);
     exist = stat(currentCommand.contents,&buffer);
     if(exist == 0) {
-        CreateUangWaktu(u);
         start(&currentCommand.contents);
         ignoreBlank();
         ignoreNext();
-        do
-        {
+    
         //READ MAP SIZE
         int mapRow, mapCol, hqRow, hqCol, coordLength, coordRow, coordCol, adj;
         char coordName;
@@ -36,14 +33,6 @@ void load(PrioQueue *q, map *M, adjMatrix *Al, boolean *failToLoad, UangWaktu *u
         ignoreNext();
         CreateMap(M, mapRow, mapCol);
 
-        /* ignoreBlank();
-        uang = readNumberfromChar();
-        ignoreBlank();
-        waktu = readNumberfromChar();
-        ignoreNext();
-        UANG(*u) = uang;
-        WAKTU(*u) = waktu; */
-
         //KOORDINAT HQ
         ignoreBlank();
         hqRow = readNumberfromChar();
@@ -52,7 +41,6 @@ void load(PrioQueue *q, map *M, adjMatrix *Al, boolean *failToLoad, UangWaktu *u
         ignoreNext();
         Coordinate *C = CreateCoord('8', hqRow, hqCol);
         ReadMap(M, C);
-
     
         //CEK KOORDINAT
         ignoreBlank();
@@ -70,7 +58,7 @@ void load(PrioQueue *q, map *M, adjMatrix *Al, boolean *failToLoad, UangWaktu *u
         }
 
         //READ ADJ MATRIX
-        createAdjMatrix(Al, coordLength + 1);
+        createAdjMatrix(A, coordLength + 1);
 
         for(int j = 0; j < coordLength + 1; j++)
         {
@@ -80,7 +68,7 @@ void load(PrioQueue *q, map *M, adjMatrix *Al, boolean *failToLoad, UangWaktu *u
             {
                 ignoreBlank();
                 adj = readNumberfromChar();
-                ReadAdjMatrix(Al, j, k, adj);
+                ReadAdjMatrix(A, j, k, adj);
             }
         }
         // READ DAFTAR PESANAN DAN INPUT KE TO DO LIST
@@ -93,43 +81,68 @@ void load(PrioQueue *q, map *M, adjMatrix *Al, boolean *failToLoad, UangWaktu *u
             // READ WAKTU PESANAN MASUK
             inreqIn = readNumberfromChar();
             val.reqIn = inreqIn;
+
             ignoreBlank();
             // READ LOKASI PICK UP ITEM
             inpickUp = currentChar;
             val.pickUp = inpickUp;
             adv();
+
             ignoreBlank();
             // READ LOKASI DROP OFF ITEM
             indropOff = currentChar;
             val.dropOff = indropOff;
             adv();
+
             ignoreBlank();
             // READ TIPE ITEM
             intype = currentChar;
             val.type = intype;
             adv();
+
             ignoreBlank();
             // READ WAKTU HANGUS ITEM JIKA ITEM PERISHABLE
             if (intype == 'P') {
                 intimeLimit = readNumberfromChar();
-                adv();
             } else {
                 intimeLimit = 0;
             }
             val.timeLimit = intimeLimit;
+
             // INPUT VAL YANG SUDAH DIBENTUK KE DALAM QUEUE
             enqueueRL(q, val);
-            }
-            adv();
-            if(eot) {
-                break;
-            }
-            ignoreNext();
-        } while (!eot);
+        }
     } else {
-        *failToLoad = true;
-        printf("Maaf, nama file yang anda masukkan tidak ada!\n");
+        printf("File konfigurasi tidak ada\n");
     }
 }
 
-/*  */
+void mainMenu(){
+    //Prosedur Tulis Main Menu//
+    printf(".88b  d88.  .d88b.  d8888b. d888888b d888888b  .d8b.       \n");
+    printf("88'YbdP`88 .8P  Y8. 88  `8D   `88'   `~~88~~' d8' `8b      \n");
+    printf("88  88  88 88    88 88oooY'    88       88    88ooo88      \n");
+    printf("88  88  88 88    88 88~~~b.    88       88    88~~~88      \n");
+    printf("88  88  88 `8b  d8' 88   8D   .88.      88    88   88      \n");
+    printf("YP  YP  YP  `Y88P'  Y8888P' Y888888P    YP    YP   YP      \n");
+    printf("===============   WELCOME TO MOBITA   ===============\n");
+    printf("==============       LET'S PLAY        ==============\n");
+    printf("============            MENU             ============\n");
+    printf("1. NEW_GAME\n");
+    printf("2. LOAD_GAME\n");
+    printf("3. EXIT\n");
+    printf("Masukkan pilihan anda: ");
+}
+
+void delay(int number_of_seconds)
+{
+    // Converting time into milli_seconds
+    int milli_seconds = 1000 * number_of_seconds;
+  
+    // Storing start time
+    clock_t start_time = clock();
+  
+    // looping till required time is not achieved
+    while (clock() < start_time + milli_seconds)
+        ;
+}

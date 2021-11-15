@@ -4,6 +4,7 @@
         "todoqueue.h": "c",
         "string.h": "c",
         "inprogresslist.h": "c",
-        "inventorygadget.h": "c"
-    }
+        "inventorygadget.h": "c",
+        "in_progress.h": "c"
+}
 }
