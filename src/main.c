@@ -101,9 +101,7 @@ int main(){
     // load(&pq, &m,&AM);
     /* Start mesin kata untuk membaca config file dan input konfigurasi */
     readConfigFile(&pq, &m, &AM);
-    for(int i = 0; i < 3; i++){
-        ability.type[i] = false; //awal game diinisiasi tanpa ability
-    }
+    CreateAbility(&ability);
     Mobita = *CoordByName(m, '8');
     // Fungsi newGame
     while(newGame) {
