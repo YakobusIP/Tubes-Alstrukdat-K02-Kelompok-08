@@ -5,6 +5,7 @@
 #include "boolean.h"
 
 #include "ADT Lain/UangWaktu.h"
+#include "ADT Lain/Ability.h"
 #include "ADT Linked List/inprogressList.h"
 #include "ADT Linked List/inprogressNode.h"
 #include "ADT Linked List/todoNode.h" 
@@ -49,9 +50,6 @@
 #include "../src/COMMAND/loadFile.h"
 
 
-struct Ability {
-    boolean type[3];    //type[i] mengikuti urutan spek
-};
 
 void print_mainmenu(){
     //Prosedur Tulis Main Menu//
@@ -88,7 +86,7 @@ int main(){
     int addMoveTime = 0;      // waktu tambahan jika membawa heavy item, dapat menumpuk
 
     struct items val;
-    struct Ability ability; //struct ability
+    Ability ability; //struct ability
     boolean isReturn; // Digunakan untuk mengetahui apakah ada ability is return to sender
     // Jika telah menerima item VIP, ubah isReturn ke True
     boolean newGame; // Boolean untuk menampilkan apakah game sukses dimulai atau tidak, jika sukses, akan menjadi true
@@ -118,7 +116,7 @@ int main(){
         } else if (isStringEqual(currentToken,"DROP_OFF")) {
             // drop_off(&IPL, &s, currentLocation, &u, &ability);
         } else if (isStringEqual(currentToken,"MAP")) {
-            DisplayMap(m, AM, Mobita);
+            DisplayMap(m, AM, Mobita, IPL, TDL);
         } else if (isStringEqual(currentToken,"TO_DO")) {
             //fromRLtoTDL(&pq, &TDL, &u);
             //to_do(TDL);
