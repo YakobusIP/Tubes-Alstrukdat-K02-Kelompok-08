@@ -89,7 +89,6 @@ void readCommand(Token *input) {
         advUserInput();
         i++;
     }
-    ignoreBlankUserInput();
     (*input).length = i;
 }
 

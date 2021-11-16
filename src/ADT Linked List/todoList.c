@@ -50,6 +50,21 @@ void setElmtTD(to_do_List *l, int idx, toDoList val) {
     INFO(p) = val;
 }
 
+int lengthTD(to_do_List l) {
+/* Mengirim panjang list, 0 jika kosong */
+    /* KAMUS */
+    tdAddress p;
+    int i;
+    /* ALGORITMA */
+    p = FIRST(l);
+    i = 0;
+    while (p != NULL) {
+        i++;
+        p = NEXT(p);
+    }
+    return i;
+}
+
 /****************** PRIMITIF BERDASARKAN NILAI ******************/
 /*** PENAMBAHAN ELEMEN ***/
 void insertFirstTD(to_do_List *l, toDoList val) {
@@ -185,7 +200,7 @@ void displayToDo(to_do_List l) {
     /* ALGORITMA */
     i = 1;
     printf("Pesanan pada To Do List:\n");
-    while (!isTDListEmpty(l)) {
+    while (lengthTD(l) > 0) {
         printf("%d. ", i);
         i++;
         deleteFirstTD(&l, &val);

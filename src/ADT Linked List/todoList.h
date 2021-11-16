@@ -28,6 +28,9 @@ void setElmtTD(to_do_List *l, int idx, toDoList val);
 /* I.S. l terdefinisi, idx indeks yang valid dalam l, yaitu 0..length(l) */
 /* F.S. Mengubah elemen l pada indeks ke-idx menjadi val */
 
+int lengthTD(to_do_List l);
+/* Mengirim panjang list, 0 jika kosong */
+
 /****************** PRIMITIF BERDASARKAN NILAI ******************/
 /*** PENAMBAHAN ELEMEN ***/
 void insertFirstTD(to_do_List *l, toDoList val);

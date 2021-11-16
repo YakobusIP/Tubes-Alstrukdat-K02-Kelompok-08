@@ -12,7 +12,7 @@ void fromRLtoTDL(PrioQueue *q, to_do_List *tdl, UangWaktu *u) {
     int reqIn_in, timeLimit_in;
     char pickUp_in, dropOff_in, type_in;
     /* ALGORITMA */
-    for (i=0;i<length(*q);i++) {
+    while (!isQueueEmpty(*q)) {
         dequeue(q, &val_in);
         reqIn_in = val_in.reqIn;
         pickUp_in = val_in.pickUp;
@@ -21,7 +21,7 @@ void fromRLtoTDL(PrioQueue *q, to_do_List *tdl, UangWaktu *u) {
         timeLimit_in = val_in.timeLimit;
 
         // Insert ke dalam todolist sesuai waktu sekarang
-        if (timeLimit_in < UANG(*u)) {
+        if (reqIn_in <= 10) {
             val_out.reqIn = reqIn_in;
             val_out.pickUp = pickUp_in;
             val_out.dropOff = dropOff_in;

@@ -165,7 +165,7 @@ int main(){
         } else if (isStringEqual(currentCommand,"MAP")) {
             DisplayMap(m, AM, Mobita, IPL, TDL);
         } else if (isStringEqual(currentCommand,"TO_DO")) {
-            // fromRLtoTDL(&pq, &TDL, &u);
+            //fromRLtoTDL(&pq, &TDL, &u);
             to_do(TDL);
         } else if (isStringEqual(currentCommand,"IN_PROGRESS")) {
            in_progress(&IPL);

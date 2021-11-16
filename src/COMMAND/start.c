@@ -17,6 +17,7 @@ void start_game(PrioQueue *q, map *M, adjMatrix *A) {
     // START READ CONFIG FILE
     printf("Masukkan nama file konfigurasi: ");
     readCommand(&currentCommand);
+    printf("%s", currentCommand.contents);
     exist = stat(currentCommand.contents,&buffer);
     if(exist == 0) {
         start(&currentCommand.contents);
@@ -74,7 +75,6 @@ void start_game(PrioQueue *q, map *M, adjMatrix *A) {
         // READ DAFTAR PESANAN DAN INPUT KE TO DO LIST
         p = readNumberfromChar();
         //printf("%d,", p);
-        CreatePrioQueue(q);
         for (i=0;i<p;i++) {
             ignoreNext();
             ignoreBlank();
