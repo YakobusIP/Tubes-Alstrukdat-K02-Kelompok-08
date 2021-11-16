@@ -21,7 +21,7 @@ void move(Coordinate *src, map m, adjMatrix A, UangWaktu *u)
     }
     printf("Posisi yang dipilih? (ketik 0 jika ingin kembali)\n");
     printf("ENTER COMMAND: ");
-    scanf("%d", &num);
+    num = readNumberfromSTDIN();
     *src = *ElmtPointer(l, num-1);
     printf("Mobita sekarang berada di titik ");
     DisplayCoord(*src);

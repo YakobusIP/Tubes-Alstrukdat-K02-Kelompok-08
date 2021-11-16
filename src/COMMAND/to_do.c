@@ -19,7 +19,7 @@ void fromRLtoTDL(PrioQueue *q, to_do_List *tdl, UangWaktu *u) {
         dropOff_in = val_in.dropOff;
         type_in = val_in.type;
         timeLimit_in = val_in.timeLimit;
-
+        printf("%d %d\n", reqIn_in, timeLimit_in);
         // Insert ke dalam todolist sesuai waktu sekarang
         if (timeLimit_in < UANG(*u)) {
             val_out.reqIn = reqIn_in;
@@ -34,6 +34,6 @@ void fromRLtoTDL(PrioQueue *q, to_do_List *tdl, UangWaktu *u) {
 }
 
 // Fungsi untuk display to do list ketika diminta
-void to_do(to_do_List tdl) {
-    displayToDo(tdl);
+void to_do(to_do_List *tdl) {
+    displayToDo(*tdl);
 }

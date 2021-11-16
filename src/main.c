@@ -125,8 +125,9 @@ int main(){
         delay(1);
         printf("Enjoy the Game!\n");
         newGame = true;
+        Mobita = *CoordByName(m, '8');
     }else if(isStringEqual(currentCommand, "LOAD_GAME") ){
-        load(&pq, &m, &AM, &failToLoad, &u);
+        load(&pq, &m, &AM, &failToLoad, &u, &Mobita);
         if(failToLoad == false) {
             fromRLtoTDL(&pq, &TDL, &u);
             printf("Harap tunggu sebentar...\n");
@@ -148,7 +149,6 @@ int main(){
     /* Start mesin kata untuk membaca config file dan input konfigurasi */
     // readConfigFile(&pq, &m, &AM);
     // CreateAbility(&ability);
-    // Mobita = *CoordByName(m, '8');
 
 
 
@@ -166,7 +166,7 @@ int main(){
             DisplayMap(m, AM, Mobita, IPL, TDL);
         } else if (isStringEqual(currentCommand,"TO_DO")) {
             // fromRLtoTDL(&pq, &TDL, &u);
-            to_do(TDL);
+            to_do(&TDL);
         } else if (isStringEqual(currentCommand,"IN_PROGRESS")) {
            in_progress(&IPL);
         } else if(isStringEqual(currentCommand,"BUY")) {
@@ -176,7 +176,7 @@ int main(){
         } else if (isStringEqual(currentCommand,"HELP")) {
             Help();
         } else if (isStringEqual(currentCommand,"SAVE_GAME")) {
-            save(m, AM, TDL, u);
+            save(m, AM, TDL, u, Mobita);
             printf("Permainan anda sedang disimpan...\n");
             delay(2);
             printf("Permainan anda berhasil disimpan!\n");

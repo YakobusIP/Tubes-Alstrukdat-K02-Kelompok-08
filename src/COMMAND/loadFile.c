@@ -2,7 +2,7 @@
 #include<sys/stat.h>
 #include "loadFile.h"
 
-void load(PrioQueue *q, map *M, adjMatrix *Al, boolean *failToLoad, UangWaktu *u) {
+void load(PrioQueue *q, map *M, adjMatrix *Al, boolean *failToLoad, UangWaktu *u, Coordinate *Mobita) {
 /* Membaca file config secara penuh */
     /* KAMUS */
     requestList val;
@@ -10,12 +10,22 @@ void load(PrioQueue *q, map *M, adjMatrix *Al, boolean *failToLoad, UangWaktu *u
     static char *loadFile[200];
     int i, p;
     int inreqIn, intimeLimit;
-    char inpickUp, indropOff, intype;
+    char inpickUp, indropOff, intype, nama;
     struct stat buffer;
     int exist;
     int uang, waktu;
+    int lokRow, lokCol;
+    boolean pass;
     /* ALGORITMA */
     // START READ CONFIG FILE
+
+    pass = false;
+    printf("Apakah file yang anda masukkan terdapat konfigurasi awal? (Y/N) \n");
+    readCommand(&currentCommand);
+    if(isStringEqual(currentCommand, "Y")) {
+        pass = true;
+        printf("Test1\n");
+    }
     printf("Masukkan nama load file dalam permainan : ");
     readCommand(&currentCommand);
     exist = stat(currentCommand.contents,&buffer);
@@ -71,7 +81,6 @@ void load(PrioQueue *q, map *M, adjMatrix *Al, boolean *failToLoad, UangWaktu *u
 
         //READ ADJ MATRIX
         createAdjMatrix(Al, coordLength + 1);
-
         for(int j = 0; j < coordLength + 1; j++)
         {
             ignoreNext();
@@ -85,7 +94,7 @@ void load(PrioQueue *q, map *M, adjMatrix *Al, boolean *failToLoad, UangWaktu *u
         }
         // READ DAFTAR PESANAN DAN INPUT KE TO DO LIST
         p = readNumberfromChar();
-        //printf("%d,", p);
+        printf("%d\n", p);
         CreatePrioQueue(q);
         for (i=0;i<p;i++) {
             ignoreNext();
@@ -93,6 +102,7 @@ void load(PrioQueue *q, map *M, adjMatrix *Al, boolean *failToLoad, UangWaktu *u
             // READ WAKTU PESANAN MASUK
             inreqIn = readNumberfromChar();
             val.reqIn = inreqIn;
+            
             ignoreBlank();
             // READ LOKASI PICK UP ITEM
             inpickUp = currentChar;
@@ -112,14 +122,38 @@ void load(PrioQueue *q, map *M, adjMatrix *Al, boolean *failToLoad, UangWaktu *u
             // READ WAKTU HANGUS ITEM JIKA ITEM PERISHABLE
             if (intype == 'P') {
                 intimeLimit = readNumberfromChar();
-                adv();
             } else {
                 intimeLimit = 0;
             }
             val.timeLimit = intimeLimit;
+            printf("%d %d\n", val.reqIn, val.timeLimit);
             // INPUT VAL YANG SUDAH DIBENTUK KE DALAM QUEUE
             enqueueRL(q, val);
             }
+            if(!pass) {
+                pass = false;
+                printf("Test2\n");
+                ignoreBlank();
+                uang = readNumberfromChar();
+                ignoreBlank();
+                waktu = readNumberfromChar();
+                ignoreNext();
+                UANG(*u) = uang;
+                WAKTU(*u) = waktu;
+
+                ignoreBlank();
+                nama = currentChar;
+                adv();
+                ignoreBlank();
+                lokRow = readNumberfromChar();
+                ignoreBlank();
+                lokCol = readNumberfromChar();
+                ignoreNext();
+                *Mobita = *CreateCoord(nama, lokRow, lokCol);
+            } else {
+                pass = false;
+            }
+            displayQueue(*q);
             adv();
             if(eot) {
                 break;

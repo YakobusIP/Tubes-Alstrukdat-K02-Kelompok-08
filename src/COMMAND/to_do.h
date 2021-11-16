@@ -9,6 +9,6 @@
 void fromRLtoTDL(PrioQueue *q, to_do_List *tdl, UangWaktu *u);
 
 // Fungsi untuk display to do list ketika diminta
-void to_do(to_do_List tdl);
+void to_do(to_do_List *tdl);
 
 #endif
