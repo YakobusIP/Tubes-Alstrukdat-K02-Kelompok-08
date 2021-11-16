@@ -162,12 +162,12 @@ int main(){
         } else if (isStringEqual(currentCommand,"PICK_UP")) {
             pick_up(&TDL, &s, &IPL, currentLocation, &addMoveTime, &u);
         } else if (isStringEqual(currentCommand,"DROP_OFF")) {
-            // drop_off(&IPL, &s, currentLocation, &u, &ability);
+            drop_off(&IPL, &s, currentLocation, &u, ability);
         } else if (isStringEqual(currentCommand,"MAP")) {
             DisplayMap(m, AM, Mobita, IPL, TDL);
         } else if (isStringEqual(currentCommand,"TO_DO")) {
             fromRLtoTDL(&pq, &TDL, &u);
-            to_do(TDL);
+            to_do(&TDL);
         } else if (isStringEqual(currentCommand,"IN_PROGRESS")) {
            in_progress(&IPL);
         } else if(isStringEqual(currentCommand,"BUY")) {
