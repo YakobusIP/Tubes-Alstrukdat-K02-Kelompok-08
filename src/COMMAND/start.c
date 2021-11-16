@@ -74,7 +74,6 @@ void start_game(PrioQueue *q, map *M, adjMatrix *A) {
         // READ DAFTAR PESANAN DAN INPUT KE TO DO LIST
         p = readNumberfromChar();
         //printf("%d,", p);
-        CreatePrioQueue(q);
         for (i=0;i<p;i++) {
             ignoreNext();
             ignoreBlank();

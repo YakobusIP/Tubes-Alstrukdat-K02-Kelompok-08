@@ -83,14 +83,17 @@ void readCommand(Token *input) {
     startUserInput();
     ignoreBlankUserInput();
 
+    (*input).length = 0;
     i = 0;
     while ((currentChar != BLANK) && (currentChar != NEXTLINE) && (i < CAPACITYTOKENMACHINE)) {
         (*input).contents[i] = currentChar;
         advUserInput();
         i++;
     }
-    ignoreBlankUserInput();
     (*input).length = i;
+
+    // Add null terminator agar array of char tidak memberikan symbol yang aneh
+    (*input).contents[i] = '\0';
 }
 
 /* Cara penggunaan: isStringEqual(currentToken, "Command yang ingin dipakai"), contoh isStringEqual(currentToken, "BUY"), kalau dia true berarti bisa masuk ke dalam if-nya */

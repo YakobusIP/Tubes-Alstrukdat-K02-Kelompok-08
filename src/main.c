@@ -154,7 +154,9 @@ int main(){
 
     // Masuk ke permainan utama
     while(newGame) {
-        printf("ENTER COMMAND: ");
+        printf("Uang anda sekarang adalah: %d", UANG(u));
+        printf("\nWaktu sekarang adalah: %d", WAKTU(u));
+        printf("\nENTER COMMAND: ");
         readCommand(&currentCommand);
         if(isStringEqual(currentCommand,"MOVE")) {
             move(&Mobita, m, AM, &u);
@@ -165,8 +167,8 @@ int main(){
         } else if (isStringEqual(currentCommand,"MAP")) {
             DisplayMap(m, AM, Mobita, IPL, TDL);
         } else if (isStringEqual(currentCommand,"TO_DO")) {
-            // fromRLtoTDL(&pq, &TDL, &u);
-            to_do(&TDL);
+            //fromRLtoTDL(&pq, &TDL, &u);
+            to_do(TDL);
         } else if (isStringEqual(currentCommand,"IN_PROGRESS")) {
            in_progress(&IPL);
         } else if(isStringEqual(currentCommand,"BUY")) {
