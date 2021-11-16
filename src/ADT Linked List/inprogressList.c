@@ -185,6 +185,22 @@ void deleteAtIP(in_progress_list *l, int idx, inProgressList *val) {
     }
 }
 
+boolean isHeavyinIPL(in_progress_list l){
+/* Fungsi mengembalikan true jika terdapat heavy item di dalam in progress list */
+    /* KAMUS */
+    inProgressList val;
+    boolean flag;
+    /* ALGORITMA */
+    flag = false;
+    while ((!isIPListEmpty(l)) && (!flag)) {
+        deleteFirstIP(l, &val);
+        if (val.type == 'H') {
+            flag = true;
+        }
+    }
+    return flag;
+}
+
 /****************** PROSES SEMUA ELEMEN LIST ******************/
 void displayInProgress(in_progress_list l) {
 /* I.S. List mungkin kosong */

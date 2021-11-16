@@ -26,6 +26,7 @@
 
 // Jangan dihapus ya gais :D
 #include "ADT Lain/UangWaktu.c"
+#include "ADT Lain/Ability.c"
 #include "ADT Linked List/inprogressList.c"
 #include "ADT Linked List/inprogressNode.c"
 #include "ADT Linked List/todoList.c"
@@ -187,7 +188,7 @@ int main(){
                 if(EFFECT(s) == 3) {
                     printf("Maaf, return to sender tidak bisa digunakan untuk VIP Item\n");
                 } else {
-                    return_to_sender(&s, &IPL, &TDL, u);
+                    return_to_sender(&ability, &IPL, &s, &TDL, u);
                     isReturn = false;
                 }
             } else {
