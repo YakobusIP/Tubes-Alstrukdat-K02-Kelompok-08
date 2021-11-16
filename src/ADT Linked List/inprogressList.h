@@ -65,6 +65,9 @@ void deleteAtIP(in_progress_list *l, int idx, inProgressList *val);
 /* F.S. val diset dengan elemen l pada indeks ke-idx. */
 /*      Elemen l pada indeks ke-idx dihapus dari l */
 
+boolean isHeavyinIPL(in_progress_list l);
+/* Fungsi mengembalikan true jika terdapat heavy item di dalam in progress list */
+
 /****************** PROSES SEMUA ELEMEN LIST ******************/
 void displayInProgress(in_progress_list l);
 /* I.S. List mungkin kosong */
