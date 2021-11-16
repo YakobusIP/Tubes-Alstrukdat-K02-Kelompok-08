@@ -25,7 +25,7 @@
 
 
 // Jangan dihapus ya gais :D
-#include "ADT Lain/UangWaktu.c"
+/* #include "ADT Lain/UangWaktu.c"
 #include "ADT Lain/Ability.c"
 #include "ADT Linked List/inprogressList.c"
 #include "ADT Linked List/inprogressNode.c"
@@ -41,8 +41,7 @@
 #include "ADT Point/point.c"
 #include "ADT Stack/stack.c"
 #include "ADT Queue/requestList.c" 
-// #include "ADT Lain/bfs.c"
-#include "pcolor/pcolor.c" 
+#include "pcolor/pcolor.c"  */
 
 /* Include command code */
 // P.S: Keliatannya kalo ini udah banyak yang implementasi kode buat command, yang include di atas ilangin aja
@@ -60,7 +59,7 @@
 #include "../src/COMMAND/to_do.h"
 #include "../src/COMMAND/start.h"
 
-#include "../src/COMMAND/buy.c"
+/* #include "../src/COMMAND/buy.c"
 #include "../src/COMMAND/return_to_sender.c"
 #include "../src/COMMAND/loadFile.c"
 #include "../src/COMMAND/drop_off.c"
@@ -71,7 +70,7 @@
 #include "../src/COMMAND/pick_up.c"
 #include "../src/COMMAND/saveFile.c"
 #include "../src/COMMAND/to_do.c"
-#include "../src/COMMAND/start.c" 
+#include "../src/COMMAND/start.c"  */
 
 int main(){
     /* Kamus */    
@@ -111,6 +110,7 @@ int main(){
     CreateToDoList(&TDL);
     CreatePrioQueue(&pq);
     CreateInProgressList(&IPL);
+    CreateAbility(&ability);
 
     // Main Menu
     mainMenu();
@@ -149,8 +149,6 @@ int main(){
 
     /* Start mesin kata untuk membaca config file dan input konfigurasi */
     // readConfigFile(&pq, &m, &AM);
-    // CreateAbility(&ability);
-
 
 
     // Masuk ke permainan utama
@@ -168,7 +166,7 @@ int main(){
         } else if (isStringEqual(currentCommand,"MAP")) {
             DisplayMap(m, AM, Mobita, IPL, TDL);
         } else if (isStringEqual(currentCommand,"TO_DO")) {
-            //fromRLtoTDL(&pq, &TDL, &u);
+            fromRLtoTDL(&pq, &TDL, &u);
             to_do(TDL);
         } else if (isStringEqual(currentCommand,"IN_PROGRESS")) {
            in_progress(&IPL);

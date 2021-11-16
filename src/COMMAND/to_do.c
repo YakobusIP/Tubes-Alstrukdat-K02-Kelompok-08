@@ -21,7 +21,7 @@ void fromRLtoTDL(PrioQueue *q, to_do_List *tdl, UangWaktu *u) {
         timeLimit_in = val_in.timeLimit;
 
         // Insert ke dalam todolist sesuai waktu sekarang
-        if (reqIn_in <= WAKTU(*u)) {
+        if (reqIn_in <= 10) {
             val_out.reqIn = reqIn_in;
             val_out.pickUp = pickUp_in;
             val_out.dropOff = dropOff_in;

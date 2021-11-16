@@ -179,7 +179,7 @@ void load(PrioQueue *q, map *M, adjMatrix *Al, boolean *failToLoad, UangWaktu *u
     if(currentCommand.length == 3) {
         pass = true;
     } 
-    printf("Masukkan nama file konfigurasi: ");
+    printf("Masukkan nama file yang akan diload: ");
     readCommand(&currentCommand);
     exist = stat(currentCommand.contents,&buffer);
     if(exist == 0) {
@@ -301,6 +301,10 @@ void load(PrioQueue *q, map *M, adjMatrix *Al, boolean *failToLoad, UangWaktu *u
             
             if(eot) {
                 break;
+            } else {
+                while(!isQueueEmpty(*q)) {
+                    dequeue(q, &val);
+                }
             }
             ignoreNext();
         } while (!eot);
