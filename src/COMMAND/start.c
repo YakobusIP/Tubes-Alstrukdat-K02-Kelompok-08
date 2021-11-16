@@ -17,7 +17,6 @@ void start_game(PrioQueue *q, map *M, adjMatrix *A) {
     // START READ CONFIG FILE
     printf("Masukkan nama file konfigurasi: ");
     readCommand(&currentCommand);
-    printf("%s", currentCommand.contents);
     exist = stat(currentCommand.contents,&buffer);
     if(exist == 0) {
         start(&currentCommand.contents);
