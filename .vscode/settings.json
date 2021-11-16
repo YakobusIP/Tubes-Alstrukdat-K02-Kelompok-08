@@ -5,6 +5,7 @@
         "string.h": "c",
         "inprogresslist.h": "c",
         "inventorygadget.h": "c",
-        "in_progress.h": "c"
-}
+        "in_progress.h": "c",
+        "return_to_sender.h": "c"
+    }
 }

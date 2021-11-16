@@ -25,7 +25,7 @@
 
 
 // Jangan dihapus ya gais :D
-/* #include "ADT Lain/UangWaktu.c"
+#include "ADT Lain/UangWaktu.c"
 #include "ADT Lain/Ability.c"
 #include "ADT Linked List/inprogressList.c"
 #include "ADT Linked List/inprogressNode.c"
@@ -41,7 +41,7 @@
 #include "ADT Point/point.c"
 #include "ADT Stack/stack.c"
 #include "ADT Queue/requestList.c" 
-#include "pcolor/pcolor.c"  */
+#include "pcolor/pcolor.c"
 
 /* Include command code */
 // P.S: Keliatannya kalo ini udah banyak yang implementasi kode buat command, yang include di atas ilangin aja
@@ -59,7 +59,7 @@
 #include "../src/COMMAND/to_do.h"
 #include "../src/COMMAND/start.h"
 
-/* #include "../src/COMMAND/buy.c"
+#include "../src/COMMAND/buy.c"
 #include "../src/COMMAND/return_to_sender.c"
 #include "../src/COMMAND/loadFile.c"
 #include "../src/COMMAND/drop_off.c"
@@ -70,7 +70,7 @@
 #include "../src/COMMAND/pick_up.c"
 #include "../src/COMMAND/saveFile.c"
 #include "../src/COMMAND/to_do.c"
-#include "../src/COMMAND/start.c"  */
+#include "../src/COMMAND/start.c"
 
 int main(){
     /* Kamus */    
@@ -117,7 +117,7 @@ int main(){
     readCommand(&currentCommand);
     if(isStringEqual(currentCommand,"NEW_GAME")){
         start_game(&pq, &m, &AM);
-        fromRLtoTDL(&pq, &TDL, &u);
+        fromRLtoTDL(&pq, &TDL, WAKTU(u));
         printf("Harap tunggu sebentar...\n");
         delay(2);
         printf("Permainan anda sedang disiapkan...\n");
@@ -130,7 +130,7 @@ int main(){
     }else if(isStringEqual(currentCommand, "LOAD_GAME") ){
         load(&pq, &m, &AM, &failToLoad, &u, &Mobita);
         if(failToLoad == false) {
-            fromRLtoTDL(&pq, &TDL, &u);
+            fromRLtoTDL(&pq, &TDL, WAKTU(u));
             printf("Harap tunggu sebentar...\n");
             delay(2);
             printf("Permainan anda sedang diload...\n");
@@ -166,8 +166,8 @@ int main(){
         } else if (isStringEqual(currentCommand,"MAP")) {
             DisplayMap(m, AM, Mobita, IPL, TDL);
         } else if (isStringEqual(currentCommand,"TO_DO")) {
-            fromRLtoTDL(&pq, &TDL, &u);
-            to_do(TDL);
+            fromRLtoTDL(&pq, &TDL, WAKTU(u));
+            to_do(&TDL);
         } else if (isStringEqual(currentCommand,"IN_PROGRESS")) {
            in_progress(&IPL);
         } else if(isStringEqual(currentCommand,"BUY")) {
