@@ -278,6 +278,7 @@ void load(PrioQueue *q, map *M, adjMatrix *Al, boolean *failToLoad, UangWaktu *u
         }
         ignoreNext();
         if(!pass) {
+            
                 ignoreBlank();
                 uang = readNumberfromChar();
                 ignoreBlank();
@@ -298,7 +299,6 @@ void load(PrioQueue *q, map *M, adjMatrix *Al, boolean *failToLoad, UangWaktu *u
             } else {
                 pass = false;
             } 
-            
             if(eot) {
                 break;
             } else {

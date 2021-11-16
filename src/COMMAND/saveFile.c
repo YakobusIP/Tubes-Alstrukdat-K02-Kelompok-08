@@ -54,6 +54,7 @@ void save(map m, adjMatrix adjM, to_do_List tdl, UangWaktu u, Coordinate Mobita)
         fprintf(saveFile,"\n");
     }
     p = tdl;
+    fprintf(saveFile, "%d\n", lengthTD(tdl));
     while(p != NULL) {
         if(INFO(p).timeLimit > 0) {
             fprintf(saveFile,"%d %c %c %c %d\n", INFO(p).reqIn, INFO(p).pickUp, INFO(p).dropOff, INFO(p).type, INFO(p).timeLimit);

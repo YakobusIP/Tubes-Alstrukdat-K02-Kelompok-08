@@ -1,1 +1,1 @@
-DisplayMap(m, AM, Mobita, IPL, TDL);
+// fromRLtoTDL(&pq, &TDL, WAKTU(u));

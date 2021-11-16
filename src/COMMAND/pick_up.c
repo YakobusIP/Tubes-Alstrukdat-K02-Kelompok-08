@@ -39,6 +39,7 @@ void foundPickupInLoc(to_do_List *tdl, char currentLocation, boolean *found, int
     /* Mengecek apakah ada pesanan yang harus di pick-up di currentLocation */
     tdAddress p = FIRST(*tdl);
     do {
+        
         if (INFO(p).pickUp ==  currentLocation) {
             *pickup_item = INFO(p);
             if ((*pickup_item).type = 'N') {*val = 1;}

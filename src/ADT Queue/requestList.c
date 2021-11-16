@@ -64,9 +64,12 @@ void enqueueRL(PrioQueue *q, requestList val) {
                     (*q).buffer[i+1] = (*q).buffer[i];
                 }
                 IDX_TAIL(*q)++;
+                // Tambah elemen ke depan queue
+                HEAD(*q) = val;
+            } else {
+                IDX_HEAD(*q)--;
+                HEAD(*q) = val;
             }
-            // Tambah elemen ke depan queue
-            HEAD(*q) = val;
         } else {
             i = IDX_HEAD(*q);
             while ((i <= IDX_TAIL(*q)) && ((*q).buffer[i].reqIn <= val.reqIn)) {

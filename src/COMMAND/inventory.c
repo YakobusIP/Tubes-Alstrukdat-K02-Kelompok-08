@@ -34,7 +34,7 @@ void movePintuKemanaSaja(Coordinate *src, map m, adjMatrix A, InventoryGadget *I
     }
     printf("Posisi yang dipilih? (ketik 0 jika ingin kembali)\n");
     printf("ENTER COMMAND: ");
-    scanf("%d", &num);
+    num = readNumberfromSTDIN();
     if (num == 0) {
         printf("%s tidak jadi digunakan\n", NAME(G));
     } else if (num < 0 || num > lengthAdjList(l)) {
@@ -51,9 +51,9 @@ void movePintuKemanaSaja(Coordinate *src, map m, adjMatrix A, InventoryGadget *I
 void inventory(InventoryGadget *IG, in_progress_list *ipl, Stack *s, UangWaktu *c, Coordinate *src, map m, adjMatrix A){
     int x;
     displayInventory(*IG);
-    printf("Gadget mana yang ingin digunakan? (ketik 0 jika ingin kembali)\n\n");
+    printf("Gadget mana yang ingin digunakan? (ketik 0 jika ingin kembali)\n");
     printf("ENTER COMMAND: ");
-    scanf("%d", &x);
+    x = readNumberfromSTDIN();
     if(x == 0) {
         printf("Tidak ada gadget yang jadi digunakan\n");
     } else if(x < 0 || x > 5) {
@@ -88,7 +88,7 @@ void inventory(InventoryGadget *IG, in_progress_list *ipl, Stack *s, UangWaktu *
                     }
                 }
                 else {
-                    printf("%s tidak berhasil digunakan karena item teratas bukan perisable item\n", NAME(G));
+                    printf("%s tidak berhasil digunakan karena item teratas bukan perishable item\n", NAME(G));
                 }
             }
             
@@ -105,7 +105,7 @@ void inventory(InventoryGadget *IG, in_progress_list *ipl, Stack *s, UangWaktu *
             
             else if (ID(G) == 3) {
                 // pintu kemana saja
-                movePintuKemanaSaja(src, m, A, IG, G);
+                movePintuKemanaSaja(&src, m, A, &IG, G);
             }
             
             else if (ID(G) == 4) {
