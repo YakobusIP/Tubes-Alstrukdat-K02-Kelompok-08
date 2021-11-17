@@ -28,9 +28,7 @@ void DisplayMap(map M, adjMatrix A, Coordinate Mobita, in_progress_list ipl, to_
     int nRow = nRow(M), nCol = nCol(M);
     tdAddress pick;
     ipAddress drop;
-    drop = FIRST(ipl);
-    if(drop != NULL) dropoff = INFO(drop).dropOff;
-    else dropoff = NONE;
+    
     for(int i = 0; i < nRow + 2; i++)
     {
         for(int j = 0; j < nCol + 2; j++)   
@@ -46,6 +44,9 @@ void DisplayMap(map M, adjMatrix A, Coordinate Mobita, in_progress_list ipl, to_
                     x = CoordNama(M, i, j);
                     pick = FIRST(tdl);
                     foundPickup = false;
+                    drop = FIRST(ipl);
+                    if(drop != NULL) dropoff = INFO(drop).dropOff;
+                    else dropoff = NONE;
                     
                     while(pick != NULL && !foundPickup)
                     {
