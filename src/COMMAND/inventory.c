@@ -82,12 +82,14 @@ void inventory(InventoryGadget *IG, in_progress_list *ipl, to_do_List *tdl, Stac
             else if (ID(G) == 5) {
                 // senter pengecil, menghilangkan efek heavy item
                 if (TYPE(*s) == 'H') {
-                    inProgressList tempProgress;        // mengubah status di progress list
-                    deleteLastIP(ipl, &tempProgress);
-                    tempProgress.type = 'N';
-                    insertLastIP(ipl, tempProgress);
-                    TOP(*s).type = 'N';
-                    copyString(TOP(*s).name, "Normal Item");
+                    // inProgressList tempProgress;        // mengubah status di progress list
+                    // deleteLastIP(ipl, &tempProgress);
+                    // tempProgress.type = 'N';
+                    // insertLastIP(ipl, tempProgress);
+                    // TOP(*s).type = 'N';
+                    // copyString(TOP(*s).name, "Normal Item");
+                    EFFECT(*s) =  IDX_UNDEF;
+
                     *addMoveTime -= 1;
 
                     printf("%s berhasil digunakan\n", NAME(G));

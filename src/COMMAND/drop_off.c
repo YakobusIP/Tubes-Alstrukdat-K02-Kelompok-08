@@ -44,10 +44,21 @@ void drop_off(in_progress_list *pl, Stack *s, char currentLocation, UangWaktu *u
             deleteAtIP(pl, idx, &delProgressItem);
             ChangeUang(u, addUang);
 
-            if (delStackItem.type == 'H') {AbilityType(*A, 0) = true; *addMoveTime -= 1;}
-            else if (delStackItem.type == 'P') {AbilityType(*A, 1) = true;}
-            else if (delStackItem.type == 'V') {AbilityType(*A, 2) = true;}
+            if (delStackItem.effect == 1) {AbilityType(*A, 0) = true; *addMoveTime -= 1;}   // heavy item
+            else if (delStackItem.effect == 2) {AbilityType(*A, 1) = true;}                 // perishable item
+            else if (delStackItem.effect == 3) {AbilityType(*A, 2) = true;}                 // VIP Item
+
+            // kasus penggunaan senter pengecil, efek senter pengecil nya hilang saat di drop (kembali seperti semula)
+            // reward tetap aktif
+            if ((delStackItem.effect == IDX_UNDEF) && (delStackItem.type == 'H')) {
+                delStackItem.effect = 1;
+                AbilityType(*A, 0) = true;
+            }
+
             printf("Pesanan %s berhasil diantarkan\n", delStackItem.name);
+            if (delStackItem.effect != IDX_UNDEF) {
+                printf("Ability %s berhasil didapatkan\n", delStackItem.reward);
+            }
             printf("Uang yang didapatkan: %d yen\n", addUang);
         }
     }
