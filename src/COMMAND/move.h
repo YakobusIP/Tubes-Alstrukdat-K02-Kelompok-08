@@ -10,5 +10,5 @@
 #include "../ADT Lain/ability.h"
 #include "../ADT Stack/stack.h"
 
-void move(Stack *s, in_progress_list *IPL, Coordinate *src, map m, adjMatrix A, UangWaktu *u, Ability *ability, int *waktu);
+void move(Stack *s, in_progress_list *IPL, Coordinate *src, map m, adjMatrix A, UangWaktu *u, Ability *ability, int *waktu, int addMoveTime);
 #endif

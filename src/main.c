@@ -132,6 +132,7 @@ int main(){
         UANG(u) = 20000;
     }else if(isStringEqual(currentCommand, "2") ){
         load(&pq, &m, &AM, &failToLoad, &u, &Mobita);
+        printf("Test");
         if(failToLoad == false) {
             /* displayQueue(pq);
             printf("%d\n", WAKTU(u)); */
@@ -142,7 +143,7 @@ int main(){
             delay(2);
             printf("Ini dia!\n");
             delay(1);
-            printf("Game anda berhasil diload! Selamat bermain!\n");   
+            printf("Game anda berhasil diload! Selamat bermain!\n");
             newGame = true;
         } else {
             newGame = false;
@@ -159,7 +160,7 @@ int main(){
     // Masuk ke permainan utama
     while(newGame) {
         speed_boost(&ability, &waktu, &u, &IPL);
-         increase_capacity(ability, &s);
+        increase_capacity(ability, &s);
         fromRLtoTDL(&pq, &TDL, WAKTU(u));
         printf("Uang anda sekarang adalah: %d", UANG(u));
         printf("\nWaktu sekarang adalah: %d", WAKTU(u));
