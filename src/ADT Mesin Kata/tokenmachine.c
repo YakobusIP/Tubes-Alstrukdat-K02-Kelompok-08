@@ -94,6 +94,7 @@ void readCommand(Token *input) {
     int i;
     /* ALGORITMA */
     startUserInput();
+    ignoreNextUserInput();
     ignoreBlankUserInput();
 
     (*input).length = 0;
