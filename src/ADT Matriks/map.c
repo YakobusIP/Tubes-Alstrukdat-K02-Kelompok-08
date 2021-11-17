@@ -45,17 +45,22 @@ void DisplayMap(map M, adjMatrix A, Coordinate Mobita, in_progress_list ipl, to_
                 {
                     x = CoordNama(M, i, j);
                     pick = FIRST(tdl);
+                    foundPickup = false;
+                    
                     while(pick != NULL && !foundPickup)
                     {
                          if (x == INFO(pick).pickUp){
-                             print_red(x);
-                             foundPickup = true;
+                              foundPickup = true;
                          }
                          else pick = NEXT(pick);
-                    }             
+                    }     
                     if (x == nama(Mobita))
                     {
                         print_yellow(x);
+                    }
+                    else if (pick != NULL)
+                    {
+                        print_red(x);
                     }
                     else if (x == dropoff)
                     {
