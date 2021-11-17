@@ -1,6 +1,30 @@
 # MOBITA
-## Program Utama
+## General Info
 
+
+## Program Utama
+Mobita adalah sebuah program simulasi aplikasi untuk membantu pekerjaan mobita yang dibuat demi memenuhi Tugas Besar Mata Kuliah IF2110 Algoritma dan Struktur Data. pemain dapat membantu mobita sepertim melacak pesanan, navigasi peta, mengambil dan menurunkan barang.
+
+## Setup
+1. buka terminal di directory penyimpanan yang diinginkan
+2. Lakukan clone terhadap repository dengan mengetikkan di terminal:
+   ```
+   git clone https://github.com/YakobusIP/Tubes-Alstrukdat-K02-Kelompok-08.git
+   ```
+3. Masuk ke folder hasil clone dengan mengetikkan di terminal:
+   ```
+   cd Tubes-Alstrukdat-K02-Kelompok-08
+   ```
+4. lakukan compile dengan mengetikkan di terminal
+   ```
+   
+   ```
+5. Jalankan program dengan mengetikkan di terminal:
+   ```
+   ./main
+   ```
+6. Selamat bermain
+   
 
 
 ## Anggota Kelompok
