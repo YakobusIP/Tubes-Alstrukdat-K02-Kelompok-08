@@ -58,15 +58,17 @@ void DisplayMap(map M, adjMatrix A, Coordinate Mobita, in_progress_list ipl, to_
                     {
                         print_yellow(x);
                     }
-                    else if (pick != NULL)
-                    {
-                        print_red(x);
-                    }
+                    
                     else if (x == dropoff)
                     {
                         print_blue(x);
                     }
 
+                    else if (pick != NULL)
+                    {
+                        print_red(x);
+                    }
+                    
                     else if(checkAdjacency(A, nama(Mobita), x))
                     {
                         print_green(x);
