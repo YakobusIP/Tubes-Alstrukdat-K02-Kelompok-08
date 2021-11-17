@@ -97,7 +97,7 @@ void readCommand(Token *input) {
 }
 
 /* Cara penggunaan: isStringEqual(currentToken, "Command yang ingin dipakai"), contoh isStringEqual(currentToken, "BUY"), kalau dia true berarti bisa masuk ke dalam if-nya */
-boolean isStringEqual(Token input, const char* compare) {
+boolean isStringEqual(Token input, char* compare) {
 /* Membandingkan apakah kedua string yang dimasukkan sama */
     /* KAMUS */
     int i;

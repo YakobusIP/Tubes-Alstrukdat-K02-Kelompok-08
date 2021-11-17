@@ -46,7 +46,7 @@ int readNumberfromSTDIN();
 void readCommand(Token *input);
 /* Membaca command dari input user */
 
-boolean isStringEqual(Token input, const char* compare);
+boolean isStringEqual(Token input, char* compare);
 /* Membandingkan apakah kedua string yang dimasukkan sama */
 
 char* copyString(char* variable, const char* string);
