@@ -22,6 +22,20 @@ Mobita adalah sebuah program simulasi aplikasi untuk membantu pekerjaan mobita y
    ```
 6. Selamat bermain
 
+## Spesifikasi
+**ADT**
+Kumpulan ADT                      | Status
+-----------                       | ------
+ADT POINT                         | :green_square:
+ADT STACK                         | :green_square:
+ADT LIST                          | :green_square:
+ADT MATRIKS                       | :green_square:
+ADT MESIN KATA                    | :green_square:
+ADT QUEUE                         | :green_square:
+ADT LAIN                          | :green_square:
+ADT LINKED LIST                   | :green_square:
+
+
 ## Status
 On Progress
 
