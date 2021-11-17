@@ -1,8 +1,5 @@
 # MOBITA
 ## General Info
-
-
-## Program Utama
 Mobita adalah sebuah program simulasi aplikasi untuk membantu pekerjaan mobita yang dibuat demi memenuhi Tugas Besar Mata Kuliah IF2110 Algoritma dan Struktur Data. pemain dapat membantu mobita sepertim melacak pesanan, navigasi peta, mengambil dan menurunkan barang.
 
 ## Setup
@@ -24,10 +21,11 @@ Mobita adalah sebuah program simulasi aplikasi untuk membantu pekerjaan mobita y
    ./main
    ```
 6. Selamat bermain
-   
 
+## Status
+On Progress
 
-## Anggota Kelompok
+## Created by:
 1. Aria Wahyu Wicaksono	(10219083)
 2. Marcellus Michael Herman K	(13520057)
 3. Putri Nurhaliza (13520066)
