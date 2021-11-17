@@ -19,9 +19,12 @@ void save(map m, adjMatrix adjM, to_do_List tdl, UangWaktu u, Coordinate Mobita,
     if(saveFile == NULL) {
         printf("Failed to save\n");
     } 
+    
     fprintf(saveFile, "%d %d\n", nRow(m), nCol(m));
     // fprintf(saveFile, "%d %d\n", UANG(u), WAKTU(u));
     c = *CoordByName(m, '8');
+    
+    
     fprintf(saveFile, "%d %d\n", row(c), col(c));
     count = 0;
     // Mencari tahu banyak koordinat
@@ -36,7 +39,9 @@ void save(map m, adjMatrix adjM, to_do_List tdl, UangWaktu u, Coordinate Mobita,
         }
     }
     count -= 1;
+    
     fprintf(saveFile, "%d\n", count);
+    
     for(int i = 1; i < nRow(m) + 1; i++)
     {
         for(int j = 1; j < nCol(m) + 1; j++)
@@ -57,7 +62,9 @@ void save(map m, adjMatrix adjM, to_do_List tdl, UangWaktu u, Coordinate Mobita,
         fprintf(saveFile,"\n");
     }
     p = tdl;
+   
     fprintf(saveFile, "%d\n", lengthTD(tdl));
+   
     while(p != NULL) {
         if(INFO(p).timeLimit > 0) {
             fprintf(saveFile,"%d %c %c %c %d\n", INFO(p).reqIn, INFO(p).pickUp, INFO(p).dropOff, INFO(p).type, INFO(p).timeLimit);

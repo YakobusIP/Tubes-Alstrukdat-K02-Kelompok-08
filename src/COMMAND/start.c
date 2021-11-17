@@ -73,7 +73,7 @@ void start_game(PrioQueue *q, map *M, adjMatrix *A) {
         }
         // READ DAFTAR PESANAN DAN INPUT KE TO DO LIST
         p = readNumberfromChar();
-        //printf("%d,", p);
+        
         for (i=0;i<p;i++) {
             ignoreNext();
             ignoreBlank();
@@ -81,6 +81,7 @@ void start_game(PrioQueue *q, map *M, adjMatrix *A) {
             inreqIn = readNumberfromChar();
             val.reqIn = inreqIn;
 
+            
             ignoreBlank();
             // READ LOKASI PICK UP ITEM
             inpickUp = currentChar;
@@ -109,6 +110,7 @@ void start_game(PrioQueue *q, map *M, adjMatrix *A) {
             val.timeLimit = intimeLimit;
 
             // INPUT VAL YANG SUDAH DIBENTUK KE DALAM QUEUE
+           
             enqueueRL(q, val);
         }
     } else {

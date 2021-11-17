@@ -12,11 +12,13 @@ void load(PrioQueue *q, map *M, adjMatrix *Al, boolean *failToLoad, UangWaktu *u
     int inreqIn, intimeLimit, instarttime;
     char inpickUp, indropOff, intype, nama;
     struct stat buffer;
+    struct items I;
     int exist;
     int uang, waktu1;
     int lokRow, lokCol;
     int temp, ID;
     Gadget G;
+    int angka;
     boolean pass;
     /* ALGORITMA */
     // START READ CONFIG FILE
@@ -187,9 +189,9 @@ void load(PrioQueue *q, map *M, adjMatrix *Al, boolean *failToLoad, UangWaktu *u
                 }
                 ignoreNext();
                 p = readNumberfromChar();
-                printf("%d\n", temp);
+                
                 for(b = 0;b<p;b++) {
-                    printf("%d\n", b);
+                    
                     ignoreNext();
                     ignoreBlank();
                     // READ LOKASI PICK UP ITEM
@@ -218,6 +220,16 @@ void load(PrioQueue *q, map *M, adjMatrix *Al, boolean *failToLoad, UangWaktu *u
                     temp = readNumberfromChar();
                     value.startTime = temp;
                     insertLastIP(IPL, value);  
+                    if(value.type == 'N') {
+                        angka = 1;
+                    } else if (value.type == 'H') {
+                        angka = 2;
+                    } else if (value.type == 'P') {
+                        angka = 3;
+                    } else if (value.type == 'V') {
+                        angka = 4;
+                    }
+                    pushStack(s,angka);
                 }
                 adv();
             } else {
@@ -231,6 +243,9 @@ void load(PrioQueue *q, map *M, adjMatrix *Al, boolean *failToLoad, UangWaktu *u
                 }
                 while(!isIPListEmpty(*IPL)) {
                     deleteFirstIP(IPL, &value);
+                }
+                while(!isEmptyStack(*s)) {
+                    popStack(s, &I);
                 }
             }
             ignoreNext();

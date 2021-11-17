@@ -21,6 +21,7 @@ void speed_boost(Ability *A, int* waktu, UangWaktu *U, in_progress_list *IPL)
         }
     }
     else{
+        if(*waktu == 10) ChangeWaktu(U,1);
         *waktu = 0;
         AbilityType(*A, 0) = false;
     }
@@ -39,10 +40,16 @@ void return_to_sender(Ability *A, in_progress_list *IPL, Stack *s, to_do_List *t
     toDoList value;
     deleteLastIP(IPL, &ipl);
     popStack(s,&val);
-    value.reqIn = WAKTU(u);
+    
+    if(val.name == 'H' && val.effect == IDX_UNDEF ) {
+        val.effect = 2;
+    }
+    value.reqIn = WAKTU(u)-1;
     value.dropOff = ipl.dropOff;
     value.pickUp = ipl.pickUp;
-    value.timeLimit = ipl.startTime;
+    if(ipl.type == 'P') {
+        value.timeLimit = ipl.startTime;
+    }
     value.type = ipl.type;
     insertLastTD(tdl, value);
     printf("Item berhasil dikembalikan ke Pick Up Point %c\n", value.pickUp);

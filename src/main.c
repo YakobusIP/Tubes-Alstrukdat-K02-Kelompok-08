@@ -159,10 +159,11 @@ int main(){
     // Masuk ke permainan utama
     while(newGame) {
         speed_boost(&ability, &waktu, &u, &IPL);
+        printf("%d\n", HARGA(s));
         increase_capacity(ability, &s);
         fromRLtoTDL(&pq, &TDL, WAKTU(u));
         printf("Uang anda sekarang adalah: %d", UANG(u));
-        printf("\nWaktu sekarang adalah: %d", WAKTU(u));
+        printf("\nWaktu sekarang adalah: %d\n", WAKTU(u));
         printf("\nENTER COMMAND: ");
         readCommand(&currentCommand);
         if(isStringEqual(currentCommand,"MOVE")) {
@@ -196,6 +197,9 @@ int main(){
                 } else {
                     return_to_sender(&ability, &IPL, &s, &TDL, u);
                     TotalVIP(ability) -= 1;
+                    if(TotalVIP(ability) == 0) {
+                        AbilityType(ability,2) = false;
+                    }
                 }
             } else {
                 printf("Maaf, anda tidak memiliki return to sender\n");
