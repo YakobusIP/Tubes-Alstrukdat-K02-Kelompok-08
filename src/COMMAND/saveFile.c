@@ -33,12 +33,13 @@ void save(map m, adjMatrix adjM, to_do_List tdl, UangWaktu u, Coordinate Mobita)
             }
         }
     }
+    count -= 1;
     fprintf(saveFile, "%d\n", count);
     for(int i = 1; i < nRow(m) + 1; i++)
     {
         for(int j = 1; j < nCol(m) + 1; j++)
         {
-            if(CoordPointer(m, i, j) != NULL)
+            if(CoordPointer(m, i, j) != NULL && nama(*CoordPointer(m, i, j)) != '8')
             {
                 fprintf(saveFile, "%c %d %d\n", nama(*CoordPointer(m, i, j)), row(*CoordPointer(m, i, j)), col(*CoordPointer(m, i, j)));
             }

@@ -15,11 +15,10 @@ void fromRLtoTDL(PrioQueue *q, to_do_List *tdl, int time) {
     boolean canMove;
     /* ALGORITMA */
     canMove = false;
-    if (time > 0) {
+    if ((time > 0) && (!isQueueEmpty(*q))) {
         canMove = true;
     }
     while (canMove) {
-      
         dequeue(q, &val_in);
         reqIn_in = val_in.reqIn;
         pickUp_in = val_in.pickUp;
@@ -42,9 +41,13 @@ void fromRLtoTDL(PrioQueue *q, to_do_List *tdl, int time) {
             val_out.timeLimit = timeLimit_in;
 
             insertLastTD(tdl, val_out);
-        } else if (isQueueEmpty(*q)) {
-            canMove = false;
+        // Kalau reqIn_in yang sekarang > time, hentikan loop dulu
         } else {
+            canMove = false;
+        }
+        
+        // Kalau queue sudah kosong, tidak ada lagi yang bisa dipindah, loop berhenti
+        if (isQueueEmpty(*q)) {
             canMove = false;
         }
     }

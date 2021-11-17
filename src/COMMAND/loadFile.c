@@ -206,7 +206,7 @@ void load(PrioQueue *q, map *M, adjMatrix *Al, boolean *failToLoad, UangWaktu *u
         ignoreNext();
         Coordinate *C = CreateCoord('8', hqRow, hqCol);
         ReadMap(M, C);
-    
+      
         //CEK KOORDINAT
         ignoreBlank();
         coordLength = readNumberfromChar();
@@ -221,12 +221,12 @@ void load(PrioQueue *q, map *M, adjMatrix *Al, boolean *failToLoad, UangWaktu *u
             Coordinate *C = CreateCoord(coordName, coordRow, coordCol);
             ReadMap(M, C);
         }
-
+        
         //READ ADJ MATRIX
         createAdjMatrix(Al, coordLength + 1);
 
         for(int j = 0; j < coordLength + 1; j++)
-        {
+        {   ignoreBlank();
             ignoreNext();
             ignoreBlank();
             for(int k = 0; k < coordLength + 1; k++)
@@ -235,8 +235,8 @@ void load(PrioQueue *q, map *M, adjMatrix *Al, boolean *failToLoad, UangWaktu *u
                 adj = readNumberfromChar();
                 ReadAdjMatrix(Al, j, k, adj);
             }
-            
         }
+        ignoreNext();
         // READ DAFTAR PESANAN DAN INPUT KE TO DO LIST
         p = readNumberfromChar();
         for (i=0;i<p;i++) {
@@ -278,7 +278,6 @@ void load(PrioQueue *q, map *M, adjMatrix *Al, boolean *failToLoad, UangWaktu *u
         }
         ignoreNext();
         if(!pass) {
-            
                 ignoreBlank();
                 uang = readNumberfromChar();
                 ignoreBlank();
@@ -286,7 +285,7 @@ void load(PrioQueue *q, map *M, adjMatrix *Al, boolean *failToLoad, UangWaktu *u
                 ignoreNext();
                 UANG(*u) = uang;
                 WAKTU(*u) = waktu;
-
+              
                 ignoreBlank();
                 nama = currentChar;
                 adv();

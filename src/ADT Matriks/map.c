@@ -23,16 +23,12 @@ void ReadMap(map *M, Coordinate *C)
 
 void DisplayMap(map M, adjMatrix A, Coordinate Mobita, in_progress_list ipl, to_do_List tdl)
 {
+    boolean foundPickup = false;
     char x, dropoff, pickup;
     int nRow = nRow(M), nCol = nCol(M);
     tdAddress pick;
     ipAddress drop;
-    drop = FIRST(ipl);
-    pick = FIRST(tdl);
-    if(drop != NULL) dropoff = INFO(drop).dropOff;
-    else dropoff = NONE;
-    if(pick != NULL) pickup = INFO(pick).pickUp;
-    else pickup = NONE;
+    
     for(int i = 0; i < nRow + 2; i++)
     {
         for(int j = 0; j < nCol + 2; j++)   
@@ -46,20 +42,34 @@ void DisplayMap(map M, adjMatrix A, Coordinate Mobita, in_progress_list ipl, to_
                 if(CoordPointer(M, i, j) != NULL)
                 {
                     x = CoordNama(M, i, j);
+                    pick = FIRST(tdl);
+                    foundPickup = false;
+                    drop = FIRST(ipl);
+                    if(drop != NULL) dropoff = INFO(drop).dropOff;
+                    else dropoff = NONE;
+                    
+                    while(pick != NULL && !foundPickup)
+                    {
+                         if (x == INFO(pick).pickUp){
+                              foundPickup = true;
+                         }
+                         else pick = NEXT(pick);
+                    }     
                     if (x == nama(Mobita))
                     {
                         print_yellow(x);
                     }
                     
-                    else if (x == pickup)
-                    {
-                        print_red(x);
-                    }
                     else if (x == dropoff)
                     {
                         print_blue(x);
                     }
 
+                    else if (pick != NULL)
+                    {
+                        print_red(x);
+                    }
+                    
                     else if(checkAdjacency(A, nama(Mobita), x))
                     {
                         print_green(x);

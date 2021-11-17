@@ -142,7 +142,7 @@ int main(){
             delay(2);
             printf("Ini dia!\n");
             delay(1);
-            printf("Game anda berhasil diload! Selamat bermain!\n");   
+            printf("Game anda berhasil diload! Selamat bermain!\n");
             newGame = true;
         } else {
             newGame = false;
@@ -177,7 +177,7 @@ int main(){
             // fromRLtoTDL(&pq, &TDL, WAKTU(u));
             to_do(&TDL);
         } else if (isStringEqual(currentCommand,"IN_PROGRESS")) {
-           in_progress(&IPL);
+           in_progress(&IPL, WAKTU(u));
         } else if(isStringEqual(currentCommand,"BUY")) {
             buy(&u, AG, &IG, G);
         }  else if (isStringEqual(currentCommand,"INVENTORY")) {
@@ -190,12 +190,12 @@ int main(){
             delay(2);
             printf("Permainan anda berhasil disimpan!\n");
         } else if (isStringEqual(currentCommand,"RETURN")) {
-            if(AbilityType(ability,2)) {
+            if(TotalVIP(ability) > 0) {
                 if(EFFECT(s) == 3) {
                     printf("Maaf, return to sender tidak bisa digunakan untuk VIP Item\n");
                 } else {
                     return_to_sender(&ability, &IPL, &s, &TDL, u);
-                    AbilityType(ability,2) = false;
+                    TotalVIP(ability) -= 1;
                 }
             } else {
                 printf("Maaf, anda tidak memiliki return to sender\n");
