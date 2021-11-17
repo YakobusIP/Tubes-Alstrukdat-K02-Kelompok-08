@@ -35,6 +35,22 @@ ADT QUEUE                         | :green_square:
 ADT LAIN                          | :green_square:
 ADT LINKED LIST                   | :green_square:
 
+**COMMAND**
+Kumpulan COMMAND                  | Status
+-----------                       | ------
+BUY                               | :green_square:
+DROP OFF                          | :green_square:
+HELP                              | :green_square:
+IN PROGRESS                       | :green_square:
+INVENTORY                         | :green_square:
+LOAD FILE                         | :green_square:
+MOVE                              | :green_square:
+PICK UP                           | :green_square:
+RETURN TO SENDER                  | :green_square:
+INVENTORY                         | :green_square:
+SAVE FILE                         | :green_square:
+START                             | :green_square:
+TO DO                             | :green_square:
 
 ## Status
 On Progress
