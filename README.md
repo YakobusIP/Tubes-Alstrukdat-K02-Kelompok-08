@@ -2,6 +2,17 @@
 ## General Info
 Mobita adalah sebuah program simulasi aplikasi untuk membantu pekerjaan mobita yang dibuat demi memenuhi Tugas Besar Mata Kuliah IF2110 Algoritma dan Struktur Data. pemain dapat membantu mobita sepertim melacak pesanan, navigasi peta, mengambil dan menurunkan barang.
 
+## Informasi
+Data                | Isi
+----                | ---
+Tahun Ajaran        | 2021
+Tanggal Mulai       | 21 September 2021
+Tanggal Selesai     | 18 Oktober 2021
+Tanggal Pengumpulan | 17 - 18 November 2020
+Kelas               | 2
+Dosen               | Satrio Adi Rukmono
+
+
 ## Setup
 1. buka terminal di directory penyimpanan yang diinginkan
 2. Lakukan clone terhadap repository dengan mengetikkan di terminal:
@@ -51,6 +62,21 @@ INVENTORY                         | :green_square:
 SAVE FILE                         | :green_square:
 START                             | :green_square:
 TO DO                             | :green_square:
+
+## Laporan
+**Status : Done** :green_square: \
+**9 / 9**
+Bab                     | Status
+---                     | ------
+Ringkasan               | :green_square:
+Penjelasan Spesifikasi  | :green_square:
+Struktur Data           | :green_square:
+Program Utama           | :green_square:
+Algoritma Menarik       | :green_square:
+Data Test               | :green_square:
+Test Script             | :green_square:
+Pembagian Kerja         | :green_square:
+Lampiran                | :green_square:
 
 ## Status
 On Progress
