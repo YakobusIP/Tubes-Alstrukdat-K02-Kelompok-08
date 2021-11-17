@@ -2,7 +2,7 @@
 #include "move.h"
 
 
-void move(Stack *s, in_progress_list *IPL, Coordinate *src, map m, adjMatrix A, UangWaktu *u, Ability *ability, int *waktu)
+void move(Stack *s, in_progress_list *IPL, Coordinate *src, map m, adjMatrix A, UangWaktu *u, Ability *ability, int *waktu, int addMoveTime)
 {
     char c;
     adjList l;
@@ -39,7 +39,7 @@ void move(Stack *s, in_progress_list *IPL, Coordinate *src, map m, adjMatrix A, 
                 {
                     AbilityType(*ability, 0) = false;
                 }
-            else ChangeWaktu(u, 1);
+            else ChangeWaktu(u, addMoveTime);
         }
 
         if(AbilityType(*ability, 0)) //khusus speed_boost
