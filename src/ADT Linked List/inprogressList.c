@@ -193,7 +193,7 @@ boolean isHeavyinIPL(in_progress_list l){
     /* ALGORITMA */
     flag = false;
     while ((!isIPListEmpty(l)) && (!flag)) {
-        deleteFirstIP(l, &val);
+        deleteFirstIP(&l, &val);
         if (val.type == 'H') {
             flag = true;
         }
