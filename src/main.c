@@ -91,6 +91,7 @@ int main(){
     char currentLocation;
     boolean failToLoad;
     int addMoveTime = 0;      // waktu tambahan jika membawa heavy item, dapat menumpuk
+    int waktu = 0;
     struct items val;
     Ability ability; //struct ability
     boolean isReturn; // Digunakan untuk mengetahui apakah ada ability is return to sender
@@ -157,19 +158,20 @@ int main(){
 
     // Masuk ke permainan utama
     while(newGame) {
+        speed_boost(&ability, &waktu, &u, &IPL);
         fromRLtoTDL(&pq, &TDL, WAKTU(u));
         printf("Uang anda sekarang adalah: %d", UANG(u));
         printf("\nWaktu sekarang adalah: %d", WAKTU(u));
         printf("\nENTER COMMAND: ");
         readCommand(&currentCommand);
         if(isStringEqual(currentCommand,"MOVE")) {
-            move(&Mobita, m, AM, &u);
+            move(&s, &IPL, &Mobita, m,  AM, &u, &ability, &waktu);
         } else if (isStringEqual(currentCommand,"PICK_UP")) {
             currentLocation = Mobita.nama;
             pick_up(&TDL, &s, &IPL, currentLocation, &addMoveTime, &u);
         } else if (isStringEqual(currentCommand,"DROP_OFF")) {
             currentLocation = Mobita.nama;
-            drop_off(&IPL, &s, currentLocation, &u, ability);
+            drop_off(&IPL, &s, currentLocation, &u, &ability);
         } else if (isStringEqual(currentCommand,"MAP")) {
             DisplayMap(m, AM, Mobita, IPL, TDL);
         } else if (isStringEqual(currentCommand,"TO_DO")) {
@@ -189,12 +191,12 @@ int main(){
             delay(2);
             printf("Permainan anda berhasil disimpan!\n");
         } else if (isStringEqual(currentCommand,"RETURN")) {
-            if(isReturn) {
+            if(AbilityType(ability,2)) {
                 if(EFFECT(s) == 3) {
                     printf("Maaf, return to sender tidak bisa digunakan untuk VIP Item\n");
                 } else {
                     return_to_sender(&ability, &IPL, &s, &TDL, u);
-                    isReturn = false;
+                    AbilityType(ability,2) = false;
                 }
             } else {
                 printf("Maaf, anda tidak memiliki return to sender\n");

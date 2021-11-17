@@ -19,6 +19,7 @@ void fromRLtoTDL(PrioQueue *q, to_do_List *tdl, int time) {
         canMove = true;
     }
     while (canMove) {
+      
         dequeue(q, &val_in);
         reqIn_in = val_in.reqIn;
         pickUp_in = val_in.pickUp;
