@@ -178,7 +178,7 @@ int main(){
             // fromRLtoTDL(&pq, &TDL, WAKTU(u));
             to_do(&TDL);
         } else if (isStringEqual(currentCommand,"IN_PROGRESS")) {
-           in_progress(&IPL);
+           in_progress(&IPL, WAKTU(u));
         } else if(isStringEqual(currentCommand,"BUY")) {
             buy(&u, AG, &IG, G);
         }  else if (isStringEqual(currentCommand,"INVENTORY")) {
