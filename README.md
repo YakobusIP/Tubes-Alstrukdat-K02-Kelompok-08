@@ -1,6 +1,6 @@
 # Tugas Besar - Algoritma dan Struktur Data: MOBITA
 ## General Info
-Mobita adalah sebuah program simulasi aplikasi untuk membantu pekerjaan mobita yang dibuat demi memenuhi Tugas Besar Mata Kuliah IF2110 Algoritma dan Struktur Data. pemain dapat membantu mobita sepertim melacak pesanan, navigasi peta, mengambil dan menurunkan barang.
+Mobita adalah sebuah program simulasi aplikasi untuk membantu pekerjaan mobita yang dibuat demi memenuhi Tugas Besar Mata Kuliah IF2110 Algoritma dan Struktur Data. pemain dapat membantu mobita seperti melacak pesanan, navigasi peta, mengambil dan menurunkan barang.
 
 ## Informasi
 Data                | Isi
