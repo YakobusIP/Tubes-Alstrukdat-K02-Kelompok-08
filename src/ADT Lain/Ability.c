@@ -12,7 +12,7 @@ void CreateAbility(Ability *A)
 void speed_boost(Ability *A, int* waktu, UangWaktu *U, in_progress_list *IPL)
 {
     static int last_waktu = -1;
-    if(AbilityType(*A, 0) && !isHeavyinIPL(*IPL) && *waktu < 10 && last_waktu != *waktu)
+    if(AbilityType(*A, 0) && !isHeavyinIPL(*IPL) && *waktu <= 10 && last_waktu != *waktu)
     {
         if (*waktu % 2 == 0 && *waktu != 0)
         {
