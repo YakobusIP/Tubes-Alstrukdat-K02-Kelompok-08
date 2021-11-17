@@ -69,7 +69,7 @@ boolean isHeavyinIPL(in_progress_list l);
 /* Fungsi mengembalikan true jika terdapat heavy item di dalam in progress list */
 
 /****************** PROSES SEMUA ELEMEN LIST ******************/
-void displayInProgress(in_progress_list l);
+void displayInProgress(in_progress_list l, int time);
 /* I.S. List mungkin kosong */
 /* F.S. Jika list tidak kosong, iai list dicetak ke kanan: [e1,e2,...,en] */
 /* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
