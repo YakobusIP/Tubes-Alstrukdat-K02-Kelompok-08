@@ -159,19 +159,18 @@ int main(){
     // Masuk ke permainan utama
     while(newGame) {
         speed_boost(&ability, &waktu, &u, &IPL);
+         increase_capacity(ability, &s);
         fromRLtoTDL(&pq, &TDL, WAKTU(u));
         printf("Uang anda sekarang adalah: %d", UANG(u));
         printf("\nWaktu sekarang adalah: %d", WAKTU(u));
         printf("\nENTER COMMAND: ");
         readCommand(&currentCommand);
         if(isStringEqual(currentCommand,"MOVE")) {
-            move(&s, &IPL, &Mobita, m,  AM, &u, &ability, &waktu);
+            move(&s, &IPL, &Mobita, m,  AM, &u, &ability, &waktu, addMoveTime);
         } else if (isStringEqual(currentCommand,"PICK_UP")) {
-            currentLocation = Mobita.nama;
-            pick_up(&TDL, &s, &IPL, currentLocation, &addMoveTime, &u);
+            pick_up(&TDL, &s, &IPL, Mobita.nama, &addMoveTime, &u);
         } else if (isStringEqual(currentCommand,"DROP_OFF")) {
-            currentLocation = Mobita.nama;
-            drop_off(&IPL, &s, currentLocation, &u, &ability);
+            drop_off(&IPL, &s, Mobita.nama, &u, &ability, &addMoveTime);
         } else if (isStringEqual(currentCommand,"MAP")) {
             DisplayMap(m, AM, Mobita, IPL, TDL);
         } else if (isStringEqual(currentCommand,"TO_DO")) {

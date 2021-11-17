@@ -19,7 +19,7 @@
 // #include "../pcolor/pcolor.c"
 // #include "../ADT Lain/Ability.h"
 
-void drop_off(in_progress_list *pl, Stack *s, char currentLocation, UangWaktu *u, Ability *A) {
+void drop_off(in_progress_list *pl, Stack *s, char currentLocation, UangWaktu *u, Ability *A, int *addMoveTime) {
     if (isEmptyStack(*s)) {
         printf("Tidak ada pesanan yang perlu diantarkan\n");
     }
@@ -27,18 +27,9 @@ void drop_off(in_progress_list *pl, Stack *s, char currentLocation, UangWaktu *u
         inProgressList dropoff_item;
         dropoff_item.type =  TYPE(*s);
 
-        // mencari data drop off item dari progress list
+        // data item pada progress list sinkron dengan pada stack, pada elemen terakhir
         int idx = lengthIPL(*pl) - 1;
-        boolean flag = false;
-        while (idx>=0 && !flag) {
-            if (getElmtIP(*pl,idx).type == dropoff_item.type) {
-                dropoff_item.dropOff = getElmtIP(*pl,idx).dropOff;
-                flag = true;
-            }
-            else {
-                idx--;
-            }
-        }
+        dropoff_item.dropOff = getElmtIP(*pl,idx).dropOff;
 
         /* Cek dulu apakah lokasi dropoff item tumpukan teratas sesuai dengan lokasi sekarang */
         if (dropoff_item.dropOff != currentLocation) {
@@ -53,10 +44,9 @@ void drop_off(in_progress_list *pl, Stack *s, char currentLocation, UangWaktu *u
             deleteAtIP(pl, idx, &delProgressItem);
             ChangeUang(u, addUang);
 
-            if (delStackItem.type == 'H') {AbilityType(*A, 0) = true;}
+            if (delStackItem.type == 'H') {AbilityType(*A, 0) = true; *addMoveTime -= 1;}
             else if (delStackItem.type == 'P') {AbilityType(*A, 1) = true;}
             else if (delStackItem.type == 'V') {AbilityType(*A, 2) = true;}
-
             printf("Pesanan %s berhasil diantarkan\n", delStackItem.name);
             printf("Uang yang didapatkan: %d yen\n", addUang);
         }
