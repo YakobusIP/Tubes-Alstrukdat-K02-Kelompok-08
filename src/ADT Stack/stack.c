@@ -23,33 +23,36 @@ boolean isFullStack(Stack s){
 
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
 void pushStack(Stack *s, int val){
-    (IDX_TOP(*s))++;
-    if(val == 1){
-        copyString(NAMA(*s), "Normal Item");
-        HARGA(*s) = 200;
-        EFFECT(*s) = IDX_UNDEF;
-        TYPE(*s) = 'N';
-        copyString(REWARD(*s), "");
-    }else if(val == 2){
-        copyString(NAMA(*s), "Heavy Item");
-        HARGA(*s) = 400;
-        EFFECT(*s) = 1;
-        TYPE(*s) = 'H';
-        copyString(REWARD(*s), "Speed Boost");
-    }else if(val == 3){
-        copyString(NAMA(*s), "Perishable Item");
-        HARGA(*s) = 400;
-        EFFECT(*s) = 2;
-        TYPE(*s) = 'P';
-        copyString(REWARD(*s), "Increase Capacity");
-    }else if(val == 4){
-        copyString(NAMA(*s), "VIP Item");
-        HARGA(*s) = 600;
-        EFFECT(*s) = 3;
-        TYPE(*s) = 'V';
-        copyString(REWARD(*s), "Return To Sender");
+    if(isFullStack(*s)){
+        printf("Maaf, Tas sudah penuh");
+    }else{
+        (IDX_TOP(*s))++;
+        if(val == 1){
+            copyString(NAMA(*s), "Normal Item");
+            HARGA(*s) = 200;
+            EFFECT(*s) = IDX_UNDEF;
+            TYPE(*s) = 'N';
+            copyString(REWARD(*s), "");
+        }else if(val == 2){
+            copyString(NAMA(*s), "Heavy Item");
+            HARGA(*s) = 400;
+            EFFECT(*s) = 1;
+            TYPE(*s) = 'H';
+            copyString(REWARD(*s), "Speed Boost");
+        }else if(val == 3){
+            copyString(NAMA(*s), "Perishable Item");
+            HARGA(*s) = 400;
+            EFFECT(*s) = 2;
+            TYPE(*s) = 'P';
+            copyString(REWARD(*s), "Increase Capacity");
+        }else if(val == 4){
+            copyString(NAMA(*s), "VIP Item");
+            HARGA(*s) = 600;
+            EFFECT(*s) = 3;
+            TYPE(*s) = 'V';
+            copyString(REWARD(*s), "Return To Sender");
+        }
     }
-    
 }
 /* Menambahkan val sebagai elemen Stack s */
 /* I.S. s mungkin kosong, tabel penampung elemen stack TIDAK penuh */
