@@ -9,10 +9,11 @@
 
 typedef struct {
     boolean type[3]; //sesuai urutan spek
+    int totalVip;
 } Ability;
 
 #define AbilityType(A, i) (A).type[(i)]
-
+#define TotalVIP(A) (A).totalVip
 
 void CreateAbility(Ability *A);
 void speed_boost(Ability *A, int* waktu, UangWaktu *U, in_progress_list *IPL);
