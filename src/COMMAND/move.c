@@ -2,7 +2,7 @@
 #include "move.h"
 
 
-void move(Stack *s, in_progress_list *IPL, Coordinate *src, map m, adjMatrix A, UangWaktu *u, Ability ability, int *waktu)
+void move(Stack *s, in_progress_list *IPL, Coordinate *src, map m, adjMatrix A, UangWaktu *u, Ability *ability, int *waktu)
 {
     char c;
     adjList l;
@@ -35,14 +35,14 @@ void move(Stack *s, in_progress_list *IPL, Coordinate *src, map m, adjMatrix A, 
 
         if(isHeavyinIPL(*IPL))
         {
-            if(AbilityType(ability, 0))
+            if(AbilityType(*ability, 0))
                 {
-                    AbilityType(ability, 0) = false;
+                    AbilityType(*ability, 0) = false;
                 }
             else ChangeWaktu(u, 1);
         }
 
-        if(AbilityType(ability, 0)) //khusus speed_boost
+        if(AbilityType(*ability, 0)) //khusus speed_boost
         {
             *waktu++;
         }
