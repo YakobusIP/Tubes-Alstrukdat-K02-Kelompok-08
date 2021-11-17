@@ -13,7 +13,7 @@ void speed_boost(Ability *A, int* waktu, UangWaktu *U, in_progress_list *IPL)
 {
     if(AbilityType(*A, 0) && !isHeavyinIPL(*IPL) && *waktu != 10)
     {
-        if (*waktu % 2 == 0)
+        if (*waktu % 2 == 0 && *waktu != 0)
         {
             ChangeWaktu(U, 1);
         }

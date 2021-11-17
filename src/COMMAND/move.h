@@ -6,8 +6,9 @@
 #include "../ADT Matriks/adjMatriks.h"
 #include "../ADT List/adjList.h"
 #include "../ADT Lain/UangWaktu.h"
-#include "../ADT Mesin Kata/charmachine.h"
 #include "../ADT Mesin Kata/tokenmachine.h"
+#include "../ADT Lain/ability.h"
+#include "../ADT Stack/stack.h"
 
-void move(Coordinate *src, map m, adjMatrix A, UangWaktu *u);
+void move(Stack *s, in_progress_list *IPL, Coordinate *src, map m, adjMatrix A, UangWaktu *u, Ability *ability, int *waktu);
 #endif
