@@ -43,6 +43,9 @@ int readNumberfromChar();
 int readNumberfromSTDIN();
 /* Membaca digit angka dari bentuk char ke bentuk integer, data diambil dari input user di terminal */
 
+char readChar();
+/* Membaca char dari input user */
+
 void readCommand(Token *input);
 /* Membaca command dari input user */
 

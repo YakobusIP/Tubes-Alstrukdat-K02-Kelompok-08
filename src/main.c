@@ -119,7 +119,6 @@ int main(){
     readCommand(&currentCommand);
     if(isStringEqual(currentCommand,"1")){
         start_game(&pq, &m, &AM);
-        // fromRLtoTDL(&pq, &TDL, WAKTU(u));
         printf("Harap tunggu sebentar...\n");
         delay(2);
         printf("Permainan anda sedang disiapkan...\n");
@@ -160,7 +159,6 @@ int main(){
     while(newGame) {
         speed_boost(&ability, &waktu, &u, &IPL);
         increase_capacity(ability, &s);
-        printf("%d\n", waktu);
         fromRLtoTDL(&pq, &TDL, WAKTU(u));
         printf("Uang anda sekarang adalah: %d", UANG(u));
         printf("\nWaktu sekarang adalah: %d", WAKTU(u));
@@ -182,7 +180,7 @@ int main(){
         } else if(isStringEqual(currentCommand,"BUY")) {
             buy(&u, AG, &IG, G);
         }  else if (isStringEqual(currentCommand,"INVENTORY")) {
-            inventory(&IG, &IPL, &s, &u, &C, m, AM);
+            inventory(&IG, &IPL, &TDL, &s, &u, m, AM, &Mobita, &addMoveTime);
         } else if (isStringEqual(currentCommand,"HELP")) {
             Help();
         } else if (isStringEqual(currentCommand,"SAVE_GAME")) {
