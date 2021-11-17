@@ -39,17 +39,15 @@ void move(Stack *s, in_progress_list *IPL, Coordinate *src, map m, adjMatrix A, 
                 {
                     AbilityType(*ability, 0) = false;
                 }
-            else ChangeWaktu(u, addMoveTime);
+            else ChangeWaktu(u, addMoveTime + 1);
         }
-
-        if(AbilityType(*ability, 0)) //khusus speed_boost
+        else //khusus speed_boost
         {
-            *waktu++;
+            if(AbilityType(*ability, 0))
+            {
+                *waktu += 1;
+            }else ChangeWaktu(u, 1);
         }
-        else
-        {
-            ChangeWaktu(u, 1); //Tambah waktu sebanyak 1 satuan waktu
-        } 
 
         int save_idx = IDX_TOP(*s);
         int i = save_idx;
