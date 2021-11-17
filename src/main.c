@@ -159,7 +159,7 @@ int main(){
     // Masuk ke permainan utama
     while(newGame) {
         speed_boost(&ability, &waktu, &u, &IPL);
-         increase_capacity(ability, &s);
+        increase_capacity(ability, &s);
         fromRLtoTDL(&pq, &TDL, WAKTU(u));
         printf("Uang anda sekarang adalah: %d", UANG(u));
         printf("\nWaktu sekarang adalah: %d", WAKTU(u));
@@ -181,7 +181,7 @@ int main(){
         } else if(isStringEqual(currentCommand,"BUY")) {
             buy(&u, AG, &IG, G);
         }  else if (isStringEqual(currentCommand,"INVENTORY")) {
-            inventory(&IG, &IPL, &s, &u, &C, m, AM);
+            inventory(&IG, &IPL, &TDL, &s, &u, m, AM, &Mobita, &addMoveTime);
         } else if (isStringEqual(currentCommand,"HELP")) {
             Help();
         } else if (isStringEqual(currentCommand,"SAVE_GAME")) {

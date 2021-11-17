@@ -75,6 +75,19 @@ int readNumberfromSTDIN() {
     return num;
 }
 
+char readChar() {
+/* Membaca charm data diambil dari input user di terminal */
+    /* KAMUS */
+    char c;
+    /* ALGORITMA */
+    startUserInput();
+    ignoreBlankUserInput();
+
+    c = currentChar;
+
+    return c;
+}
+
 void readCommand(Token *input) {
 /* Membaca command dari input user */
     /* KAMUS */
