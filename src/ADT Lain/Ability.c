@@ -30,18 +30,18 @@ void increase_capacity(Ability A, Stack *S)
         MAKSIMUM(*S) += 1;
     }
 }
-void return_to_sender(Ability *A, in_progress_list *IPL /* Tambah kalau kurang*/)
+void return_to_sender(Ability *A, in_progress_list *IPL, Stack *s, to_do_List *tdl, UangWaktu u)
 {
-    ipAddress p = FIRST(*IPL);
-
-    if(AbilityType(*A, 2) && INFO(p).type != 'V')
-    {
-        /*Pesanan dikembalikan ke to do list terakhir*/
-        /*if items = perishable, reset timelimit*/
-
-    }
-    else
-    {
-        AbilityType(*A, 2) = false;
-    }
+    inProgressList ipl;
+    struct items val;
+    toDoList value;
+    deleteLastIP(IPL, &ipl);
+    popStack(s,&val);
+    value.reqIn = WAKTU(u);
+    value.dropOff = ipl.dropOff;
+    value.pickUp = ipl.pickUp;
+    value.timeLimit = ipl.startTime;
+    value.type = ipl.type;
+    insertLastTD(tdl, value);
+    printf("Item berhasil dikembalikan ke Pick Up Point %c\n", value.pickUp);
 }

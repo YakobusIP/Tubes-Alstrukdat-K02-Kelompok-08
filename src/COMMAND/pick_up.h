@@ -22,7 +22,7 @@
 boolean foundVIP(to_do_List l);
 /* Mengecek apakah ada item VIP di To Do List */
 
-void foundPickupInLoc(to_do_List *l, char currentLocation, boolean *found, int *val, toDoList *pickup_item);
+void foundPickupInLoc(to_do_List *l, char currentLocation, boolean *found, int *val, int *idxTD, toDoList *pickup_item);
 /* Mengecek apakah ada pesanan yang harus di pick-up di currentLocation */
 
 void pick_up(to_do_List *tdl, Stack *s, in_progress_list *pl, char currentLocation, int *addMoveTime, UangWaktu *u);

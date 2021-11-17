@@ -20,6 +20,6 @@
 #include "../boolean.h"
 #include "../ADT Lain/Ability.h"
 
-void drop_off(in_progress_list *pl, Stack *s, char currentLocation, UangWaktu *u, Ability ability);
+void drop_off(in_progress_list *pl, Stack *s, char currentLocation, UangWaktu *u, Ability *A);
 
 #endif

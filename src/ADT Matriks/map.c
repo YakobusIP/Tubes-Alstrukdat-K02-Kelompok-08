@@ -33,7 +33,6 @@ void DisplayMap(map M, adjMatrix A, Coordinate Mobita, in_progress_list ipl, to_
     else dropoff = NONE;
     if(pick != NULL) pickup = INFO(pick).pickUp;
     else pickup = NONE;
-
     for(int i = 0; i < nRow + 2; i++)
     {
         for(int j = 0; j < nCol + 2; j++)   

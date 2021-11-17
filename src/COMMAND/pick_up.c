@@ -35,19 +35,21 @@ boolean foundVIP(to_do_List l) {
     return foundVip;
 }
 
-void foundPickupInLoc(to_do_List *tdl, char currentLocation, boolean *found, int *val, toDoList *pickup_item) {
+void foundPickupInLoc(to_do_List *tdl, char currentLocation, boolean *found, int *val, int *idxTD, toDoList *pickup_item) {
     /* Mengecek apakah ada pesanan yang harus di pick-up di currentLocation */
+    *idxTD = 0;
     tdAddress p = FIRST(*tdl);
     do {
         if (INFO(p).pickUp ==  currentLocation) {
             *pickup_item = INFO(p);
-            if ((*pickup_item).type = 'N') {*val = 1;}
-            else if ((*pickup_item).type = 'H') {*val = 2;}
-            else if ((*pickup_item).type = 'P') {*val = 3;}
-            else if ((*pickup_item).type = 'V') {*val = 4;}
+            if ((*pickup_item).type == 'N') {*val = 1;}
+            else if ((*pickup_item).type == 'H') {*val = 2;}
+            else if ((*pickup_item).type == 'P') {*val = 3;}
+            else if ((*pickup_item).type == 'V') {*val = 4;}
             *found = true;
         }
         else {
+            *idxTD += 1;
             p = NEXT(p);
         }
     } while (!(*found) && p!=NULL);
@@ -62,9 +64,10 @@ void pick_up(to_do_List *tdl, Stack *s, in_progress_list *pl, char currentLocati
         toDoList pickup_item;
         inProgressList progress_item;
         ElType val;
+        int idxTD;
         boolean found = false;
-        foundPickupInLoc(tdl, currentLocation, &found, &val, &pickup_item);
 
+        foundPickupInLoc(tdl, currentLocation, &found, &val, &idxTD, &pickup_item);
         if (!found) {                               // tidak ada pesanan pickup di lokasi tsb
             printf("Pesanan tidak ditemukan!\n");
         }
@@ -73,6 +76,7 @@ void pick_up(to_do_List *tdl, Stack *s, in_progress_list *pl, char currentLocati
                 printf("Tidak bisa mempick-up pesanan di lokasi ini karena ada item VIP di lokasi lain!\n");
             }
             else {
+                toDoList deletedTD;
                 pushStack(s, val);                           // item dimasukkan ke dalam Tas
                 progress_item.dropOff = pickup_item.dropOff;
                 progress_item.pickUp = pickup_item.pickUp;
@@ -80,6 +84,7 @@ void pick_up(to_do_List *tdl, Stack *s, in_progress_list *pl, char currentLocati
                 progress_item.type = pickup_item.type;
                 progress_item.startTime = WAKTU(*u);
                 insertLastIP(pl, progress_item);
+                deleteAtTD(tdl, idxTD, &deletedTD);
 
                 if (pickup_item.type == 'H') {*addMoveTime++;}
                 /* Efek Perishable Item dihandle MOVE karna bergantung waktu pengantaran */
@@ -95,7 +100,3 @@ void pick_up(to_do_List *tdl, Stack *s, in_progress_list *pl, char currentLocati
         }
     }
 }
-
-// int main() {
-//     printf("a");
-// }

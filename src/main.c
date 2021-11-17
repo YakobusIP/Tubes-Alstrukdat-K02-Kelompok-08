@@ -26,6 +26,7 @@
 
 // Jangan dihapus ya gais :D
 #include "ADT Lain/UangWaktu.c"
+#include "ADT Lain/Ability.c"
 #include "ADT Linked List/inprogressList.c"
 #include "ADT Linked List/inprogressNode.c"
 #include "ADT Linked List/todoList.c"
@@ -40,8 +41,7 @@
 #include "ADT Point/point.c"
 #include "ADT Stack/stack.c"
 #include "ADT Queue/requestList.c" 
-// #include "ADT Lain/bfs.c"
-#include "pcolor/pcolor.c" 
+#include "pcolor/pcolor.c"
 
 /* Include command code */
 // P.S: Keliatannya kalo ini udah banyak yang implementasi kode buat command, yang include di atas ilangin aja
@@ -70,7 +70,7 @@
 #include "../src/COMMAND/pick_up.c"
 #include "../src/COMMAND/saveFile.c"
 #include "../src/COMMAND/to_do.c"
-#include "../src/COMMAND/start.c" 
+#include "../src/COMMAND/start.c"
 
 int main(){
     /* Kamus */    
@@ -105,18 +105,20 @@ int main(){
 
     // Membuat konstruktor yang ada
     CreateUangWaktu(&u);
+    CreateStack(&s);
     CreateAvailableGadget(&AG);
     CreateInventoryGadget(&IG);
     CreateToDoList(&TDL);
     CreatePrioQueue(&pq);
     CreateInProgressList(&IPL);
+    CreateAbility(&ability);
 
     // Main Menu
     mainMenu();
     readCommand(&currentCommand);
-    if(isStringEqual(currentCommand,"NEW_GAME")){
+    if(isStringEqual(currentCommand,"1")){
         start_game(&pq, &m, &AM);
-        fromRLtoTDL(&pq, &TDL, &u);
+        // fromRLtoTDL(&pq, &TDL, WAKTU(u));
         printf("Harap tunggu sebentar...\n");
         delay(2);
         printf("Permainan anda sedang disiapkan...\n");
@@ -125,10 +127,14 @@ int main(){
         delay(1);
         printf("Enjoy the Game!\n");
         newGame = true;
-    }else if(isStringEqual(currentCommand, "LOAD_GAME") ){
-        load(&pq, &m, &AM, &failToLoad, &u);
+        Mobita = *CoordByName(m, '8');
+        UANG(u) = 20000;
+    }else if(isStringEqual(currentCommand, "2") ){
+        load(&pq, &m, &AM, &failToLoad, &u, &Mobita);
         if(failToLoad == false) {
-            fromRLtoTDL(&pq, &TDL, &u);
+            /* displayQueue(pq);
+            printf("%d\n", WAKTU(u)); */
+            // fromRLtoTDL(&pq, &TDL, WAKTU(u));
             printf("Harap tunggu sebentar...\n");
             delay(2);
             printf("Permainan anda sedang diload...\n");
@@ -140,33 +146,35 @@ int main(){
         } else {
             newGame = false;
         }
-    }else if(isStringEqual(currentCommand, "EXIT")){
+    }else if(isStringEqual(currentCommand, "3")){
         newGame = false;
         printf("Anda keluar dari game.\n");
     }
 
     /* Start mesin kata untuk membaca config file dan input konfigurasi */
     // readConfigFile(&pq, &m, &AM);
-    // CreateAbility(&ability);
-    // Mobita = *CoordByName(m, '8');
-
 
 
     // Masuk ke permainan utama
     while(newGame) {
-        printf("ENTER COMMAND: ");
+        fromRLtoTDL(&pq, &TDL, WAKTU(u));
+        printf("Uang anda sekarang adalah: %d", UANG(u));
+        printf("\nWaktu sekarang adalah: %d", WAKTU(u));
+        printf("\nENTER COMMAND: ");
         readCommand(&currentCommand);
         if(isStringEqual(currentCommand,"MOVE")) {
             move(&Mobita, m, AM, &u);
         } else if (isStringEqual(currentCommand,"PICK_UP")) {
+            currentLocation = Mobita.nama;
             pick_up(&TDL, &s, &IPL, currentLocation, &addMoveTime, &u);
         } else if (isStringEqual(currentCommand,"DROP_OFF")) {
-            // drop_off(&IPL, &s, currentLocation, &u, &ability);
+            currentLocation = Mobita.nama;
+            drop_off(&IPL, &s, currentLocation, &u, ability);
         } else if (isStringEqual(currentCommand,"MAP")) {
             DisplayMap(m, AM, Mobita, IPL, TDL);
         } else if (isStringEqual(currentCommand,"TO_DO")) {
-            //fromRLtoTDL(&pq, &TDL, &u);
-            to_do(TDL);
+            // fromRLtoTDL(&pq, &TDL, WAKTU(u));
+            to_do(&TDL);
         } else if (isStringEqual(currentCommand,"IN_PROGRESS")) {
            in_progress(&IPL);
         } else if(isStringEqual(currentCommand,"BUY")) {
@@ -176,7 +184,7 @@ int main(){
         } else if (isStringEqual(currentCommand,"HELP")) {
             Help();
         } else if (isStringEqual(currentCommand,"SAVE_GAME")) {
-            save(m, AM, TDL, u);
+            save(m, AM, TDL, u, Mobita);
             printf("Permainan anda sedang disimpan...\n");
             delay(2);
             printf("Permainan anda berhasil disimpan!\n");
@@ -185,7 +193,7 @@ int main(){
                 if(EFFECT(s) == 3) {
                     printf("Maaf, return to sender tidak bisa digunakan untuk VIP Item\n");
                 } else {
-                    return_to_sender(&s, &IPL, &TDL, u);
+                    return_to_sender(&ability, &IPL, &s, &TDL, u);
                     isReturn = false;
                 }
             } else {

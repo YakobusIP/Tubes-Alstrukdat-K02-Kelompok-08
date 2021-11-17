@@ -193,7 +193,7 @@ boolean isHeavyinIPL(in_progress_list l){
     /* ALGORITMA */
     flag = false;
     while ((!isIPListEmpty(l)) && (!flag)) {
-        deleteFirstIP(l, &val);
+        deleteFirstIP(&l, &val);
         if (val.type == 'H') {
             flag = true;
         }
@@ -216,23 +216,27 @@ void displayInProgress(in_progress_list l) {
     i = 1;
     printf("Pesanan yang sedang diantarkan:\n");
     p = FIRST(l);
-    while (p != NULL) {
-        printf("%d. ", i);
-        i++;
-        typeCheck = INFO(p).type;
+    if (p == NULL) {
+        printf("Tidak ada barang yang perlu diantarkan!\n");
+    } else {
+        while (p != NULL) {
+            printf("%d. ", i);
+            i++;
+            typeCheck = INFO(p).type;
 
-        if (typeCheck == 'N') {
-            printf("Normal Item");
-        } else if (typeCheck == 'H') {
-            printf("Heavy Item");
-        } else if (typeCheck == 'P') {
-            printf("Perishable Item");
-        } else if (typeCheck == 'V') {
-            printf("VIP Item");
+            if (typeCheck == 'N') {
+                printf("Normal Item");
+            } else if (typeCheck == 'H') {
+                printf("Heavy Item");
+            } else if (typeCheck == 'P') {
+                printf("Perishable Item");
+            } else if (typeCheck == 'V') {
+                printf("VIP Item");
+            }
+
+            printf("(Tujuan: %c)", INFO(p).dropOff);
+            printf("\n");
+            p = NEXT(p);
         }
-
-        printf("(Tujuan: %c)", INFO(p).dropOff);
-        printf("\n");
-        p = NEXT(p);
     }
 }

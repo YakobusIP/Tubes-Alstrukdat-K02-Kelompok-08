@@ -200,23 +200,28 @@ void displayToDo(to_do_List l) {
     /* ALGORITMA */
     i = 1;
     printf("Pesanan pada To Do List:\n");
-    while (lengthTD(l) > 0) {
-        printf("%d. ", i);
-        i++;
-        deleteFirstTD(&l, &val);
-        printf("%c ", val.pickUp);
-        printf("-> ");
-        printf("%c ", val.dropOff);
+    if (lengthTD(l) == 0) {
+        printf("To Do List kosong!\n");
+    } else {
+        while (lengthTD(l) > 0) {
+            printf("%d. ", i);
+            i++;
+            deleteFirstTD(&l, &val);
+            printf("%c ", val.pickUp);
+            printf("-> ");
+            printf("%c ", val.dropOff);
 
-        if (val.type == 'N') {
-            printf("(Normal Item)");
-        } else if (val.type == 'H') {
-            printf("(Heavy Item)");
-        } else if (val.type == 'V') {
-            printf("(VIP Item)");
-        } else {
-            printf("(Perishable Item, sisa waktu %d)", val.timeLimit);
+            if (val.type == 'N') {
+                printf("(Normal Item)");
+            } else if (val.type == 'H') {
+                printf("(Heavy Item)");
+            } else if (val.type == 'V') {
+                printf("(VIP Item)");
+            } else {
+                printf("(Perishable Item, sisa waktu %d)", val.timeLimit);
+            }
+            printf("\n");
         }
-        printf("\n");
     }
+        
 }

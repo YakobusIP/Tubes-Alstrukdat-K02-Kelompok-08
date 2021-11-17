@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "./saveFile.h"
 
-void save(map m, adjMatrix adjM, to_do_List tdl, UangWaktu u){
+void save(map m, adjMatrix adjM, to_do_List tdl, UangWaktu u, Coordinate Mobita){
     /* KAMUS */
     toDoList val;
     tdAddress p;
@@ -54,6 +54,7 @@ void save(map m, adjMatrix adjM, to_do_List tdl, UangWaktu u){
         fprintf(saveFile,"\n");
     }
     p = tdl;
+    fprintf(saveFile, "%d\n", lengthTD(tdl));
     while(p != NULL) {
         if(INFO(p).timeLimit > 0) {
             fprintf(saveFile,"%d %c %c %c %d\n", INFO(p).reqIn, INFO(p).pickUp, INFO(p).dropOff, INFO(p).type, INFO(p).timeLimit);
@@ -62,6 +63,8 @@ void save(map m, adjMatrix adjM, to_do_List tdl, UangWaktu u){
         }
         p = NEXT(p);
     } 
+    fprintf(saveFile, "%d %d\n", UANG(u), WAKTU(u));
+    fprintf(saveFile, "%c %d %d\n", nama(Mobita), row(Mobita), col(Mobita));
 /* 
     // Print banyaknya pesanan
     fprintf(saveFile, "%d\n", length(q));

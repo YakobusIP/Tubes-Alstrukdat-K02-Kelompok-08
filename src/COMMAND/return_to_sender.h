@@ -10,6 +10,6 @@
 #include "../ADT Mesin Kata/tokenmachine.h"
 #include "../ADT Stack/stack.h"
 
-void return_to_sender(Stack *s, in_progress_list *ipl, to_do_List *tdl,  UangWaktu u);
+// void return_to_sender(Stack *s, in_progress_list *ipl, to_do_List *tdl,  UangWaktu u);
 
 #endif
