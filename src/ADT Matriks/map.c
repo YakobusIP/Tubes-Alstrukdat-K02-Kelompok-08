@@ -23,6 +23,7 @@ void ReadMap(map *M, Coordinate *C)
 
 void DisplayMap(map M, adjMatrix A, Coordinate Mobita, in_progress_list ipl, to_do_List tdl)
 {
+    boolean foundPickup = false;
     char x, dropoff, pickup;
     int nRow = nRow(M), nCol = nCol(M);
     tdAddress pick;
@@ -44,9 +45,12 @@ void DisplayMap(map M, adjMatrix A, Coordinate Mobita, in_progress_list ipl, to_
                 {
                     x = CoordNama(M, i, j);
                     pick = FIRST(tdl);
-                    while(pick != NULL)
+                    while(pick != NULL && !foundPickup)
                     {
-                         if (x == INFO(pick).pickUp) print_red(x);
+                         if (x == INFO(pick).pickUp){
+                             print_red(x);
+                             foundPickup = true;
+                         }
                          else pick = NEXT(pick);
                     }             
                     if (x == nama(Mobita))
