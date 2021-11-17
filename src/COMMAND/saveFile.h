@@ -3,6 +3,7 @@
 
 #include "../boolean.h"
 #include "../ADT Lain/UangWaktu.h"
+#include "../ADT Lain/Ability.h"
 #include "../ADT Linked List/todoNode.h" 
 #include "../ADT List/adjList.h"
 #include "../ADT List/Gadget.h"
@@ -16,6 +17,6 @@
 #include "../ADT Queue/requestList.h"
 #include "../pcolor/pcolor.h"
 
-void save(map m, adjMatrix adjM, to_do_List tdl, UangWaktu u, Coordinate Mobita);
+void save(map m, adjMatrix adjM, to_do_List tdl, UangWaktu u, Coordinate Mobita, Stack s, InventoryGadget IG, int itemCounter, int waktu, Ability ability, in_progress_list IPL);
 
 #endif

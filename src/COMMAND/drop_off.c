@@ -19,7 +19,7 @@
 // #include "../pcolor/pcolor.c"
 // #include "../ADT Lain/Ability.h"
 
-void drop_off(in_progress_list *pl, Stack *s, char currentLocation, UangWaktu *u, Ability *A, int *addMoveTime) {
+void drop_off(in_progress_list *pl, Stack *s, char currentLocation, UangWaktu *u, Ability *A, int *addMoveTime, int *itemCounter) {
     if (isEmptyStack(*s)) {
         printf("Tidak ada pesanan yang perlu diantarkan\n");
     }
@@ -49,6 +49,7 @@ void drop_off(in_progress_list *pl, Stack *s, char currentLocation, UangWaktu *u
             else if (delStackItem.type == 'V') {AbilityType(*A, 2) = true;}
             printf("Pesanan %s berhasil diantarkan\n", delStackItem.name);
             printf("Uang yang didapatkan: %d yen\n", addUang);
+            *itemCounter += 1;
         }
     }
 }

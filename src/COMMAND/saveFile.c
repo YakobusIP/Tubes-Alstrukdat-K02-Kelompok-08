@@ -1,13 +1,15 @@
 #include <stdio.h>
 #include "./saveFile.h"
 
-void save(map m, adjMatrix adjM, to_do_List tdl, UangWaktu u, Coordinate Mobita){
+void save(map m, adjMatrix adjM, to_do_List tdl, UangWaktu u, Coordinate Mobita, Stack s, InventoryGadget IG, int itemCounter, int waktu, Ability ability, in_progress_list IPL){
     /* KAMUS */
     toDoList val;
     tdAddress p;
+    ipAddress pa;
     Token currentCommand;
     Coordinate c;
     FILE *saveFile;
+    Gadget G;
     int i, len;
     int count;
     /* ALGORITMA */
@@ -66,6 +68,41 @@ void save(map m, adjMatrix adjM, to_do_List tdl, UangWaktu u, Coordinate Mobita)
     } 
     fprintf(saveFile, "%d %d\n", UANG(u), WAKTU(u));
     fprintf(saveFile, "%c %d %d\n", nama(Mobita), row(Mobita), col(Mobita));
+    fprintf(saveFile, "%d\n", MAKSIMUM(s));
+    fprintf(saveFile, "%d\n", itemCounter);
+    if(AbilityType(ability,0) == false) {
+        fprintf(saveFile, "0 ");
+    } else {
+        fprintf(saveFile, "1 ");
+    }
+    fprintf(saveFile, "%d\n", waktu);
+    if(AbilityType(ability,2) == false) {
+        fprintf(saveFile, "0 ");
+    } else {
+        fprintf(saveFile, "1 ");
+    }
+    fprintf(saveFile, "%d\n", ability.totalVip);
+    for (i=0; i<=getLastIdx(IG); i++) {
+        if(i == 4) {
+            fprintf(saveFile, "%d\n", ELMT(IG, i).ID);
+        } else {
+            fprintf(saveFile, "%d ", ELMT(IG, i).ID);
+        }
+    }
+    for (i=getLastIdx(IG)+1; i<5; i++) {
+        if (i == 4) {
+            fprintf(saveFile, "0\n", i+1);
+        } else {
+            fprintf(saveFile, "0 ", i+1);
+        }
+    }
+    pa = FIRST(IPL);
+    fprintf(saveFile, "%d\n", lengthIPL(IPL));
+    while(pa != NULL) {
+        fprintf(saveFile, "%c %c %c %d %d\n", INFO(pa).pickUp, INFO(pa).dropOff, INFO(pa).type, INFO(pa).timeLimit, INFO(pa).startTime);
+        pa = NEXT(pa);
+    }
+
 /* 
     // Print banyaknya pesanan
     fprintf(saveFile, "%d\n", length(q));

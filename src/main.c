@@ -92,6 +92,7 @@ int main(){
     boolean failToLoad;
     int addMoveTime = 0;      // waktu tambahan jika membawa heavy item, dapat menumpuk
     int waktu = 0;
+    int itemCounter = 0; // Jumlah item yang sukses
     struct items val;
     Ability ability; //struct ability
     boolean isReturn; // Digunakan untuk mengetahui apakah ada ability is return to sender
@@ -130,7 +131,7 @@ int main(){
         Mobita = *CoordByName(m, '8');
         UANG(u) = 20000;
     }else if(isStringEqual(currentCommand, "2") ){
-        load(&pq, &m, &AM, &failToLoad, &u, &Mobita);
+        load(&pq, &m, &AM, &failToLoad, &u, &Mobita, &s, &IG, &itemCounter, &waktu, &ability, &IPL);
         if(failToLoad == false) {
             /* displayQueue(pq);
             printf("%d\n", WAKTU(u)); */
@@ -169,7 +170,7 @@ int main(){
         } else if (isStringEqual(currentCommand,"PICK_UP")) {
             pick_up(&TDL, &s, &IPL, Mobita.nama, &addMoveTime, &u);
         } else if (isStringEqual(currentCommand,"DROP_OFF")) {
-            drop_off(&IPL, &s, Mobita.nama, &u, &ability, &addMoveTime);
+            drop_off(&IPL, &s, Mobita.nama, &u, &ability, &addMoveTime, &itemCounter);
         } else if (isStringEqual(currentCommand,"MAP")) {
             DisplayMap(m, AM, Mobita, IPL, TDL);
         } else if (isStringEqual(currentCommand,"TO_DO")) {
@@ -184,7 +185,7 @@ int main(){
         } else if (isStringEqual(currentCommand,"HELP")) {
             Help();
         } else if (isStringEqual(currentCommand,"SAVE_GAME")) {
-            save(m, AM, TDL, u, Mobita);
+            save(m, AM, TDL, u, Mobita, s, IG, itemCounter, waktu, ability, IPL);
             printf("Permainan anda sedang disimpan...\n");
             delay(2);
             printf("Permainan anda berhasil disimpan!\n");
@@ -204,6 +205,13 @@ int main(){
             printf("Sampai jumpa di permainan berikutnya\n");
         } else {
             printf("COMMAND yang anda masukkan salah!\n");
+        }
+        if(isIPListEmpty(IPL) && isTDListEmpty(TDL) && Mobita.nama == '8' && WAKTU(u) > 0) {
+            newGame = false;
+            printf("Selamat! Anda telah berhasil menyelesaikan game ini!\n");
+            printf("Total item yang telah diantarkan: %d\n", itemCounter);
+            printf("Total waktu yang telah dilalui: %d\n", WAKTU(u));
+            printf("Kami menunggu anda untuk bermain kembali!\n");
         }
     } 
     return 0;
