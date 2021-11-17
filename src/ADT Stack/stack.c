@@ -28,25 +28,25 @@ void pushStack(Stack *s, int val){
         copyString(NAMA(*s), "Normal Item");
         HARGA(*s) = 200;
         EFFECT(*s) = IDX_UNDEF;
-        copyString(TYPE(*s), "N");
+        TYPE(*s) = 'N';
         copyString(REWARD(*s), "");
     }else if(val == 2){
         copyString(NAMA(*s), "Heavy Item");
         HARGA(*s) = 400;
         EFFECT(*s) = 1;
-        copyString(TYPE(*s), "H");
+        TYPE(*s) = 'H';
         copyString(REWARD(*s), "Speed Boost");
     }else if(val == 3){
         copyString(NAMA(*s), "Perishable Item");
         HARGA(*s) = 400;
         EFFECT(*s) = 2;
-        copyString(TYPE(*s), "P");
+        TYPE(*s) = 'P';
         copyString(REWARD(*s), "Increase Capacity");
     }else if(val == 4){
         copyString(NAMA(*s), "VIP Item");
         HARGA(*s) = 600;
         EFFECT(*s) = 3;
-        copyString(TYPE(*s), "V");
+        TYPE(*s) = 'V';
         copyString(REWARD(*s), "Return To Sender");
     }
     

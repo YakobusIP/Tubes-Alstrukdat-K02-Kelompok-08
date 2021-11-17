@@ -15,7 +15,7 @@ struct items {
     char name[20];
     int price;
     int effect;
-    char type[20]; // Untuk mengidentifikasi item
+    char type;
     char reward[20];
 };
 typedef int ElType;
