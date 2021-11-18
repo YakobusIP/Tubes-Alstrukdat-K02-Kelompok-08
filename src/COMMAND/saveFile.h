@@ -17,7 +17,7 @@
 #include "../ADT Queue/requestList.h"
 #include "../pcolor/pcolor.h"
 
-void save(map m, adjMatrix adjM, to_do_List tdl, UangWaktu u, Coordinate Mobita, Stack s, InventoryGadget IG, int itemCounter, int waktu, Ability ability, in_progress_list IPL);
+void save(PrioQueue pq, map m, adjMatrix adjM, to_do_List tdl, UangWaktu u, Coordinate Mobita, Stack s, InventoryGadget IG, int itemCounter, int waktu, Ability ability, in_progress_list IPL);
 
 
 #endif

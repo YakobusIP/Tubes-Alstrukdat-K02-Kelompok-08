@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "./saveFile.h"
 
-void save(map m, adjMatrix adjM, to_do_List tdl, UangWaktu u, Coordinate Mobita, Stack s, InventoryGadget IG, int itemCounter, int waktu, Ability ability, in_progress_list IPL){
+void save(PrioQueue pq, map m, adjMatrix adjM, to_do_List tdl, UangWaktu u, Coordinate Mobita, Stack s, InventoryGadget IG, int itemCounter, int waktu, Ability ability, in_progress_list IPL){
     /* KAMUS */
     toDoList val;
     tdAddress p;
@@ -12,6 +12,7 @@ void save(map m, adjMatrix adjM, to_do_List tdl, UangWaktu u, Coordinate Mobita,
     Gadget G;
     int i, len;
     int count;
+    requestList value;
     /* ALGORITMA */
     printf("Masukkan nama save file dalam permainan : ");
     readCommand(&currentCommand);
@@ -62,8 +63,8 @@ void save(map m, adjMatrix adjM, to_do_List tdl, UangWaktu u, Coordinate Mobita,
         fprintf(saveFile,"\n");
     }
     p = tdl;
-   
-    fprintf(saveFile, "%d\n", lengthTD(tdl));
+    
+    fprintf(saveFile, "%d\n", lengthTD(tdl) + length(pq));
    
     while(p != NULL) {
         if(INFO(p).timeLimit > 0) {
@@ -73,6 +74,17 @@ void save(map m, adjMatrix adjM, to_do_List tdl, UangWaktu u, Coordinate Mobita,
         }
         p = NEXT(p);
     } 
+
+    if(!isQueueEmpty(pq)) {
+        for(int i = IDX_HEAD(pq); i <= IDX_TAIL(pq); i++) {
+            dequeue(&pq, &value);
+            if(value.type == 'P') {
+                fprintf(saveFile, "%d %c %c %c %d\n", value.reqIn, value.pickUp, value.dropOff, value.type, value.timeLimit);
+            } else {
+                fprintf(saveFile, "%d %c %c %c\n", value.reqIn, value.pickUp, value.dropOff, value.type);
+            }
+        }
+    }
     fprintf(saveFile, "%d %d\n", UANG(u), WAKTU(u));
     fprintf(saveFile, "%c %d %d\n", nama(Mobita), row(Mobita), col(Mobita));
     fprintf(saveFile, "%d\n", MAKSIMUM(s));

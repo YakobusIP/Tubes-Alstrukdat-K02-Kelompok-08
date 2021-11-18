@@ -6,8 +6,8 @@ Mobita adalah sebuah program simulasi aplikasi untuk membantu pekerjaan mobita y
 Data                | Isi
 ----                | ---
 Tahun Ajaran        | 2021
-Tanggal Mulai       | 21 September 2021
-Tanggal Selesai     | 18 Oktober 2021
+Tanggal Mulai       | 21 Oktober 2021
+Tanggal Selesai     | 18 November 2021
 Tanggal Pengumpulan | 17 - 18 November 2020
 Kelas               | 2
 Dosen               | Satrio Adi Rukmono
@@ -23,15 +23,9 @@ Dosen               | Satrio Adi Rukmono
    ```
    cd Tubes-Alstrukdat-K02-Kelompok-08
    ```
-4. lakukan compile dengan mengetikkan di terminal
-   ```
+4. Lakukan compile dengan mengklik batch file 
    
-   ```
-5. Jalankan program dengan mengetikkan di terminal:
-   ```
-   ./main
-   ```
-6. Selamat bermain
+5. Selamat bermain
 
 ## Spesifikasi
 **ADT**
@@ -65,14 +59,13 @@ TO DO                             | :green_square:
 
 ## Laporan
 **Status : Done** :green_square: \
-**9 / 9**
+**8 / 8**
 Bab                     | Status
 ---                     | ------
 Ringkasan               | :green_square:
 Penjelasan Spesifikasi  | :green_square:
 Struktur Data           | :green_square:
 Program Utama           | :green_square:
-Algoritma Menarik       | :green_square:
 Data Test               | :green_square:
 Test Script             | :green_square:
 Pembagian Kerja         | :green_square:
