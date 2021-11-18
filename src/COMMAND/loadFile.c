@@ -155,33 +155,37 @@ void load(PrioQueue *q, map *M, adjMatrix *Al, boolean *failToLoad, UangWaktu *u
                 
                 ignoreBlank();
                 temp = readNumberfromChar();
-              
-                ubahWaktu(&itemCounter, temp);
+                *itemCounter = temp;
               
                 adv();
                 ignoreNext();
              
                 ignoreBlank();
                 temp = readNumberfromChar();
-                ubahAbility(&ability,0,temp);
-                
+                if(temp == 1) {
+                    AbilityType(*ability,0) = true;
+                } 
 
                 ignoreBlank();
                 temp = readNumberfromChar();
-                ubahWaktu(&waktu, temp);
+                *waktu = temp;
+                
                 
                 
                 ignoreNext();
                
                 ignoreBlank();
                 temp = readNumberfromChar();
-                ubahAbility(&ability,2,temp);
+                if(temp == 1) {
+                    AbilityType(*ability,2) = true;
+                } 
            
 
                 ignoreBlank();
                 temp = readNumberfromChar();
+                (*ability).totalVip = temp;
                
-                ubahVIP(ability, temp);
+               
              
                 ignoreNext();
                
@@ -267,18 +271,4 @@ void load(PrioQueue *q, map *M, adjMatrix *Al, boolean *failToLoad, UangWaktu *u
         *failToLoad = true;
         printf("Maaf, nama file yang anda masukkan tidak ada!\n");
     }
-}
-
-void ubahWaktu(int **waktu, int num) {
-    **waktu = num;
-}
-
-void ubahAbility(Ability **A, int urutan, int fase) {
-    if(fase == 1) {
-        (**A).type[urutan] = true;
-    } 
-}
-
-void ubahVIP(Ability *A, int num) {
-    (*A).totalVip = num;
 }
