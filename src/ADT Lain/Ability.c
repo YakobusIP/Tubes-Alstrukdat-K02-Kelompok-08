@@ -1,5 +1,5 @@
 #include "Ability.h"
-
+#include <stdio.h>
 
 void CreateAbility(Ability *A)
 {
