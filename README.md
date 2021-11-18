@@ -7,7 +7,7 @@ Data                | Isi
 ----                | ---
 Tahun Ajaran        | 2021
 Tanggal Mulai       | 21 September 2021
-Tanggal Selesai     | 18 Oktober 2021
+Tanggal Selesai     | 18 November 2021
 Tanggal Pengumpulan | 17 - 18 November 2020
 Kelas               | 2
 Dosen               | Satrio Adi Rukmono
