@@ -7,6 +7,7 @@ void CreateAbility(Ability *A)
     {
         AbilityType(*A, i) = false;
     }
+    TotalVIP(*A) = 0;
 }
 
 void speed_boost(Ability *A, int* waktu, UangWaktu *U, in_progress_list *IPL)
@@ -48,7 +49,7 @@ void return_to_sender(Ability *A, in_progress_list *IPL, Stack *s, to_do_List *t
     value.dropOff = ipl.dropOff;
     value.pickUp = ipl.pickUp;
     if(ipl.type == 'P') {
-        value.timeLimit = ipl.startTime;
+        value.timeLimit = ipl.timeLimit ;
     }
     value.type = ipl.type;
     insertLastTD(tdl, value);

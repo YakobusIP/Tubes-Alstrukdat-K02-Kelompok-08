@@ -133,9 +133,6 @@ int main(){
     }else if(isStringEqual(currentCommand, "2") ){
         load(&pq, &m, &AM, &failToLoad, &u, &Mobita, &s, &IG, &itemCounter, &waktu, &ability, &IPL);
         if(failToLoad == false) {
-            /* displayQueue(pq);
-            printf("%d\n", WAKTU(u)); */
-            // fromRLtoTDL(&pq, &TDL, WAKTU(u));
             printf("Harap tunggu sebentar...\n");
             delay(2);
             printf("Permainan anda sedang diload...\n");
@@ -212,8 +209,12 @@ int main(){
         if(isIPListEmpty(IPL) && isTDListEmpty(TDL) && Mobita.nama == '8' && WAKTU(u) > 0) {
             newGame = false;
             printf("Selamat! Anda telah berhasil menyelesaikan game ini!\n");
+            printf("Sedang menghitung total item yang berhasik terantar...\n");
+            delay(2);
             printf("Total item yang telah diantarkan: %d\n", itemCounter);
+            delay(1);
             printf("Total waktu yang telah dilalui: %d\n", WAKTU(u));
+            delay(1);
             printf("Kami menunggu anda untuk bermain kembali!\n");
         }
     } 

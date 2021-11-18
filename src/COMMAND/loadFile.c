@@ -20,6 +20,7 @@ void load(PrioQueue *q, map *M, adjMatrix *Al, boolean *failToLoad, UangWaktu *u
     Gadget G;
     int angka;
     boolean pass;
+    (*ability).totalVip = 0;
     /* ALGORITMA */
     // START READ CONFIG FILE
     printf("Apakah file yang anda masukkan terdapat konfigurasi awal? (YES/NO) \n");
@@ -126,6 +127,7 @@ void load(PrioQueue *q, map *M, adjMatrix *Al, boolean *failToLoad, UangWaktu *u
         }
         ignoreNext();
         if(!pass) {
+            
                 ignoreBlank();
                 uang = readNumberfromChar();
                 ignoreBlank();
@@ -133,7 +135,7 @@ void load(PrioQueue *q, map *M, adjMatrix *Al, boolean *failToLoad, UangWaktu *u
                 ignoreNext();
                 UANG(*u) = uang;
                 WAKTU(*u) = waktu1;
-              
+                
                 ignoreBlank();
                 nama = currentChar;
                 adv();
@@ -143,39 +145,46 @@ void load(PrioQueue *q, map *M, adjMatrix *Al, boolean *failToLoad, UangWaktu *u
                 lokCol = readNumberfromChar();
                 *Mobita = *CreateCoord(nama, lokRow, lokCol);
                 ignoreNext();
-     
+
+               
                 ignoreBlank();
                 temp = readNumberfromChar();
                 MAKSIMUM(*s) = temp;
+                
                 ignoreNext();
                 
                 ignoreBlank();
-                *itemCounter = readNumberfromChar();
+                temp = readNumberfromChar();
+              
+                ubahWaktu(&itemCounter, temp);
+              
+                adv();
                 ignoreNext();
              
                 ignoreBlank();
                 temp = readNumberfromChar();
-                if(temp == 0) {
-                    AbilityType(*ability, 0) = false;
-                } else {
-                    AbilityType(*ability,0) = true;
-                }
+                ubahAbility(&ability,0,temp);
+                
+
                 ignoreBlank();
                 temp = readNumberfromChar();
-                *waktu = temp;
+                ubahWaktu(&waktu, temp);
+                
+                
                 ignoreNext();
                
                 ignoreBlank();
                 temp = readNumberfromChar();
-                if(temp == 0) {
-                    AbilityType(*ability, 2) = false;
-                } else {
-                    AbilityType(*ability,2) = true;
-                }
+                ubahAbility(&ability,2,temp);
+           
+
                 ignoreBlank();
                 temp = readNumberfromChar();
-                (*ability).totalVip = temp;
+               
+                ubahVIP(ability, temp);
+             
                 ignoreNext();
+               
                
                 ignoreBlank();
                 for (int z = 0; z < 5; z++)
@@ -183,7 +192,7 @@ void load(PrioQueue *q, map *M, adjMatrix *Al, boolean *failToLoad, UangWaktu *u
                     ID = readNumberfromChar();
                     if(ID != 0) {
                         CreateGadget(&G, ID);
-                        addGadget(&IG, G);
+                        addGadget(IG, G);
                     }
                     ignoreBlank();
                 }
@@ -236,17 +245,21 @@ void load(PrioQueue *q, map *M, adjMatrix *Al, boolean *failToLoad, UangWaktu *u
                 pass = false;
             } 
             if(eot) {
+                
                 break;
             } else {
                 while(!isQueueEmpty(*q)) {
                     dequeue(q, &val);
                 }
-                while(!isIPListEmpty(*IPL)) {
-                    deleteFirstIP(IPL, &value);
-                }
-                while(!isEmptyStack(*s)) {
-                    popStack(s, &I);
-                }
+                if(p > 0) {
+                    while(!isIPListEmpty(*IPL)) {
+                            deleteFirstIP(IPL, &value);
+                        }
+                        
+                        while(!isEmptyStack(*s)) {
+                            popStack(s, &I);
+                        }
+                    }
             }
             ignoreNext();
         } while (!eot);
@@ -256,4 +269,17 @@ void load(PrioQueue *q, map *M, adjMatrix *Al, boolean *failToLoad, UangWaktu *u
     }
 }
 
+void ubahWaktu(int **waktu, int num) {
+    **waktu = num;
+}
+
+void ubahAbility(Ability **A, int urutan, int fase) {
+    if(fase == 1) {
+        (**A).type[urutan] = true;
+    } 
+}
+
+void ubahVIP(Ability *A, int num) {
+    (*A).totalVip = num;
+}
 /*  */

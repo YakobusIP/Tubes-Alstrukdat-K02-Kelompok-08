@@ -3,6 +3,7 @@
 
 #include "../boolean.h"
 #include "../ADT Lain/UangWaktu.h"
+#include "../ADT Lain/Ability.h"
 #include "../ADT Linked List/todoNode.h" 
 #include "../ADT List/adjList.h"
 #include "../ADT List/Gadget.h"
@@ -16,5 +17,8 @@
 #include "../ADT Queue/requestList.h"
 
 void load(PrioQueue *q, map *M, adjMatrix *A, boolean *failToLoad, UangWaktu *u, Coordinate *Mobita, Stack *s, InventoryGadget *IG, int *itemCounter, int *waktu, Ability *ability, in_progress_list *IPL);
+
+
+
 
 #endif
