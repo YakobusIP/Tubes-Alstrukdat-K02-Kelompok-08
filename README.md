@@ -66,7 +66,6 @@ Ringkasan               | :green_square:
 Penjelasan Spesifikasi  | :green_square:
 Struktur Data           | :green_square:
 Program Utama           | :green_square:
-Algoritma Menarik       | :green_square:
 Data Test               | :green_square:
 Test Script             | :green_square:
 Pembagian Kerja         | :green_square:
