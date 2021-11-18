@@ -79,7 +79,7 @@ Pembagian Kerja         | :green_square:
 Lampiran                | :green_square:
 
 ## Status
-On Progress
+:green_square: DONE :green_square:
 
 ## Created by:
 1. Aria Wahyu Wicaksono	(10219083)
