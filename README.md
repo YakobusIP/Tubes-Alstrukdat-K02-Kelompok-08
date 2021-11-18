@@ -78,7 +78,6 @@ Pembagian Kerja         | :green_square:
 Lampiran                | :green_square:
 
 ## Pembagian Tugas
-**ADT**
 NAMA                      | Tugas
 -----------                       | ------
 Aria Wahyu Wicaksono                    | ADT Ability dan efeknya, ADT Matriks (Map dan adjacency matrix), ADT Point, MOVE, MAP, Laporan
