@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "uangwaktu.h": "c",
+        "todoqueue.h": "c",
+        "string.h": "c",
+        "inprogresslist.h": "c",
+        "inventorygadget.h": "c",
+        "in_progress.h": "c",
+        "return_to_sender.h": "c"
+    }
+}
