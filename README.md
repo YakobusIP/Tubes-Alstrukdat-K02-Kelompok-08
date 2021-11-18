@@ -19,13 +19,19 @@ Dosen               | Satrio Adi Rukmono
    ```
    git clone https://github.com/YakobusIP/Tubes-Alstrukdat-K02-Kelompok-08.git
    ```
-3. Masuk ke folder hasil clone dengan mengetikkan di terminal:
+3. Buka program Visual Studio Code dan membuka folder hasil clone
+
+4. Buka terminal di dalam Visual Studio Code dan salin kode kompilasi berikut:
    ```
-   cd Tubes-Alstrukdat-K02-Kelompok-08
+   gcc "./src/ADT Lain/Ability.c" "./src/ADT Lain/bfs.c" "./src/ADT Lain/UangWaktu.c" "./src/ADT Linked List/inprogressNode.c" "./src/ADT Linked List/inprogressList.c"       "./src/ADT Linked List/todoNode.c" "./src/ADT Linked List/todoList.c" "./src/ADT List/adjList.c" "./src/ADT List/Gadget.c" "./src/ADT List/InventoryGadget.c" "./src/ADT Matriks/adjMatriks.c" "./src/ADT Matriks/map.c" "./src/ADT Mesin Kata/charmachine.c" "./src/ADT Mesin Kata/tokenmachine.c" "./src/ADT Point/point.c" "./src/ADT Queue/requestList.c" "./src/ADT Stack/stack.c" "./src/COMMAND/buy.c" "./src/COMMAND/drop_off.c" "./src/COMMAND/help.c" "./src/COMMAND/in_progress.c" "./src/COMMAND/inventory.c" "./src/COMMAND/loadFile.c" "./src/COMMAND/move.c" "./src/COMMAND/pick_up.c" "./src/COMMAND/saveFile.c" "./src/COMMAND/start.c" "./src/COMMAND/to_do.c" "./src/pcolor/pcolor.c" "./src/main.c" -o main
    ```
-4. Lakukan compile dengan mengklik batch file 
+
+5. Setelah kode disalin, jalankan file executable dengan
+   ```
+   .\main.exe
+   ```
    
-5. Selamat bermain
+6. Selamat bermain
 
 ## Spesifikasi
 **ADT**
