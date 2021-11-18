@@ -282,4 +282,3 @@ void ubahAbility(Ability **A, int urutan, int fase) {
 void ubahVIP(Ability *A, int num) {
     (*A).totalVip = num;
 }
-/*  */

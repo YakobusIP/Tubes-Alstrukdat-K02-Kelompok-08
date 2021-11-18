@@ -4,6 +4,7 @@
 #include <time.h>
 #include "boolean.h"
 
+// ADT
 #include "ADT Lain/UangWaktu.h"
 #include "ADT Lain/Ability.h"
 #include "ADT Linked List/inprogressList.h"
@@ -23,31 +24,8 @@
 #include "ADT Lain/bfs.h"
 #include "pcolor/pcolor.h"
 
-
-// Jangan dihapus ya gais :D
-#include "ADT Lain/UangWaktu.c"
-#include "ADT Lain/Ability.c"
-#include "ADT Linked List/inprogressList.c"
-#include "ADT Linked List/inprogressNode.c"
-#include "ADT Linked List/todoList.c"
-#include "ADT Linked List/todoNode.c"
-#include "ADT List/adjList.c" 
-#include "ADT List/Gadget.c"
-#include "ADT List/InventoryGadget.c"
-#include "ADT Matriks/adjMatriks.c"
-#include "ADT Matriks/map.c"
-#include "ADT Mesin Kata/charmachine.c"
-#include "ADT Mesin Kata/tokenmachine.c"
-#include "ADT Point/point.c"
-#include "ADT Stack/stack.c"
-#include "ADT Queue/requestList.c" 
-#include "pcolor/pcolor.c"
-
-/* Include command code */
-// P.S: Keliatannya kalo ini udah banyak yang implementasi kode buat command, yang include di atas ilangin aja
-// karena udah pasti di include sama header commandnya
+// COMMAND
 #include "../src/COMMAND/buy.h"
-#include "../src/COMMAND/return_to_sender.h"
 #include "../src/COMMAND/loadFile.h"
 #include "../src/COMMAND/drop_off.h"
 #include "../src/COMMAND/help.h"
@@ -59,22 +37,11 @@
 #include "../src/COMMAND/to_do.h"
 #include "../src/COMMAND/start.h"
 
-#include "../src/COMMAND/buy.c"
-#include "../src/COMMAND/return_to_sender.c"
-#include "../src/COMMAND/loadFile.c"
-#include "../src/COMMAND/drop_off.c"
-#include "../src/COMMAND/help.c"
-#include "../src/COMMAND/inventory.c"
-#include "../src/COMMAND/in_progress.c"
-#include "../src/COMMAND/move.c"
-#include "../src/COMMAND/pick_up.c"
-#include "../src/COMMAND/saveFile.c"
-#include "../src/COMMAND/to_do.c"
-#include "../src/COMMAND/start.c"
 
 int main(){
     /* Kamus */    
-    Token currentCommand;
+    // Deklarasi ADT
+    Token currentCommand; 
     UangWaktu u; // ADT untuk membaca uang dan waktu
     AvailableGadget AG; // ADT yang menampilkan gadget yang tersedia
     InventoryGadget IG; // ADT untuk menampilkan gadget yang telah dimiliki
@@ -87,6 +54,7 @@ int main(){
     requestList RL;
     PrioQueue pq;
     adjMatrix AM;
+    Ability ability; 
 
     char currentLocation;
     boolean failToLoad;
@@ -94,16 +62,12 @@ int main(){
     int waktu = 0;
     int itemCounter = 0; // Jumlah item yang sukses
     struct items val;
-    Ability ability; //struct ability
-    boolean isReturn; // Digunakan untuk mengetahui apakah ada ability is return to sender
-    // Jika telah menerima item VIP, ubah isReturn ke True
     boolean newGame; // Boolean untuk menampilkan apakah game sukses dimulai atau tidak, jika sukses, akan menjadi true
 
-    failToLoad = false;
-    newGame = false;
-    isReturn = false;
-
     /* Algoritma */
+
+    failToLoad = false; // Jika file yang ingin di load tidak ada, maka akan muncul pesan error
+    newGame = false; // Jika true, maka akan masuk ke permainan utama
 
     // Membuat konstruktor yang ada
     CreateUangWaktu(&u);
@@ -129,7 +93,6 @@ int main(){
         printf("Enjoy the Game!\n");
         newGame = true;
         Mobita = *CoordByName(m, '8');
-        UANG(u) = 20000;
     }else if(isStringEqual(currentCommand, "2") ){
         load(&pq, &m, &AM, &failToLoad, &u, &Mobita, &s, &IG, &itemCounter, &waktu, &ability, &IPL);
         if(failToLoad == false) {
@@ -149,10 +112,6 @@ int main(){
         printf("Anda keluar dari game.\n");
     }
 
-    /* Start mesin kata untuk membaca config file dan input konfigurasi */
-    // readConfigFile(&pq, &m, &AM);
-
-
     // Masuk ke permainan utama
     while(newGame) {
         speed_boost(&ability, &waktu, &u, &IPL);
@@ -171,7 +130,6 @@ int main(){
         } else if (isStringEqual(currentCommand,"MAP")) {
             DisplayMap(m, AM, Mobita, IPL, TDL);
         } else if (isStringEqual(currentCommand,"TO_DO")) {
-            // fromRLtoTDL(&pq, &TDL, WAKTU(u));
             to_do(&TDL);
         } else if (isStringEqual(currentCommand,"IN_PROGRESS")) {
            in_progress(&IPL, WAKTU(u));
@@ -206,6 +164,8 @@ int main(){
         } else {
             printf("COMMAND yang anda masukkan salah!\n");
         }
+
+        // Kondisi ketika Final Game, yaitu to do list kosong, in progress list kosong, dan berada di headquarter
         if(isIPListEmpty(IPL) && isTDListEmpty(TDL) && Mobita.nama == '8' && WAKTU(u) > 0) {
             newGame = false;
             printf("Selamat! Anda telah berhasil menyelesaikan game ini!\n");
