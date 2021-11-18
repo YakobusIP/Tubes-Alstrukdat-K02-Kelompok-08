@@ -146,13 +146,17 @@ int main(){
             printf("Permainan anda berhasil disimpan!\n");
         } else if (isStringEqual(currentCommand,"RETURN")) {
             if(TotalVIP(ability) > 0) {
-                if(EFFECT(s) == 3) {
-                    printf("Maaf, return to sender tidak bisa digunakan untuk VIP Item\n");
+                if(isEmptyStack(s) && isIPListEmpty(IPL)) {
+                    printf("Tas anda kosong! Return to sender tidak dapat digunakan\n");
                 } else {
-                    return_to_sender(&ability, &IPL, &s, &TDL, u);
-                    TotalVIP(ability) -= 1;
-                    if(TotalVIP(ability) == 0) {
-                        AbilityType(ability,2) = false;
+                        if(EFFECT(s) == 3) {
+                        printf("Maaf, return to sender tidak bisa digunakan untuk VIP Item\n");
+                    } else {
+                        return_to_sender(&ability, &IPL, &s, &TDL, u);
+                        TotalVIP(ability) -= 1;
+                        if(TotalVIP(ability) == 0) {
+                            AbilityType(ability,2) = false;
+                        }
                     }
                 }
             } else {
