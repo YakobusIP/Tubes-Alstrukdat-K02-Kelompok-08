@@ -1,14 +1,16 @@
 #include <stdio.h>
 #include "map.h"
+#include "map.c"
 #include "adjMatriks.h"
-#include "../ADTList/adjList.h"
+#include "../ADT Point/point.c"
+#include "../pcolor/pcolor.c"
+#include "adjMatriks.c"
 int main()
 {
     Coordinate A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, Mobita;
     map m;
-    adjList l;
     adjMatrix Ad;
-    CreateAdjList(&l);
+
     
     Mobita = *CreateCoord('8', 1, 6);
     A = *CreateCoord('A', 1, 20);
@@ -48,11 +50,16 @@ int main()
     ReadMap(&m, &D);
     ReadMap(&m, &E);
         
-    createAdjMatrix(&Ad);
-    ReadAdjMatrix(&Ad);
-    DisplayMap(m, Ad, Mobita);
+    createAdjMatrix(&Ad, 18);
+    for(int i = 0; i < 18; i++)
+        {
+            for(int j = 0; j < 18; j++)
+            {
+                if(i != j) ReadAdjMatrix(&Ad, i, j, 1);
+            }
+        }
+    DisplayMap(m, Ad, Mobita, NULL, NULL);
     DisplayAdjMatrix(Ad);
-    AdjList(m, &l, Ad, '8');
-    DisplayAdjList(l);
+
     return 0;
 }
