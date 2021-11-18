@@ -59,7 +59,7 @@ TO DO                             | :green_square:
 
 ## Laporan
 **Status : Done** :green_square: \
-**9 / 9**
+**8 / 8**
 Bab                     | Status
 ---                     | ------
 Ringkasan               | :green_square:
