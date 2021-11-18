@@ -159,7 +159,6 @@ int main(){
     // Masuk ke permainan utama
     while(newGame) {
         speed_boost(&ability, &waktu, &u, &IPL);
-        printf("%d\n", HARGA(s));
         increase_capacity(ability, &s);
         fromRLtoTDL(&pq, &TDL, WAKTU(u));
         printf("Uang anda sekarang adalah: %d", UANG(u));
