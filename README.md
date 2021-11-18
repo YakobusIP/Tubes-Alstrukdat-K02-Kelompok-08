@@ -23,15 +23,9 @@ Dosen               | Satrio Adi Rukmono
    ```
    cd Tubes-Alstrukdat-K02-Kelompok-08
    ```
-4. lakukan compile dengan mengetikkan di terminal
-   ```
+4. Lakukan compile dengan mengklik batch file 
    
-   ```
-5. Jalankan program dengan mengetikkan di terminal:
-   ```
-   ./main
-   ```
-6. Selamat bermain
+5. Selamat bermain
 
 ## Spesifikasi
 **ADT**
