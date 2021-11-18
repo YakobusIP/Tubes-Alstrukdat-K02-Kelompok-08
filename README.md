@@ -77,6 +77,17 @@ Test Script             | :green_square:
 Pembagian Kerja         | :green_square:
 Lampiran                | :green_square:
 
+## Pembagian Tugas
+**ADT**
+NAMA                      | Tugas
+-----------                       | ------
+Aria Wahyu Wicaksono                    | ADT Ability dan efeknya, ADT Matriks (Map dan adjacency matrix), ADT Point, MOVE, MAP, Laporan
+Marcellus Michael Herman K              | SAVE_GAME, LOAD_GAME, BUY, Return to Sender dan RETURN, struct Items, Final Game, Integrasi,  Laporan
+Putri Nurhaliza                         | ADT Gadget, ADT Inventory Gadget, PICK UP, DROP OFF, INVENTORY dan efeknya, laporan
+Yakobus Iryanto Prasethio               | ADT Linked List, ADT Queue, ADT Mesin Kata, TODO, IN PROGRESS, Laporan
+Rizky Akbar Asmaran                     | Main Menu, New Game, ADT Stack, ADT Lain (UangWaktu), START, HELP, Readme, dan Laporan
+
+
 ## Status
 :green_square: DONE :green_square:
 
