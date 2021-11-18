@@ -140,7 +140,7 @@ int main(){
         } else if (isStringEqual(currentCommand,"HELP")) {
             Help();
         } else if (isStringEqual(currentCommand,"SAVE_GAME")) {
-            save(m, AM, TDL, u, Mobita, s, IG, itemCounter, waktu, ability, IPL);
+            save(pq, m, AM, TDL, u, Mobita, s, IG, itemCounter, waktu, ability, IPL);
             printf("Permainan anda sedang disimpan...\n");
             delay(2);
             printf("Permainan anda berhasil disimpan!\n");
