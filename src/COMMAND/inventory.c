@@ -55,11 +55,11 @@ void inventory(InventoryGadget *IG, in_progress_list *ipl, to_do_List *tdl, Stac
             else if (ID(G) == 2) {
                 // senter pembesar
                 if(MAKSIMUM(*s) * 2 > CAPACITYSTACK){
-                    printf("%s terbuang sia-sia karena melebihi kapasitas maksimum\n", NAME(G));
+                    MAKSIMUM(*s) = CAPACITYSTACK;
                 }else{
                     MAKSIMUM(*s) *= 2;
-                    printf("%s berhasil digunakan\n", NAME(G));
                 }
+                printf("%s berhasil digunakan, kapasitas tas sekarang adalah %d!\n", NAME(G), MAKSIMUM(*s));
                 deleteGadget(IG, G);
             }
             
