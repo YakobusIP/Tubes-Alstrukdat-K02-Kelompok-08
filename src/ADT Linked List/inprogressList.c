@@ -3,7 +3,7 @@
 
 /* PROTOTYPE */
 /****************** PEMBUATAN LIST KOSONG ******************/
-void CreateInProgressList(in_progress_list *l) {
+void createInProgressList(in_progress_list *l) {
 /* I.S. sembarang */
 /* F.S. Terbentuk list kosong */
     /* ALGORITMA */
