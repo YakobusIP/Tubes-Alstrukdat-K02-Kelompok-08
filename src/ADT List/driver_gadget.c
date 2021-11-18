@@ -1,3 +1,5 @@
+/* driver ADT Gadget dan Ivnetory Gadget */
+
 #include <stdio.h>
 
 #include "../ADT Lain/UangWaktu.c"
@@ -18,16 +20,24 @@
 
 int main() {
     AvailableGadget AG;
-    CreateAvailableGadget(&AG);
-    displayAvailableGadget(AG);
-    printf("\n");
     InventoryGadget IG;
     CreateInventoryGadget(&IG);
+    CreateAvailableGadget(&AG);
+
+    printf("Berikut gadget yang tersedia pada sistem:\n");
+    displayAvailableGadget(AG);
+    printf("\n");
+    
+    // invetory masih kosong
     displayInventory(IG);
     printf("\n");
+
     addGadget(&IG, ELMT(AG, 2));    // menambahkan senter pembesar ke inventory
-    addGadget(&IG, ELMT(AG, 3));    // menambahkan senter pembesar ke inventory
+    addGadget(&IG, ELMT(AG, 3));    // menambahkan pintu kemana saja ke inventory
+    printf("Inventory seletah ditambahkan gadget:\n");
     displayInventory(IG);
-    deleteGadget(&IG, ELMT(AG, 2));
+    deleteGadget(&IG, ELMT(AG, 2)); // menghapus senter pembesar dari inventory
+    printf("Inventory setelah ada gadget yang dihapus:\n");
     displayInventoryWithPrice(IG);
+    printf("%d %d\n", isEmpty(IG), isFull(IG));
 }
