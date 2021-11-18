@@ -76,7 +76,7 @@ int main(){
     CreateInventoryGadget(&IG);
     CreateToDoList(&TDL);
     CreatePrioQueue(&pq);
-    CreateInProgressList(&IPL);
+    createInProgressList(&IPL);
     CreateAbility(&ability);
 
     // Main Menu
